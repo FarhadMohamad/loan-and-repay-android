@@ -1,0 +1,2 @@
+rootProject.name='LoanAndRepay'
+include ':app'
