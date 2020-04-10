@@ -20,7 +20,6 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 
 public class RegisterActivity extends AppCompatActivity {
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -32,6 +31,7 @@ new Register().execute();
     }
 
     public class Register extends AsyncTask<String, Void, Void> {
+        private EditText editText;
 
         HttpConnection httpConnection = new HttpConnection();
         EditText enterFirstName = (EditText) findViewById(R.id.txtFirstName);
