@@ -60,6 +60,14 @@
                 android:hint="@string/hintRegisterPassword"
                 android:inputType="textPassword" />
 
+            <EditText
+                android:id="@+id/txtConfirmPassword"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="ConfirmPassword"
+                android:inputType="textPassword" />
+
 
 
             <TextView
