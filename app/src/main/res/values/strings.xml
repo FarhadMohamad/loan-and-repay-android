@@ -1,6 +1,9 @@
 <resources>
-    <string name="app_name">Lendr</string>
+    <string name="app_name">LoanAndRepay</string>
 
+    <string name="navigation_app">NavigationApp</string>
+    <string name="open">Open</string>
+    <string name="close">Close</string>
 
     //Login
     <string name="txtLogin">Login</string>
