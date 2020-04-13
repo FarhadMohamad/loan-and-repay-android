@@ -56,32 +56,32 @@ public class RequestLoan extends AppCompatActivity {
             // TODO Auto-generated method stub
         }
     }
-//    //Here the logout button is hidden, when the user is logged out
-    @Override
-    protected void onStart() {
-        super.onStart();
-        SharedPreferences sharedPref = getSharedPreferences("userInfo", Context.MODE_PRIVATE);
-        String token = sharedPref.getString("token", "");
-
-        if (Objects.equals(token, "")) {
-            //// MenuItem logoutItem = menu.findItem(R.id.action_logout);
-            NavigationView navigationView = findViewById(R.id.navigation_view);
-            Menu menu = navigationView.getMenu();
-            MenuItem menuItem = menu.findItem(R.id.action_logout);
-            menuItem.setVisible(false);
-        }
-
-    }
+    //Here the logout button is hidden, when the user is logged out
+//    @Override
+//    protected void onStart() {
+//        super.onStart();
+//        SharedPreferences sharedPref = getSharedPreferences("userInfo", Context.MODE_PRIVATE);
+//        String token = sharedPref.getString("token", "");
+//
+//        if (Objects.equals(token, "")) {
+//            //// MenuItem logoutItem = menu.findItem(R.id.action_logout);
+//            NavigationView navigationView = findViewById(R.id.navigation_view);
+//            Menu menu = navigationView.getMenu();
+//            MenuItem menuItem = menu.findItem(R.id.action_logout);
+//            menuItem.setVisible(false);
+//        }
+//
+//    }
 
     //When a back button is pressed, the drawer will be closed instead of going back to another activity
-    @Override
-    public void onBackPressed() {
-
-        if (drawerLayout.isDrawerOpen((GravityCompat.START))){
-            drawerLayout.closeDrawer(GravityCompat.START);
-        }
-        else{
-            super.onBackPressed();
-        }
-    }
+//    @Override
+//    public void onBackPressed() {
+//
+//        if (drawerLayout.isDrawerOpen((GravityCompat.START))){
+//            drawerLayout.closeDrawer(GravityCompat.START);
+//        }
+//        else{
+//            super.onBackPressed();
+//        }
+//    }
 }
