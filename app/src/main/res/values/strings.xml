@@ -94,5 +94,14 @@
     <string name="hello_first_fragment">Hello first fragment</string>
     <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
     --------------------------------------------------------------------------------------------------------------------------------------------
+    <string name="company_prompt">Choose a country</string>
+
+
+    <string-array name="company_arrays">
+        <item>Select</item>
+        <item>Driving Licence</item>
+        <item>SteamFoss</item>
+
+    </string-array>
 
 </resources>

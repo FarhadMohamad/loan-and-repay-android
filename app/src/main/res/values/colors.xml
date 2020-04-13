@@ -3,4 +3,6 @@
     <color name="colorPrimary">#F86C40</color>
     <color name="colorPrimaryDark">#F86C40</color>
     <color name="colorAccent">#F4F4F4</color>
+    <color name="textColor">#000000</color>
+    <color name="orange">#ED8F04</color>
 </resources>
