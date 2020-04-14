@@ -6,6 +6,7 @@ import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.Menu;
@@ -42,6 +43,14 @@ public class RequestLoan extends AppCompatActivity {
 
     }
 
+    public void onClickRequestLoan(View view) {
+
+
+            Intent goToRegisterActivity = new Intent(this, MainActivity.class);
+            startActivity(goToRegisterActivity);
+
+    }
+
 
     public class CustomOnItemSelectedListener implements AdapterView.OnItemSelectedListener {
 
@@ -56,7 +65,7 @@ public class RequestLoan extends AppCompatActivity {
             // TODO Auto-generated method stub
         }
     }
-    //Here the logout button is hidden, when the user is logged out
+   //Here the logout button is hidden, when the user is logged out
 //    @Override
 //    protected void onStart() {
 //        super.onStart();

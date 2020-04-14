@@ -1,11 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:layout_marginTop="10dp"
     android:layout_marginLeft="10dp"
     android:layout_marginRight="10dp"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    >
 
 
     <ScrollView
@@ -239,21 +241,28 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginTop="20dp"
                 android:gravity="center">
 
-
-
                 <Button
-                    android:id="@+id/btnRegisterNow"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/btnSendRequest"
-                    android:onClick="onClickSignupBtn"
-                    android:layout_marginBottom="25dp" />
+                    android:id="@+id/RequestLoanBtn"
+                    android:layout_width="156dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginBottom="8dp"
+                    android:background="@drawable/buttonlayout"
+                    android:onClick="onClickRequestLoan"
+                    android:padding="10dp"
+                    android:layout_marginTop="10dp"
+                    android:text="@string/txtRequestLoan"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.19"
+                    app:layout_constraintStart_toEndOf="@+id/textView2"
+                    app:layout_constraintTop_toBottomOf="@+id/forgot_button"
+                    app:layout_constraintVertical_bias="0.222" />
 
 
             </LinearLayout>
+
 
         </LinearLayout>
 
