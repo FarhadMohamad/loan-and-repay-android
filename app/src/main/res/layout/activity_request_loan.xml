@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical"
-    android:layout_marginTop="10dp"
-    android:layout_marginLeft="10dp"
-    android:layout_marginRight="10dp"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    >
+    android:layout_marginLeft="10dp"
+    android:layout_marginTop="10dp"
+    android:layout_marginRight="10dp"
+    android:orientation="vertical">
 
 
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -23,195 +23,206 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
+
                 <TextView
                     android:id="@+id/companyinfo"
-                    android:layout_height="wrap_content"
                     android:layout_width="match_parent"
-                    android:text="Company  information:"
+                    android:layout_height="wrap_content"
                     android:layout_marginBottom="10dp"
+                    android:text="Company  information:"
+                    android:textAlignment="center"
                     android:textColor="#000000"
                     android:textSize="24sp"
-                    android:textStyle="bold"
-                    android:textAlignment="center"/>
+                    android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/choose_a_company"
-                    android:layout_height="wrap_content"
                     android:layout_width="wrap_content"
-                    android:text="Choose a Company:"
+                    android:layout_height="wrap_content"
                     android:layout_marginBottom="10dp"
                     android:padding="5dip"
-
                     android:paddingLeft="6dp"
+
+                    android:text="Choose a Company:"
                     android:textColor="#000000"
                     android:textSize="16sp"
-                    android:textStyle="bold|italic"/>
+                    android:textStyle="bold|italic" />
+
                 <Spinner
                     android:id="@+id/spinner1"
-                    android:layout_marginBottom="6dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginBottom="6dp"
+                    android:background="@drawable/edittextlayout"
                     android:entries="@array/company_arrays"
-                    android:prompt="@string/company_prompt"
                     android:padding="5dip"
-                    android:textCursorDrawable="@color/textColor"
-                    android:background="@drawable/edittextlayout"/>
+                    android:prompt="@string/company_prompt"
+                    android:textCursorDrawable="@color/textColor" />
 
             </LinearLayout>
 
-            <TextView
-                android:id="@+id/Personalinfo"
-                android:layout_height="wrap_content"
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:text="Personal information:"
-                android:layout_marginBottom="10dp"
-                android:padding="5dip"
-                android:textCursorDrawable="@color/textColor"
-                android:textColor="#000000"
-                android:textSize="24sp"
-                android:textStyle="bold"
-                android:textAlignment="center"/>
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/Personalinfo"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp"
+                    android:padding="5dip"
+                    android:text="Personal information:"
+                    android:textAlignment="center"
+                    android:textColor="#000000"
+                    android:textCursorDrawable="@color/textColor"
+                    android:textSize="24sp"
+                    android:textStyle="bold" />
 
 
-            <EditText
-                android:id="@+id/txtFirstName"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:ems="10"
-                android:hint="@string/hintFirstName"
-                android:inputType="textPersonName" android:padding="5dip"
-                android:textCursorDrawable="@color/textColor"
-                android:background="@drawable/edittextlayout"
-                android:layout_marginBottom="6dp"/>
+                <EditText
+                    android:id="@+id/txtFirstName"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="6dp"
+                    android:background="@drawable/edittextlayout"
+                    android:ems="10"
+                    android:hint="@string/hintFirstName"
+                    android:inputType="textPersonName"
+                    android:padding="5dip"
+                    android:textCursorDrawable="@color/textColor" />
 
-            <EditText
-                android:id="@+id/txtLastName"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:ems="10"
-                android:hint="@string/hintLastName"
-                android:inputType="textPersonName" android:padding="5dip"
-                android:textCursorDrawable="@color/textColor"
-                android:background="@drawable/edittextlayout"
-                android:layout_marginBottom="6dp"/>/>
+                <EditText
+                    android:id="@+id/txtLastName"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="6dp"
+                    android:background="@drawable/edittextlayout"
+                    android:ems="10"
+                    android:hint="@string/hintLastName"
+                    android:inputType="textPersonName"
+                    android:padding="5dip"
+                    android:textCursorDrawable="@color/textColor" />/>
 
-            <EditText
-                android:id="@+id/txtEmail"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:ems="10"
-                android:hint="@string/hintRegisterEmail"
-                android:inputType="textEmailAddress" android:padding="5dip"
-                android:textCursorDrawable="@color/textColor"
-                android:background="@drawable/edittextlayout"
-                android:layout_marginBottom="6dp"/>/>
-            <EditText
-                android:id="@+id/txtAge"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:ems="10"
-                android:hint="Age"
-                android:inputType="text"
-                android:padding="5dip"
-                android:textCursorDrawable="@color/textColor"
-                android:background="@drawable/edittextlayout"
-                android:layout_marginBottom="6dp"/>/>
+                <EditText
+                    android:id="@+id/txtEmail"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="6dp"
+                    android:background="@drawable/edittextlayout"
+                    android:ems="10"
+                    android:hint="@string/hintRegisterEmail"
+                    android:inputType="textEmailAddress"
+                    android:padding="5dip"
+                    android:textCursorDrawable="@color/textColor" />/>
 
-            <EditText
-                android:id="@+id/txtPhone"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:ems="10"
-                android:hint="@string/hintPhone"
-                android:inputType="phone"
-                android:padding="5dip"
-                android:textCursorDrawable="@color/textColor"
-                android:background="@drawable/edittextlayout"
-                android:layout_marginBottom="6dp"/>/>
+                <EditText
+                    android:id="@+id/txtAge"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="6dp"
+                    android:background="@drawable/edittextlayout"
+                    android:ems="10"
+                    android:hint="Age"
+                    android:inputType="number"
+                    android:padding="5dip"
+                    android:textCursorDrawable="@color/textColor" />/>
 
-            <EditText
-                android:id="@+id/StreetName"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:ems="10"
-                android:hint="Street Name"
-                android:inputType="text"
-                android:padding="5dip"
-                android:textCursorDrawable="@color/textColor"
-                android:background="@drawable/edittextlayout"
-                android:layout_marginBottom="6dp"/>/>
-            <EditText
-                android:id="@+id/HouseNumber"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:ems="10"
-                android:hint="House Number"
-                android:inputType="text"
-                android:padding="5dip"
-                android:textCursorDrawable="@color/textColor"
-                android:background="@drawable/edittextlayout"
-                android:layout_marginBottom="6dp"/>/>
+                <EditText
+                    android:id="@+id/txtPhone"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="6dp"
+                    android:background="@drawable/edittextlayout"
+                    android:ems="10"
+                    android:hint="@string/hintPhone"
+                    android:inputType="phone"
+                    android:padding="5dip"
+                    android:textCursorDrawable="@color/textColor" />/>
 
-            <EditText
-                android:id="@+id/CityName"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:ems="10"
-                android:hint="City Name"
-                android:inputType="text"
-                android:padding="5dip"
-                android:textCursorDrawable="@color/textColor"
-                android:background="@drawable/edittextlayout"
-                android:layout_marginBottom="6dp"/>/>
+                <EditText
+                    android:id="@+id/StreetName"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="6dp"
+                    android:background="@drawable/edittextlayout"
+                    android:ems="10"
+                    android:hint="Street Name"
+                    android:inputType="text"
+                    android:padding="5dip"
+                    android:textCursorDrawable="@color/textColor" />/>
 
-            <EditText
-                android:id="@+id/PostCode"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:ems="10"
-                android:hint="Post Code"
-                android:inputType="textPostalAddress"
-                android:padding="5dip"
-                android:textCursorDrawable="@color/textColor"
-                android:background="@drawable/edittextlayout"/>
+                <EditText
+                    android:id="@+id/HouseNumber"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="6dp"
+                    android:background="@drawable/edittextlayout"
+                    android:ems="10"
+                    android:hint="House Number"
+                    android:inputType="text"
+                    android:padding="5dip"
+                    android:textCursorDrawable="@color/textColor" />/>
+
+                <EditText
+                    android:id="@+id/CityName"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="6dp"
+                    android:background="@drawable/edittextlayout"
+                    android:ems="10"
+                    android:hint="City Name"
+                    android:inputType="text"
+                    android:padding="5dip"
+                    android:textCursorDrawable="@color/textColor" />/>
+
+                <EditText
+                    android:id="@+id/PostCode"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/edittextlayout"
+                    android:ems="10"
+                    android:hint="Post Code"
+                    android:inputType="number"
+                    android:padding="5dip"
+                    android:textCursorDrawable="@color/textColor" />
+            </LinearLayout>
 
             <TextView
                 android:id="@+id/Payment"
-                android:layout_height="wrap_content"
                 android:layout_width="match_parent"
-                android:text="Payment information:"
+                android:layout_height="wrap_content"
                 android:layout_marginBottom="10dp"
+                android:text="Payment information:"
+                android:textAlignment="center"
                 android:textColor="#000000"
                 android:textSize="24sp"
-                android:textStyle="bold"
-                android:textAlignment="center"/>
+                android:textStyle="bold" />
 
 
             <EditText
                 android:id="@+id/txtAmount"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginBottom="6dp"
+                android:background="@drawable/edittextlayout"
                 android:ems="10"
                 android:hint="Loan Amount"
-                android:inputType="text"
+                android:inputType="numberDecimal"
                 android:padding="5dip"
-                android:textCursorDrawable="@color/textColor"
-                android:background="@drawable/edittextlayout"
-               android:layout_marginBottom="6dp" />
+                android:textCursorDrawable="@color/textColor" />
 
             <EditText
                 android:id="@+id/txtRepay_within_months"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginBottom="6dp"
+                android:background="@drawable/edittextlayout"
                 android:ems="10"
                 android:hint="Repay within months"
-                android:inputType="text"
+                android:inputType="number"
                 android:padding="5dip"
-                android:textCursorDrawable="@color/textColor"
-                android:background="@drawable/edittextlayout"
-                android:layout_marginBottom="6dp"/>
-
-
+                android:textCursorDrawable="@color/textColor" />
 
 
             <LinearLayout
@@ -222,20 +233,17 @@
                 <CheckBox
                     android:id="@+id/chkbxTerms"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    />
+                    android:layout_height="wrap_content" />
 
                 <TextView
                     android:id="@+id/textGDPR"
-                    android:onClick="onClickTerms"
                     android:layout_width="wrap_content"
-                    android:clickable="true"
-                    android:textColor="#0000EE"
                     android:layout_height="wrap_content"
-                    android:text="@string/txtTerms"/>
+                    android:clickable="true"
+                    android:onClick="onClickTerms"
+                    android:text="@string/txtTerms"
+                    android:textColor="#0000EE" />
             </LinearLayout>
-
-
 
 
             <LinearLayout
@@ -247,11 +255,11 @@
                     android:id="@+id/RequestLoanBtn"
                     android:layout_width="156dp"
                     android:layout_height="match_parent"
+                    android:layout_marginTop="10dp"
                     android:layout_marginBottom="8dp"
                     android:background="@drawable/buttonlayout"
                     android:onClick="onClickRequestLoan"
                     android:padding="10dp"
-                    android:layout_marginTop="10dp"
                     android:text="@string/txtRequestLoan"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -267,9 +275,6 @@
         </LinearLayout>
 
     </ScrollView>
-
-
-
 
 
 </RelativeLayout>
