@@ -9,10 +9,15 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.RadioButton;
 import android.widget.Spinner;
 import android.widget.Toast;
 
@@ -24,13 +29,45 @@ public class RequestLoan extends AppCompatActivity {
     private DrawerLayout drawerLayout;
     private ActionBarDrawerToggle toggle;
     private Spinner spinner1;
+    private EditText loanAmount;
+    public RadioButton radiosixMonths;
+    public RadioButton radiontvelveMonths;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_request_loan);
         addListenerOnButton();
         addListenerOnSpinnerItemSelection();
+
+        loanAmount = findViewById(R.id.txtAmount);
+        radiosixMonths = findViewById(R.id.radiobtnSixMonths);
+        radiontvelveMonths = findViewById(R.id.radiobtntvelveMonths);
+        loanAmount.addTextChangedListener(radioButtonTextWatcher);
     }
+   //enable radion button and request loan button after all fields are filled
+private TextWatcher radioButtonTextWatcher = new TextWatcher() {
+    @Override
+    public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+    }
+
+    @Override
+    public void onTextChanged(CharSequence s, int start, int before, int count) {
+        String usernameInput = loanAmount.getText().toString();
+        radiosixMonths.setEnabled(!usernameInput.isEmpty());
+        radiontvelveMonths.setEnabled(!usernameInput.isEmpty());
+    }
+
+    @Override
+    public void afterTextChanged(Editable s) {
+
+    }
+};
+
+
     public void addListenerOnSpinnerItemSelection() {
         spinner1 = (Spinner) findViewById(R.id.spinner1);
         spinner1.setOnItemSelectedListener((AdapterView.OnItemSelectedListener) new CustomOnItemSelectedListener());
@@ -46,8 +83,8 @@ public class RequestLoan extends AppCompatActivity {
     public void onClickRequestLoan(View view) {
 
 
-            Intent goToRegisterActivity = new Intent(this, MainActivity.class);
-            startActivity(goToRegisterActivity);
+        Intent goToRegisterActivity = new Intent(this, MainActivity.class);
+        startActivity(goToRegisterActivity);
 
     }
 
@@ -65,7 +102,7 @@ public class RequestLoan extends AppCompatActivity {
             // TODO Auto-generated method stub
         }
     }
-   //Here the logout button is hidden, when the user is logged out
+    //Here the logout button is hidden, when the user is logged out
 //    @Override
 //    protected void onStart() {
 //        super.onStart();
