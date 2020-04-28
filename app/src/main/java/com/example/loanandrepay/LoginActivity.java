@@ -98,7 +98,7 @@ public class LoginActivity extends AppCompatActivity {
         new UserLogin().execute();
     }
 
-    public class UserLogin extends AsyncTask<String, Void, Void> {
+    public  class UserLogin extends AsyncTask<String, Void, Void> {
 
         HttpConnection httpConnection = new HttpConnection();
         EditText userId = (EditText) findViewById(R.id.txtLoginUsername);
