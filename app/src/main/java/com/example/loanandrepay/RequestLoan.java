@@ -8,6 +8,7 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -23,6 +24,13 @@ import android.widget.Toast;
 
 import com.google.android.material.navigation.NavigationView;
 
+import org.json.JSONObject;
+
+import java.io.BufferedWriter;
+import java.io.OutputStream;
+import java.io.OutputStreamWriter;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.util.Objects;
 
 public class RequestLoan extends AppCompatActivity {
@@ -199,4 +207,117 @@ private TextWatcher radioButtonTextWatcher = new TextWatcher() {
 //            super.onBackPressed();
 //        }
 //    }
+    public void onClickSignupBtn(View view) {
+        new RegisterActivity.Register().execute();
+    }
+
+    public class Register extends AsyncTask<String, Void, Void> {
+        private EditText editText;
+
+        HttpConnection httpConnection = new HttpConnection();
+
+
+
+
+        public Button RequestLoanBtn;
+        public EditText txtFirstName;
+        public EditText txtLastName;
+        public EditText txtEmail;
+        public EditText txtAge;
+        public EditText txtPhone;
+        public EditText StreetName;
+        public EditText HouseNumber;
+        public EditText CityName;
+        public EditText PostCode;
+        private EditText loanAmount;
+
+
+        EditText enterFirstName = (EditText) findViewById(R.id.txtFirstName);
+        EditText enterLastName = (EditText) findViewById(R.id.txtLastName);
+        EditText enterEmail = (EditText) findViewById(R.id.txtEmail);
+        EditText enterAge = (EditText) findViewById(R.id.txtAge);
+        EditText enterPhone = (EditText) findViewById(R.id.txtPhone);
+        EditText enterStreetName = (EditText) findViewById(R.id.StreetName);
+        EditText enterHouseNumber = (EditText) findViewById(R.id.HouseNumber);
+        EditText enterCityName = (EditText) findViewById(R.id.CityName);
+        EditText enterPostCode = (EditText) findViewById(R.id.PostCode);
+        EditText enterloanAmount = (EditText) findViewById(R.id.txtAmount);
+
+
+        @Override
+        protected Void doInBackground(String... params) {
+            URL url;
+            HttpURLConnection urlConnection = null;
+
+            try {
+                JSONObject postDataParams = new JSONObject();
+                postDataParams.put("FirstName", enterFirstName.getText());
+                postDataParams.put("LastName", enterLastName.getText());
+                postDataParams.put("Email", enterEmail.getText());
+                postDataParams.put("Age", enterAge.getText());
+                postDataParams.put("PhoneNumber", enterPhone.getText());
+                postDataParams.put("StreetName", enterStreetName.getText());
+                postDataParams.put("HouseNumber", enterHouseNumber.getText());
+                postDataParams.put("CityName", enterCityName.getText());
+                postDataParams.put("PostCode", enterPostCode.getText());
+                postDataParams.put("loanAmount", enterloanAmount.getText());
+
+
+
+
+
+                //url = new URL("http://25.95.117.73:7549/api/Account/Login");
+                url = new URL("http://192.168.1.171:4567/api/Account/Register");
+
+
+                urlConnection = (HttpURLConnection) url.openConnection();
+                urlConnection.setRequestMethod("POST");
+                urlConnection.setDoInput(true);
+
+                OutputStream os = urlConnection.getOutputStream();
+
+                BufferedWriter writer = new BufferedWriter(
+                        new OutputStreamWriter(os, "UTF-8"));
+                writer.write(httpConnection.getPostDataString(postDataParams));
+
+                writer.flush();
+                writer.close();
+                os.close();
+
+                int responseCode = urlConnection.getResponseCode();
+
+                if (responseCode == HttpURLConnection.HTTP_OK) {
+
+                    Intent goToAuthentication = new Intent(RegisterActivity.this, LoginActivity.class);
+                    startActivity(goToAuthentication);
+                    finish();
+
+
+                } else if (responseCode == HttpURLConnection.HTTP_BAD_REQUEST){
+                    runOnUiThread(new Runnable(){
+                        @Override
+                        public void run() {
+                            Toast.makeText(getApplicationContext(), "Sign-up failed. Please try again",
+                                    Toast.LENGTH_LONG).show();
+                        }
+                    });
+
+                }
+
+            } catch (Exception e) {
+                e.printStackTrace();
+            } finally {
+                if (urlConnection != null)
+                    urlConnection.disconnect();
+            }
+            return null;
+        }
+
+        protected void onPostExecute(Void result){
+            super.onPostExecute(result);
+
+        }
+
+    }
 }
+
