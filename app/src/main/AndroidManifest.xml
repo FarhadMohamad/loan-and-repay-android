@@ -14,7 +14,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".MainActivity">
+        <activity android:name=".RequestStatus">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -28,7 +28,7 @@
             android:name=".LoginActivity"
             android:parentActivityName=".MainActivity" />
         <activity
-            android:name=".RequestStatus"
+            android:name=".MainActivity"
             android:parentActivityName=".MainActivity" />
         <activity
             android:name=".RequestLoan"
