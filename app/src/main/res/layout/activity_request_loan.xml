@@ -49,7 +49,7 @@
                     android:textStyle="bold|italic" />
 
                 <Spinner
-                    android:id="@+id/spinner1"
+                    android:id="@+id/spinnerCompany"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="6dp"
@@ -119,7 +119,7 @@
                 android:background="@drawable/edittextlayout"
                 android:ems="10"
                 android:hint="Age"
-                android:inputType="text"
+                android:inputType="number"
                 android:padding="5dip"
                 android:textCursorDrawable="@color/textColor" />/>
 
@@ -131,7 +131,7 @@
                 android:background="@drawable/edittextlayout"
                 android:ems="10"
                 android:hint="@string/hintPhone"
-                android:inputType="phone"
+                android:inputType="text"
                 android:padding="5dip"
                 android:textCursorDrawable="@color/textColor" />/>
 
@@ -178,7 +178,7 @@
                 android:background="@drawable/edittextlayout"
                 android:ems="10"
                 android:hint="Post Code"
-                android:inputType="textPostalAddress"
+                android:inputType="number"
                 android:padding="5dip"
                 android:textCursorDrawable="@color/textColor" />
 
@@ -202,7 +202,7 @@
                 android:background="@drawable/edittextlayout"
                 android:ems="10"
                 android:hint="Loan Amount"
-                android:inputType="text"
+                android:inputType="numberDecimal"
                 android:padding="5dip"
                 android:textCursorDrawable="@color/textColor" />
 

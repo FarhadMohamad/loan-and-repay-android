@@ -19,6 +19,7 @@ import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.Toast;
 
@@ -38,6 +39,8 @@ public class RequestLoan extends AppCompatActivity {
     private ActionBarDrawerToggle toggle;
     private Spinner spinner1;
     private EditText loanAmount;
+    private EditText loanAmount2;
+
     public RadioButton radiosixMonths;
     public RadioButton radiontvelveMonths;
     public Button RequestLoanBtn;
@@ -52,43 +55,45 @@ public class RequestLoan extends AppCompatActivity {
     public EditText PostCode;
 
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_request_loan);
-        addListenerOnButton();
-        addListenerOnSpinnerItemSelection();
+
 
         loanAmount = findViewById(R.id.txtAmount);
         radiosixMonths = findViewById(R.id.radiobtnSixMonths);
         radiontvelveMonths = findViewById(R.id.radiobtntvelveMonths);
         loanAmount.addTextChangedListener(radioButtonTextWatcher);
         ///////////////////////////////////////
-        txtFirstName= findViewById(R.id.txtFirstName);
+        txtFirstName = findViewById(R.id.txtFirstName);
         txtFirstName.addTextChangedListener(RequestLoanBtnTextWatcher);
-        txtLastName= findViewById(R.id.txtLastName);
+        txtLastName = findViewById(R.id.txtLastName);
         txtLastName.addTextChangedListener(RequestLoanBtnTextWatcher);
-        txtEmail= findViewById(R.id.txtEmail);
+        txtEmail = findViewById(R.id.txtEmail);
         txtEmail.addTextChangedListener(RequestLoanBtnTextWatcher);
-        txtAge= findViewById(R.id.txtAge);
+        txtAge = findViewById(R.id.txtAge);
         txtAge.addTextChangedListener(RequestLoanBtnTextWatcher);
-        txtPhone= findViewById(R.id.txtPhone);
+        txtPhone = findViewById(R.id.txtPhone);
         txtPhone.addTextChangedListener(RequestLoanBtnTextWatcher);
-        StreetName= findViewById(R.id.StreetName);
+        StreetName = findViewById(R.id.StreetName);
         StreetName.addTextChangedListener(RequestLoanBtnTextWatcher);
-        HouseNumber= findViewById(R.id.HouseNumber);
+        HouseNumber = findViewById(R.id.HouseNumber);
         HouseNumber.addTextChangedListener(RequestLoanBtnTextWatcher);
-        CityName= findViewById(R.id.CityName);
+        CityName = findViewById(R.id.CityName);
         CityName.addTextChangedListener(RequestLoanBtnTextWatcher);
-        PostCode= findViewById(R.id.PostCode);
+        PostCode = findViewById(R.id.PostCode);
         PostCode.addTextChangedListener(RequestLoanBtnTextWatcher);
+        loanAmount = findViewById(R.id.txtAmount);
+        loanAmount.addTextChangedListener(RequestLoanBtnTextWatcher);
         RequestLoanBtn = findViewById(R.id.RequestLoanBtn);
+
         ///////////////////////////////////////
     }
-   //enable radion button and request loan button after all fields are filled
-private TextWatcher radioButtonTextWatcher = new TextWatcher() {
+
+    //enable radion button and request loan button after all fields are filled
+    private TextWatcher radioButtonTextWatcher = new TextWatcher() {
         @Override
         public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
@@ -125,6 +130,7 @@ private TextWatcher radioButtonTextWatcher = new TextWatcher() {
             String HouseNumberFiled = HouseNumber.getText().toString();
             String CityNameFiled = CityName.getText().toString();
             String PostCodeFiled = PostCode.getText().toString();
+            String usernameInput = loanAmount.getText().toString();
 
             RequestLoanBtn.setEnabled(!txtFirstNameFiled.isEmpty());
             RequestLoanBtn.setEnabled(!txtLastNameFiled.isEmpty());
@@ -135,6 +141,7 @@ private TextWatcher radioButtonTextWatcher = new TextWatcher() {
             RequestLoanBtn.setEnabled(!HouseNumberFiled.isEmpty());
             RequestLoanBtn.setEnabled(!CityNameFiled.isEmpty());
             RequestLoanBtn.setEnabled(!PostCodeFiled.isEmpty());
+            RequestLoanBtn.setEnabled(!usernameInput.isEmpty());
 
 
         }
@@ -144,41 +151,6 @@ private TextWatcher radioButtonTextWatcher = new TextWatcher() {
 
         }
     };
-
-    public void addListenerOnSpinnerItemSelection() {
-        spinner1 = (Spinner) findViewById(R.id.spinner1);
-        spinner1.setOnItemSelectedListener((AdapterView.OnItemSelectedListener) new CustomOnItemSelectedListener());
-    }
-
-    // get the selected dropdown list value
-    public void addListenerOnButton() {
-
-        spinner1 = (Spinner) findViewById(R.id.spinner1);
-
-    }
-
-    public void onClickRequestLoan(View view) {
-
-
-        Intent goToRegisterActivity = new Intent(this, MainActivity.class);
-        startActivity(goToRegisterActivity);
-
-    }
-
-
-    public class CustomOnItemSelectedListener implements AdapterView.OnItemSelectedListener {
-
-        public void onItemSelected(AdapterView<?> parent, View view, int pos, long id) {
-            Toast.makeText(parent.getContext(),
-                    "OnItemSelectedListener : " + parent.getItemAtPosition(pos).toString(),
-                    Toast.LENGTH_SHORT).show();
-        }
-
-        @Override
-        public void onNothingSelected(AdapterView<?> arg0) {
-            // TODO Auto-generated method stub
-        }
-    }
     //Here the logout button is hidden, when the user is logged out
 //    @Override
 //    protected void onStart() {
@@ -207,30 +179,21 @@ private TextWatcher radioButtonTextWatcher = new TextWatcher() {
 //            super.onBackPressed();
 //        }
 //    }
-    public void onClickSignupBtn(View view) {
-        new RegisterActivity.Register().execute();
+
+    public void onClickRequestLoan(View view) {
+
+
+        new InstallmentRequest().execute();
+
     }
 
-    public class Register extends AsyncTask<String, Void, Void> {
-        private EditText editText;
+
+    public class InstallmentRequest extends AsyncTask<String, Void, Void> {
 
         HttpConnection httpConnection = new HttpConnection();
 
-
-
-
-        public Button RequestLoanBtn;
-        public EditText txtFirstName;
-        public EditText txtLastName;
-        public EditText txtEmail;
-        public EditText txtAge;
-        public EditText txtPhone;
-        public EditText StreetName;
-        public EditText HouseNumber;
-        public EditText CityName;
-        public EditText PostCode;
-        private EditText loanAmount;
-
+        Spinner enterCompanyName = (Spinner) findViewById(R.id.spinnerCompany);
+        String CompanyName = enterCompanyName.getSelectedItem().toString();
 
         EditText enterFirstName = (EditText) findViewById(R.id.txtFirstName);
         EditText enterLastName = (EditText) findViewById(R.id.txtLastName);
@@ -242,6 +205,11 @@ private TextWatcher radioButtonTextWatcher = new TextWatcher() {
         EditText enterCityName = (EditText) findViewById(R.id.CityName);
         EditText enterPostCode = (EditText) findViewById(R.id.PostCode);
         EditText enterloanAmount = (EditText) findViewById(R.id.txtAmount);
+        RadioGroup radioGroup = (RadioGroup) findViewById(R.id.radio_group);
+        // get selected radio button from radioGroup
+        int selectedId = radioGroup.getCheckedRadioButtonId();
+        // find the radiobutton by returned id
+        RadioButton radionButton = (RadioButton) findViewById(selectedId);
 
 
         @Override
@@ -251,23 +219,21 @@ private TextWatcher radioButtonTextWatcher = new TextWatcher() {
 
             try {
                 JSONObject postDataParams = new JSONObject();
+                postDataParams.put("Company", CompanyName);
                 postDataParams.put("FirstName", enterFirstName.getText());
                 postDataParams.put("LastName", enterLastName.getText());
                 postDataParams.put("Email", enterEmail.getText());
                 postDataParams.put("Age", enterAge.getText());
-                postDataParams.put("PhoneNumber", enterPhone.getText());
+                postDataParams.put("Phone", enterPhone.getText());
                 postDataParams.put("StreetName", enterStreetName.getText());
                 postDataParams.put("HouseNumber", enterHouseNumber.getText());
                 postDataParams.put("CityName", enterCityName.getText());
                 postDataParams.put("PostCode", enterPostCode.getText());
-                postDataParams.put("loanAmount", enterloanAmount.getText());
+                postDataParams.put("Amount", enterloanAmount.getText());
+                postDataParams.put("PayWithIn", radionButton.getText());
+               // postDataParams.put("MonthlyPayment", enterloanAmount.getText());
 
-
-
-
-
-                //url = new URL("http://25.95.117.73:7549/api/Account/Login");
-                url = new URL("http://192.168.1.171:4567/api/Account/Register");
+                url = new URL("http://192.168.1.171:4567/api/InstallmentRequest");
 
 
                 urlConnection = (HttpURLConnection) url.openConnection();
@@ -288,16 +254,16 @@ private TextWatcher radioButtonTextWatcher = new TextWatcher() {
 
                 if (responseCode == HttpURLConnection.HTTP_OK) {
 
-                    Intent goToAuthentication = new Intent(RegisterActivity.this, LoginActivity.class);
+                    Intent goToAuthentication = new Intent(RequestLoan.this, MainActivity.class);
                     startActivity(goToAuthentication);
                     finish();
 
 
-                } else if (responseCode == HttpURLConnection.HTTP_BAD_REQUEST){
-                    runOnUiThread(new Runnable(){
+                } else if (responseCode == HttpURLConnection.HTTP_NOT_FOUND) {
+                    runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            Toast.makeText(getApplicationContext(), "Sign-up failed. Please try again",
+                            Toast.makeText(getApplicationContext(), "Request failed, please try again",
                                     Toast.LENGTH_LONG).show();
                         }
                     });
@@ -313,7 +279,7 @@ private TextWatcher radioButtonTextWatcher = new TextWatcher() {
             return null;
         }
 
-        protected void onPostExecute(Void result){
+        protected void onPostExecute(Void result) {
             super.onPostExecute(result);
 
         }
