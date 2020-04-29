@@ -32,6 +32,17 @@ public class RequestLoan extends AppCompatActivity {
     private EditText loanAmount;
     public RadioButton radiosixMonths;
     public RadioButton radiontvelveMonths;
+    public Button RequestLoanBtn;
+    public EditText txtFirstName;
+    public EditText txtLastName;
+    public EditText txtEmail;
+    public EditText txtAge;
+    public EditText txtPhone;
+    public EditText StreetName;
+    public EditText HouseNumber;
+    public EditText CityName;
+    public EditText PostCode;
+
 
 
     @Override
@@ -46,27 +57,85 @@ public class RequestLoan extends AppCompatActivity {
         radiosixMonths = findViewById(R.id.radiobtnSixMonths);
         radiontvelveMonths = findViewById(R.id.radiobtntvelveMonths);
         loanAmount.addTextChangedListener(radioButtonTextWatcher);
+        ///////////////////////////////////////
+        txtFirstName= findViewById(R.id.txtFirstName);
+        txtFirstName.addTextChangedListener(RequestLoanBtnTextWatcher);
+        txtLastName= findViewById(R.id.txtLastName);
+        txtLastName.addTextChangedListener(RequestLoanBtnTextWatcher);
+        txtEmail= findViewById(R.id.txtEmail);
+        txtEmail.addTextChangedListener(RequestLoanBtnTextWatcher);
+        txtAge= findViewById(R.id.txtAge);
+        txtAge.addTextChangedListener(RequestLoanBtnTextWatcher);
+        txtPhone= findViewById(R.id.txtPhone);
+        txtPhone.addTextChangedListener(RequestLoanBtnTextWatcher);
+        StreetName= findViewById(R.id.StreetName);
+        StreetName.addTextChangedListener(RequestLoanBtnTextWatcher);
+        HouseNumber= findViewById(R.id.HouseNumber);
+        HouseNumber.addTextChangedListener(RequestLoanBtnTextWatcher);
+        CityName= findViewById(R.id.CityName);
+        CityName.addTextChangedListener(RequestLoanBtnTextWatcher);
+        PostCode= findViewById(R.id.PostCode);
+        PostCode.addTextChangedListener(RequestLoanBtnTextWatcher);
+        RequestLoanBtn = findViewById(R.id.RequestLoanBtn);
+        ///////////////////////////////////////
     }
    //enable radion button and request loan button after all fields are filled
 private TextWatcher radioButtonTextWatcher = new TextWatcher() {
-    @Override
-    public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+        @Override
+        public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
-    }
+        }
 
-    @Override
-    public void onTextChanged(CharSequence s, int start, int before, int count) {
-        String usernameInput = loanAmount.getText().toString();
-        radiosixMonths.setEnabled(!usernameInput.isEmpty());
-        radiontvelveMonths.setEnabled(!usernameInput.isEmpty());
-    }
+        @Override
+        public void onTextChanged(CharSequence s, int start, int before, int count) {
+            String usernameInput = loanAmount.getText().toString();
+            radiosixMonths.setEnabled(!usernameInput.isEmpty());
+            radiontvelveMonths.setEnabled(!usernameInput.isEmpty());
 
-    @Override
-    public void afterTextChanged(Editable s) {
 
-    }
-};
+        }
 
+        @Override
+        public void afterTextChanged(Editable s) {
+
+        }
+    };
+    private TextWatcher RequestLoanBtnTextWatcher = new TextWatcher() {
+        @Override
+        public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+        }
+
+        @Override
+        public void onTextChanged(CharSequence s, int start, int before, int count) {
+            String txtFirstNameFiled = txtFirstName.getText().toString();
+            String txtLastNameFiled = txtLastName.getText().toString();
+            String txtEmailFiled = txtEmail.getText().toString();
+            String txtAgeFiled = txtAge.getText().toString();
+            String txtPhoneFiled = txtPhone.getText().toString();
+            String StreetNameFiled = StreetName.getText().toString();
+            String HouseNumberFiled = HouseNumber.getText().toString();
+            String CityNameFiled = CityName.getText().toString();
+            String PostCodeFiled = PostCode.getText().toString();
+
+            RequestLoanBtn.setEnabled(!txtFirstNameFiled.isEmpty());
+            RequestLoanBtn.setEnabled(!txtLastNameFiled.isEmpty());
+            RequestLoanBtn.setEnabled(!txtEmailFiled.isEmpty());
+            RequestLoanBtn.setEnabled(!txtAgeFiled.isEmpty());
+            RequestLoanBtn.setEnabled(!txtPhoneFiled.isEmpty());
+            RequestLoanBtn.setEnabled(!StreetNameFiled.isEmpty());
+            RequestLoanBtn.setEnabled(!HouseNumberFiled.isEmpty());
+            RequestLoanBtn.setEnabled(!CityNameFiled.isEmpty());
+            RequestLoanBtn.setEnabled(!PostCodeFiled.isEmpty());
+
+
+        }
+
+        @Override
+        public void afterTextChanged(Editable s) {
+
+        }
+    };
 
     public void addListenerOnSpinnerItemSelection() {
         spinner1 = (Spinner) findViewById(R.id.spinner1);
