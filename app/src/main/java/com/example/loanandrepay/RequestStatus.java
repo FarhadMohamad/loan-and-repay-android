@@ -10,11 +10,23 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
+import android.widget.TextView;
 
 import com.google.android.material.navigation.NavigationView;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 public class RequestStatus extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
@@ -25,16 +37,23 @@ public class RequestStatus extends AppCompatActivity implements NavigationView.O
     @Override
     protected void onStart() {
         super.onStart();
-        SharedPreferences sharedPref = getSharedPreferences("userInfo", Context.MODE_PRIVATE);
-        String token = sharedPref.getString("token", "");
+//        SharedPreferences sharedPref = getSharedPreferences("userInfo", Context.MODE_PRIVATE);
+////        String token = sharedPref.getString("token", "");
+////
+////
+////
+////
+////        if (Objects.equals(token, "")) {
+////            //// MenuItem logoutItem = menu.findItem(R.id.action_logout);
+////            NavigationView navigationView = findViewById(R.id.navigation_view);
+////            Menu menu = navigationView.getMenu();
+////            MenuItem menuItem = menu.findItem(R.id.action_logout);
+////            menuItem.setVisible(false);
+////        }
 
-        if (Objects.equals(token, "")) {
-            //// MenuItem logoutItem = menu.findItem(R.id.action_logout);
-            NavigationView navigationView = findViewById(R.id.navigation_view);
-            Menu menu = navigationView.getMenu();
-            MenuItem menuItem = menu.findItem(R.id.action_logout);
-            menuItem.setVisible(false);
-        }
+        GetInstallmentStatus getInstallmentStatus = new GetInstallmentStatus();
+        //http://localhost:4567/api/InstallmentRequestStatus
+        getInstallmentStatus.execute("http://localhost:4567/api/InstallmentRequestStatus");
 
     }
 
@@ -98,4 +117,44 @@ public class RequestStatus extends AppCompatActivity implements NavigationView.O
         }
         return false;
     }
+
+
+
+    private class GetInstallmentStatus extends ReadHttpTask {
+        @Override
+        protected void onPostExecute(CharSequence jsonString) {
+
+            //Gets the data from database and show all info into list by using loop
+            final List<InstallmentRequest> request = new ArrayList<>();
+
+            try {
+
+                JSONArray array = new JSONArray(jsonString.toString());
+                for (int i = 0; i < array.length(); i++) {
+                    JSONObject obj = array.getJSONObject(i);
+
+                    //token = obj.getString("UserId");
+                    String company = obj.getString("Company");
+                    int status = obj.getInt("Status");
+
+
+                    InstallmentRequest installmentRequest = new InstallmentRequest(company, status);
+
+                    request.add(installmentRequest);
+                }
+                ListView listView = findViewById(R.id.showPendingRequestList);
+                ArrayAdapter<InstallmentRequest> adapter = new ArrayAdapter<>(getBaseContext(), android.R.layout.simple_list_item_1, request);
+                listView.setAdapter(adapter);
+
+
+            } catch (JSONException ex)
+            {
+                //messageTextView.setText(ex.getMessage());
+                Log.e("InstallmentRequest", ex.getMessage());
+            }
+
+
+        }
+    }
+
 }

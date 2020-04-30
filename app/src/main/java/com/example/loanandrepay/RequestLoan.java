@@ -233,10 +233,16 @@ public class RequestLoan extends AppCompatActivity {
                 postDataParams.put("PayWithIn", radionButton.getText());
                // postDataParams.put("MonthlyPayment", enterloanAmount.getText());
 
+                SharedPreferences sharedPref = getSharedPreferences("userInfo", Context.MODE_PRIVATE);
+
+                String token = sharedPref.getString("token", "");
+
                 url = new URL("http://192.168.1.171:4567/api/InstallmentRequest");
 
 
                 urlConnection = (HttpURLConnection) url.openConnection();
+                urlConnection.setRequestProperty("Authorization", "Bearer " + token);
+
                 urlConnection.setRequestMethod("POST");
                 urlConnection.setDoInput(true);
 

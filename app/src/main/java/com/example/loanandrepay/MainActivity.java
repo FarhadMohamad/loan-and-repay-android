@@ -52,7 +52,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         drawerLayout = (DrawerLayout) findViewById(R.id.drawerLayout);
         toggle = new ActionBarDrawerToggle(this, drawerLayout, R.string.open, R.string.close);
 
-        ListView lie = findViewById(R.id.sh)
+
         drawerLayout.addDrawerListener(toggle);
         toggle.syncState();
 
