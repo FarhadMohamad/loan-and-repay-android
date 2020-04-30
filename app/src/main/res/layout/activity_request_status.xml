@@ -83,7 +83,7 @@
                 android:id="@+id/showRejectedRequests"
                 android:layout_width="match_parent"
                 android:layout_height="160dp"
-                android:isScrollContainer="true"></ListView>
+                android:isScrollContainer="true" />
         </LinearLayout>
     </LinearLayout>
     <!--    End-->
