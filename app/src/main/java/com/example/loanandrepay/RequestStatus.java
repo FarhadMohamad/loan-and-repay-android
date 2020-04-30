@@ -37,23 +37,25 @@ public class RequestStatus extends AppCompatActivity implements NavigationView.O
     @Override
     protected void onStart() {
         super.onStart();
-//        SharedPreferences sharedPref = getSharedPreferences("userInfo", Context.MODE_PRIVATE);
-////        String token = sharedPref.getString("token", "");
-////
-////
-////
-////
-////        if (Objects.equals(token, "")) {
-////            //// MenuItem logoutItem = menu.findItem(R.id.action_logout);
-////            NavigationView navigationView = findViewById(R.id.navigation_view);
-////            Menu menu = navigationView.getMenu();
-////            MenuItem menuItem = menu.findItem(R.id.action_logout);
-////            menuItem.setVisible(false);
-////        }
+        SharedPreferences sharedPref = getSharedPreferences("userInfo", Context.MODE_PRIVATE);
+        String showLogUser = sharedPref.getString("savedUser", "");
+        String token = sharedPref.getString("token", "");
+        if (Objects.equals(token, "")) {
+            //// MenuItem logoutItem = menu.findItem(R.id.action_logout);
+            NavigationView navigationView = findViewById(R.id.navigation_view);
+            Menu menu = navigationView.getMenu();
+            MenuItem menuItem = menu.findItem(R.id.action_logout);
+            menuItem.setVisible(false);
+        }
 
-        GetInstallmentStatus getInstallmentStatus = new GetInstallmentStatus();
-        //http://localhost:4567/api/InstallmentRequestStatus
-        getInstallmentStatus.execute("http://localhost:4567/api/InstallmentRequestStatus");
+        GetPendingRequest getPendingRequest = new GetPendingRequest();
+        getPendingRequest.execute("http://192.168.1.171:4567/api/StatusPending?email="+ showLogUser);
+
+        GetAcceptedRequest getAcceptedRequest = new GetAcceptedRequest();
+        getAcceptedRequest.execute("http://192.168.1.171:4567/api/StatusAccepted?email="+ showLogUser);
+
+        GetRejectedRequest getRejectedRequest = new GetRejectedRequest();
+        getRejectedRequest.execute("http://192.168.1.171:4567/api/StatusRejected?email="+ showLogUser);
 
     }
 
@@ -120,12 +122,12 @@ public class RequestStatus extends AppCompatActivity implements NavigationView.O
 
 
 
-    private class GetInstallmentStatus extends ReadHttpTask {
+    private class GetPendingRequest extends ReadHttpTask {
         @Override
         protected void onPostExecute(CharSequence jsonString) {
 
             //Gets the data from database and show all info into list by using loop
-            final List<InstallmentRequest> request = new ArrayList<>();
+            final List<StatusPending> request = new ArrayList<>();
 
             try {
 
@@ -135,15 +137,89 @@ public class RequestStatus extends AppCompatActivity implements NavigationView.O
 
                     //token = obj.getString("UserId");
                     String company = obj.getString("Company");
-                    int status = obj.getInt("Status");
+                    String status = obj.getString("Status");
 
 
-                    InstallmentRequest installmentRequest = new InstallmentRequest(company, status);
+                    StatusPending statusPending = new StatusPending (company, status);
 
-                    request.add(installmentRequest);
+                    request.add(statusPending);
                 }
                 ListView listView = findViewById(R.id.showPendingRequestList);
-                ArrayAdapter<InstallmentRequest> adapter = new ArrayAdapter<>(getBaseContext(), android.R.layout.simple_list_item_1, request);
+                ArrayAdapter<StatusPending> adapter = new ArrayAdapter<>(getBaseContext(), android.R.layout.simple_list_item_1, request);
+                listView.setAdapter(adapter);
+
+
+            } catch (JSONException ex)
+            {
+                //messageTextView.setText(ex.getMessage());
+                Log.e("InstallmentRequest", ex.getMessage());
+            }
+
+
+        }
+    }
+
+    private class GetAcceptedRequest extends ReadHttpTask {
+        @Override
+        protected void onPostExecute(CharSequence jsonString) {
+
+            //Gets the data from database and show all info into list by using loop
+            final List<StatusAccepted> request = new ArrayList<>();
+
+            try {
+
+                JSONArray array = new JSONArray(jsonString.toString());
+                for (int i = 0; i < array.length(); i++) {
+                    JSONObject obj = array.getJSONObject(i);
+
+                    //token = obj.getString("UserId");
+                    String company = obj.getString("Company");
+                    String status = obj.getString("Status");
+
+
+                    StatusAccepted statusAccepted = new StatusAccepted(company, status);
+
+                    request.add(statusAccepted);
+                }
+                ListView listView = findViewById(R.id.showAcceptedRequests);
+                ArrayAdapter<StatusAccepted> adapter = new ArrayAdapter<>(getBaseContext(), android.R.layout.simple_list_item_1, request);
+                listView.setAdapter(adapter);
+
+
+            } catch (JSONException ex)
+            {
+                //messageTextView.setText(ex.getMessage());
+                Log.e("InstallmentRequest", ex.getMessage());
+            }
+
+
+        }
+    }
+
+    private class GetRejectedRequest extends ReadHttpTask {
+        @Override
+        protected void onPostExecute(CharSequence jsonString) {
+
+            //Gets the data from database and show all info into list by using loop
+            final List<StatusRejected> request = new ArrayList<>();
+
+            try {
+
+                JSONArray array = new JSONArray(jsonString.toString());
+                for (int i = 0; i < array.length(); i++) {
+                    JSONObject obj = array.getJSONObject(i);
+
+                    //token = obj.getString("UserId");
+                    String company = obj.getString("Company");
+                    String status = obj.getString("Status");
+
+
+                   StatusRejected statusRejected = new StatusRejected(company, status);
+
+                    request.add(statusRejected);
+                }
+                ListView listView = findViewById(R.id.showRejectedRequests);
+                ArrayAdapter<StatusRejected> adapter = new ArrayAdapter<>(getBaseContext(), android.R.layout.simple_list_item_1, request);
                 listView.setAdapter(adapter);
 
 
