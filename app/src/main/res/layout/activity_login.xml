@@ -51,7 +51,7 @@
         android:ems="12"
         android:hint="@string/hintEmail"
         android:inputType="textPersonName"
-        android:text="atmar@hotmail.com"
+        android:text="string@shit.com"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

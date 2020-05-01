@@ -96,6 +96,8 @@
     <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
     --------------------------------------------------------------------------------------------------------------------------------------------
     <string name="company_prompt">Choose a country</string>
+    <string name="Register">Register</string>
+    <string name="CompanyName">Company Name</string>
 
 
     <string-array name="company_arrays">

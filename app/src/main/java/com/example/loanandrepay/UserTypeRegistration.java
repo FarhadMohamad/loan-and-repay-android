@@ -6,6 +6,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
+import com.example.loanandrepay.company.CompanyRegisterActivity;
+
 public class UserTypeRegistration extends AppCompatActivity {
 
     @Override
@@ -14,8 +16,9 @@ public class UserTypeRegistration extends AppCompatActivity {
         setContentView(R.layout.activity_user_type_registration);
     }
 
-    public void OnCliekCompanyRegister(View view) {
-
+    public void OnClickCompanyRegister(View view) {
+        Intent goToRegisterActivity = new Intent(UserTypeRegistration.this, CompanyRegisterActivity.class);
+        startActivity(goToRegisterActivity);
     }
 
     public void onClickUserRegister(View view) {

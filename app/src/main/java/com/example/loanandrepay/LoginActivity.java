@@ -140,7 +140,16 @@ public class LoginActivity extends AppCompatActivity {
                     String responseString = httpConnection.readStream(urlConnection.getInputStream());
                     JSONObject obj = new JSONObject(responseString);
                     String kept = obj.get("access_token").toString();
+                    String getUserRole = obj.get("roles").toString();
 
+                    String s1= getUserRole;
+
+                    String replaceString=s1.replace('\\',' ');//replaces all occurrences of 'a' to 'e'
+
+
+
+
+                   // "roles": "[\"Company\"]",
                     //Saving Token
                     SharedPreferences sharedPref = getSharedPreferences("userInfo", Context.MODE_PRIVATE);
                     SharedPreferences.Editor editor = sharedPref.edit();
@@ -152,11 +161,22 @@ public class LoginActivity extends AppCompatActivity {
                     editor.putString("savedUser", saveUser);
                     editor.apply();
 
+                    if (getUserRole == "[Company]")
+                    {
+                        //Go to Main after user is logged in
+                        Intent goToMain = new Intent(LoginActivity.this, MainActivity.class);
+                        startActivity(goToMain);
+                        finish();
+                    }
+                    if(getUserRole == "Client")
+                    {
+                        //Go to ..... after user is logged in
+                        Intent goToMain = new Intent(LoginActivity.this, RequestStatus.class);
+                        startActivity(goToMain);
+                        finish();
+                    }
 
-                    //Go to Main after user is logged in
-                    Intent goToMain = new Intent(LoginActivity.this, MainActivity.class);
-                    startActivity(goToMain);
-                    finish();
+
 
 
                 } else {
