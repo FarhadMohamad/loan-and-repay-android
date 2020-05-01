@@ -90,7 +90,7 @@ public class LoginActivity extends AppCompatActivity {
 
 
     public void onClickRegisterbtn(View view) {
-        Intent goToRegisterActivity = new Intent(LoginActivity.this, RegisterActivity.class);
+        Intent goToRegisterActivity = new Intent(LoginActivity.this, UserTypeRegistration.class);
         startActivity(goToRegisterActivity);
     }
 
