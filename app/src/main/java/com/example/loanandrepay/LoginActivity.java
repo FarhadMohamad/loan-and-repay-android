@@ -33,6 +33,7 @@ import java.net.URL;
 import java.net.URLEncoder;
 import java.util.Iterator;
 import java.util.Objects;
+import java.util.regex.Pattern;
 
 public class LoginActivity extends AppCompatActivity {
     private DrawerLayout drawerLayout;
@@ -144,12 +145,8 @@ public class LoginActivity extends AppCompatActivity {
 
                     String s1= getUserRole;
 
-                    String replaceString=s1.replace('\\',' ');//replaces all occurrences of 'a' to 'e'
 
-
-
-
-                   // "roles": "[\"Company\"]",
+                   // "roles": "["Company"]",
                     //Saving Token
                     SharedPreferences sharedPref = getSharedPreferences("userInfo", Context.MODE_PRIVATE);
                     SharedPreferences.Editor editor = sharedPref.edit();
@@ -161,14 +158,14 @@ public class LoginActivity extends AppCompatActivity {
                     editor.putString("savedUser", saveUser);
                     editor.apply();
 
-                    if (getUserRole == "[Company]")
+                    if (getUserRole.contains("Company"))
                     {
                         //Go to Main after user is logged in
                         Intent goToMain = new Intent(LoginActivity.this, MainActivity.class);
                         startActivity(goToMain);
                         finish();
                     }
-                    if(getUserRole == "Client")
+                    if(getUserRole.contains("Client"))
                     {
                         //Go to ..... after user is logged in
                         Intent goToMain = new Intent(LoginActivity.this, RequestStatus.class);
