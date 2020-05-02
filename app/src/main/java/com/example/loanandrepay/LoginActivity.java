@@ -131,7 +131,7 @@ public class LoginActivity extends AppCompatActivity {
 
                 //url = new URL("http://25.95.117.73:7549/api/Account/Login");
                 //url = new URL("http://25.61.100.41:6429/api/Account/Login");
-                url = new URL("http://25.61.100.41:6429/api/Account/Login");
+               url = new URL("http://192.168.1.171:4567/api/Account/Login");
 
 
                 urlConnection = (HttpURLConnection) url.openConnection();
