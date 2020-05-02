@@ -16,7 +16,9 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
+import androidx.appcompat.widget.Toolbar;
 
+import com.example.loanandrepay.company.RequestListActivity;
 import com.google.android.material.navigation.NavigationView;
 
 import org.json.JSONObject;
@@ -43,12 +45,23 @@ public class LoginActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+
+
+        Toolbar toolbar = (Toolbar) findViewById(R.id.nav_action);
+        setSupportActionBar(toolbar);
+
         drawerLayout = (DrawerLayout) findViewById(R.id.drawerLayout);
         toggle = new ActionBarDrawerToggle(this, drawerLayout, R.string.open, R.string.close);
         drawerLayout.addDrawerListener(toggle);
         toggle.syncState();
 
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+
+            if (getSupportActionBar() != null) {
+                //This will enable the burger menu
+                getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+                getSupportActionBar().setDisplayUseLogoEnabled(true);
+            }
     }
 
     //Here the logout button is hidden, when the user is logged out
@@ -141,7 +154,7 @@ public class LoginActivity extends AppCompatActivity {
                     String responseString = httpConnection.readStream(urlConnection.getInputStream());
                     JSONObject obj = new JSONObject(responseString);
                     String kept = obj.get("access_token").toString();
-                    String getUserRole = obj.get("roles").toString();
+                    String getUserRole = obj.get("roles").toString().trim();
 
                     String s1= getUserRole;
 
@@ -168,7 +181,7 @@ public class LoginActivity extends AppCompatActivity {
                     if(getUserRole.contains("Client"))
                     {
                         //Go to ..... after user is logged in
-                        Intent goToMain = new Intent(LoginActivity.this, RequestStatus.class);
+                        Intent goToMain = new Intent(LoginActivity.this, MainActivity.class);
                         startActivity(goToMain);
                         finish();
                     }

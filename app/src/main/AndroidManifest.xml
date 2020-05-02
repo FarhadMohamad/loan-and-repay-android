@@ -14,7 +14,6 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".company.CompanyRegisterActivity"></activity>
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -35,6 +34,14 @@
             android:name=".RequestLoan"
             android:parentActivityName=".MainActivity" />
         <activity android:name=".RequestStatus" />
+        <activity
+            android:name=".company.CompanyRegisterActivity"
+            android:parentActivityName=".MainActivity" />
+        <activity
+            android:name=".company.RequestListActivity"
+            android:parentActivityName=".MainActivity" />
+
+
     </application>
 
 </manifest>

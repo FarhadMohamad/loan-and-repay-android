@@ -1,6 +1,7 @@
 package com.example.loanandrepay;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.view.GravityCompat;
@@ -9,6 +10,7 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Gravity;
@@ -17,13 +19,15 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ListView;
 import android.widget.Toast;
+import androidx.appcompat.widget.Toolbar;
+import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.loanandrepay.company.RequestListActivity;
 import com.google.android.material.navigation.NavigationView;
 
 import java.util.Objects;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
-
 
     private DrawerLayout drawerLayout;
     private ActionBarDrawerToggle toggle;
@@ -49,6 +53,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        //This is for overlaying the navigation header on the screen
+        Toolbar toolbar = (Toolbar) findViewById(R.id.nav_action);
+        setSupportActionBar(toolbar);
+
         drawerLayout = (DrawerLayout) findViewById(R.id.drawerLayout);
         toggle = new ActionBarDrawerToggle(this, drawerLayout, R.string.open, R.string.close);
 
@@ -56,7 +65,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         drawerLayout.addDrawerListener(toggle);
         toggle.syncState();
 
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+            getSupportActionBar().setDisplayUseLogoEnabled(true);
+        }
 
         //This will do the job for selecting a specific item in the burger menu
         NavigationView navigationView = (NavigationView) findViewById(R.id.navigation_view);
@@ -142,6 +155,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             startActivity(goToRequestStatus);
 
         }
+    }
+
+    public void onClickSetting(View view) {
+        //Go to ..... after user is logged in
+        Intent goToMain = new Intent(MainActivity.this, RequestListActivity.class);
+        startActivity(goToMain);
+        finish();
     }
 }
 
