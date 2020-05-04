@@ -41,7 +41,9 @@
             android:name=".company.RequestListActivity"
             android:parentActivityName=".MainActivity" />
 
-
+        <activity
+            android:name=".company.RequestListDetailsActivity"
+            android:parentActivityName=".company.RequestListActivity" />
     </application>
 
 </manifest>

@@ -6,6 +6,7 @@ import java.io.Serializable;
 
 public class Request implements Serializable {
 
+    private int Id;
     private String Company;
     private String FirstName;
     private String LastName;
@@ -21,7 +22,8 @@ public class Request implements Serializable {
     private double MonthlyPayment;
     private int Status;
 
-    public Request(String company, String firstName, String lastName, String email, int age, String phone, String streetName, String houseNumber, String cityName, int postCode, double amount, String payWithIn, double monthlyPayment) {
+    public Request(int id, String company, String firstName, String lastName, String email, int age, String phone, String streetName, String houseNumber, String cityName, int postCode, double amount, String payWithIn, double monthlyPayment, int status) {
+        Id = id;
         Company = company;
         FirstName = firstName;
         LastName = lastName;
@@ -35,10 +37,17 @@ public class Request implements Serializable {
         Amount = amount;
         PayWithIn = payWithIn;
         MonthlyPayment = monthlyPayment;
+        Status = status;
 
     }
 
+    public int getId() {
+        return Id;
+    }
 
+    public String getCompany() {
+        return Company;
+    }
 
     public String getFirstName() {
         return FirstName;
@@ -48,7 +57,7 @@ public class Request implements Serializable {
         return LastName;
     }
 
-    public String  getEmail() {
+    public String getEmail() {
         return Email;
     }
 
@@ -89,13 +98,14 @@ public class Request implements Serializable {
     public double getMonthlyPayment() {
         return MonthlyPayment;
     }
+
     public int getStatus() {
         return Status;
     }
 
     public String toString() {
 
-        return "To: " + Company + "\n" +"From: " + FirstName + " " +LastName;
+        return "To: " + Company + "\n" + "From: " + FirstName + " " + LastName;
     }
 }
-       // return "To: " + Company + "\n" +"From: " + FirstName + " " +LastName + "\n" + Email + "\n" + Phone + "\n" + StreetName + "\n" + HouseNumber + "\n" + CityName + "\n" + PostCode + "\n" + Amount + "\n" + PayWithIn + "\n" + MonthlyPayment;
+// return "To: " + Company + "\n" +"From: " + FirstName + " " +LastName + "\n" + Email + "\n" + Phone + "\n" + StreetName + "\n" + HouseNumber + "\n" + CityName + "\n" + PostCode + "\n" + Amount + "\n" + PayWithIn + "\n" + MonthlyPayment;

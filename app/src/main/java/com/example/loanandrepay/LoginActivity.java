@@ -154,7 +154,7 @@ public class LoginActivity extends AppCompatActivity {
 
                     String responseString = httpConnection.readStream(urlConnection.getInputStream());
                     JSONObject obj = new JSONObject(responseString);
-                    String kept = obj.get("access_token").toString();
+                    String token = obj.get("access_token").toString();
                     String getUserRole = obj.get("roles").toString().trim();
 
                     String s1= getUserRole;
@@ -164,7 +164,7 @@ public class LoginActivity extends AppCompatActivity {
                     //Saving Token
                     SharedPreferences sharedPref = getSharedPreferences("userInfo", Context.MODE_PRIVATE);
                     SharedPreferences.Editor editor = sharedPref.edit();
-                    editor.putString("token", kept);
+                    editor.putString("token", token);
                     editor.apply();
 
                     //Saving logged in user for showing it later on in Profile Settings

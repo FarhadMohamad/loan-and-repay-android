@@ -99,6 +99,7 @@
     <string name="Register">Register</string>
     <string name="CompanyName">Company Name</string>
 
+    <string name="company_style">Company: <b>Company: </b> glad to see you.</string>
 
     <string-array name="company_arrays">
         <item>Select</item>
