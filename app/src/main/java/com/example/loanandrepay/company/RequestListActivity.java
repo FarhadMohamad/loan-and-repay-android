@@ -52,20 +52,20 @@ public class RequestListActivity extends AppCompatActivity {
         getRequestList.execute("http://192.168.1.171:4567/api/GetRequestList?email="+ showLogUser);
     }
 
-//    public void btnSearch(View view) {
-//
-//        EditText editText = (EditText) findViewById(R.id.search_view);
-//        SharedPreferences sharedPref = getSharedPreferences("userInfo", Context.MODE_PRIVATE);
-//        String showLogUser = sharedPref.getString("savedUser", "");
-//        GetRequestList getRequestList = new GetRequestList();
-//        try {
-//            getRequestList.execute("http://192.168.1.171:4567/api/SearchRequestByName?name="+editText.getText()+"&email="+ showLogUser);
-//        } catch (Exception ex) {
-//            listView.setAdapter(null);
-//            Toast.makeText(getApplicationContext(), "Sorry, ticket not found, But you can request for the ticket and you will get a notification, whenever the ticket is available", Toast.LENGTH_LONG).show();
-//            Exception dd = ex;
-//        }
-//    }
+    public void btnSearch(View view) {
+
+        EditText editText = (EditText) findViewById(R.id.search_view);
+        SharedPreferences sharedPref = getSharedPreferences("userInfo", Context.MODE_PRIVATE);
+        String showLogUser = sharedPref.getString("savedUser", "");
+        GetRequestList getRequestList = new GetRequestList();
+        try {
+            getRequestList.execute("http://192.168.1.171:4567/api/SearchRequestByName?name="+editText.getText()+"&email="+ showLogUser);
+        } catch (Exception ex) {
+            listView.setAdapter(null);
+            Toast.makeText(getApplicationContext(), "Sorry, ticket not found, But you can request for the ticket and you will get a notification, whenever the ticket is available", Toast.LENGTH_LONG).show();
+            Exception dd = ex;
+        }
+    }
 
     private class GetRequestList extends ReadHttpTask {
         @Override
@@ -103,6 +103,7 @@ public class RequestListActivity extends AppCompatActivity {
 
                     requestList.add(request);
                 }
+
                 ListView listView = findViewById(R.id.showRequestList);
                 ArrayAdapter<Request> adapter = new ArrayAdapter<>(getBaseContext(), android.R.layout.simple_list_item_1, requestList);
                 listView.setAdapter(adapter);
