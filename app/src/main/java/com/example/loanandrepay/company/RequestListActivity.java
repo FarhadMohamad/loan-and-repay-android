@@ -5,9 +5,13 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.database.Cursor;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
+import android.widget.Adapter;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
@@ -28,13 +32,42 @@ import java.util.List;
 
 public class RequestListActivity extends AppCompatActivity {
 
-
+    // Listview Adapter
+   private ArrayAdapter<Request> adapter;
     private ListView listView;
+    private EditText inputSearch;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_request_list);
+
+       EditText inputSearch = (EditText) findViewById(R.id.search_view);
+
+        inputSearch.addTextChangedListener(new TextWatcher() {
+
+            @Override
+            public void onTextChanged(CharSequence cs, int arg1, int arg2, int arg3) {
+                // When user changed the Text
+                RequestListActivity.this.adapter.getFilter().filter(cs);
+            }
+
+            @Override
+            public void beforeTextChanged(CharSequence arg0, int arg1, int arg2,
+                                          int arg3) {
+                // TODO Auto-generated method stub
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable arg0) {
+                // TODO Auto-generated method stub
+            }
+        });
+
     }
+
+
+
 
     @Override
     public void onBackPressed(){
@@ -103,10 +136,11 @@ public class RequestListActivity extends AppCompatActivity {
 
                     requestList.add(request);
                 }
-
-                ListView listView = findViewById(R.id.showRequestList);
-                ArrayAdapter<Request> adapter = new ArrayAdapter<>(getBaseContext(), android.R.layout.simple_list_item_1, requestList);
+                listView = findViewById(R.id.showRequestList);
+               adapter = new ArrayAdapter<>(getBaseContext(), android.R.layout.simple_list_item_1, requestList);
                 listView.setAdapter(adapter);
+
+
 
                 listView.setOnItemClickListener((AdapterView<?> parent, View view, int position, long id) -> {
 
