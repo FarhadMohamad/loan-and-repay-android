@@ -41,7 +41,12 @@ public class RegisterActivity extends AppCompatActivity implements NavigationVie
         drawerLayout.addDrawerListener(toggle);
         toggle.syncState();
 
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+            getSupportActionBar().setDisplayUseLogoEnabled(true);
+        }
+
 
         //This will do the job for selecting a specific item in the burger menu
         NavigationView navigationView = (NavigationView) findViewById(R.id.navigation_view);
