@@ -13,12 +13,8 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.EditText;
 import android.widget.ListView;
-import android.widget.TextView;
 
 import com.google.android.material.navigation.NavigationView;
 
@@ -30,7 +26,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-public class RequestStatus extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+public class RequestStatusActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     private DrawerLayout drawerLayout;
     private ActionBarDrawerToggle toggle;
 
@@ -115,7 +111,7 @@ public class RequestStatus extends AppCompatActivity implements NavigationView.O
             editor.clear();
             editor.apply();
             finish();
-            Intent i = new Intent(RequestStatus.this, MainActivity.class);
+            Intent i = new Intent(RequestStatusActivity.this, MainActivity.class);
             // set the new task and clear flags
 //            i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
             startActivity(i);

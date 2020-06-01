@@ -31,9 +31,9 @@
             android:name=".UserTypeRegistration"
             android:parentActivityName=".MainActivity" />
         <activity
-            android:name=".RequestLoan"
+            android:name=".InstallmentRequestActivity"
             android:parentActivityName=".MainActivity" />
-        <activity android:name=".RequestStatus" />
+        <activity android:name=".RequestStatusActivity" />
         <activity
             android:name=".company.CompanyRegisterActivity"
             android:parentActivityName=".MainActivity" />

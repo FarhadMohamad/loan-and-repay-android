@@ -157,11 +157,7 @@ public class LoginActivity extends AppCompatActivity {
                     String token = obj.get("access_token").toString();
                     String getUserRole = obj.get("roles").toString().trim();
 
-                    String s1= getUserRole;
-
-
-                   // "roles": "["Company"]",
-                    //Saving Token
+                    //Saving token
                     SharedPreferences sharedPref = getSharedPreferences("userInfo", Context.MODE_PRIVATE);
                     SharedPreferences.Editor editor = sharedPref.edit();
                     editor.putString("token", token);

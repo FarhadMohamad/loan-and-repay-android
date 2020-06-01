@@ -2,7 +2,6 @@ package com.example.loanandrepay;
 
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
 import android.content.Context;
@@ -12,18 +11,15 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
-import android.widget.AdapterView;
+import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
-
-import com.google.android.material.navigation.NavigationView;
 
 import org.json.JSONObject;
 
@@ -32,15 +28,13 @@ import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.util.Objects;
 
-public class RequestLoan extends AppCompatActivity {
+public class InstallmentRequestActivity extends AppCompatActivity {
     private DrawerLayout drawerLayout;
     private ActionBarDrawerToggle toggle;
     private Spinner spinner1;
     private EditText loanAmount;
     private EditText loanAmount2;
-
     public RadioButton radiosixMonths;
     public RadioButton radiontvelveMonths;
     public Button RequestLoanBtn;
@@ -53,13 +47,15 @@ public class RequestLoan extends AppCompatActivity {
     public EditText HouseNumber;
     public EditText CityName;
     public EditText PostCode;
+    public EditText AmountToPay;
+    public TextView totalAmountToPay;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        setContentView(R.layout.activity_request_loan);
+        setContentView(R.layout.activity_installment_request);
 
 
         loanAmount = findViewById(R.id.txtAmount);
@@ -67,6 +63,8 @@ public class RequestLoan extends AppCompatActivity {
         radiontvelveMonths = findViewById(R.id.radiobtntvelveMonths);
         loanAmount.addTextChangedListener(radioButtonTextWatcher);
         ///////////////////////////////////////
+        AmountToPay = findViewById(R.id.txtAmount);
+        AmountToPay.addTextChangedListener(AmountTextWatcher);
         txtFirstName = findViewById(R.id.txtFirstName);
         txtFirstName.addTextChangedListener(RequestLoanBtnTextWatcher);
         txtLastName = findViewById(R.id.txtLastName);
@@ -90,7 +88,82 @@ public class RequestLoan extends AppCompatActivity {
         RequestLoanBtn = findViewById(R.id.RequestLoanBtn);
 
         ///////////////////////////////////////
+
+//Here we calculate the amount that the user has given and calculate it according to the radio button selected
+        RadioGroup rg = (RadioGroup) findViewById(R.id.radio_group);
+        rg.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                if (checkedId == R.id.radiobtnSixMonths) {
+                    //RadioButton radioButton = (RadioButton) findViewById(R.id.radiobtnSixMonths);
+
+                    AmountToPay = findViewById(R.id.txtAmount);
+
+                    String value = AmountToPay.getText().toString();
+                    double finalValue = Integer.parseInt(value);
+
+                    double getResult = calculationSixMonths(finalValue);
+                    String getResultinString = String.format("%1.2f", getResult);
+
+                     totalAmountToPay = findViewById(R.id.LoanToRepay);
+
+                    totalAmountToPay.setText(getResultinString);
+
+                }
+
+                if (checkedId == R.id.radiobtntvelveMonths) {
+                    //RadioButton radioButton = (RadioButton) findViewById(R.id.radiobtnSixMonths);
+
+                    AmountToPay = findViewById(R.id.txtAmount);
+
+                    String value = AmountToPay.getText().toString();
+                    double finalValue = Integer.parseInt(value);
+
+                    double getResult = calculationTwelveMonths(finalValue);
+                    String getResultinString = String.format("%1.2f", getResult);
+
+                    totalAmountToPay = findViewById(R.id.LoanToRepay);
+
+
+                    totalAmountToPay.setText(getResultinString);
+
+                }
+
+            }
+        });
     }
+
+
+    //enable radion button and request loan button after all fields are filled
+    private final TextWatcher AmountTextWatcher = new TextWatcher() {
+        @Override
+        public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+        }
+
+        @Override
+        public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+
+            RadioGroup radioGroup = (RadioGroup) findViewById(R.id.radio_group);
+
+            // get selected radio button from radioGroup
+            int selectedId = radioGroup.getCheckedRadioButtonId();
+            // find the radiobutton by returned id
+            RadioButton radionButton = (RadioButton) findViewById(selectedId);
+            radioGroup.clearCheck();
+            TextView textView = findViewById(R.id.LoanToRepay);
+            textView.setText("");
+
+        }
+
+        @Override
+        public void afterTextChanged(Editable s) {
+
+
+        }
+    };
+
 
     //enable radion button and request loan button after all fields are filled
     private TextWatcher radioButtonTextWatcher = new TextWatcher() {
@@ -180,6 +253,7 @@ public class RequestLoan extends AppCompatActivity {
 //        }
 //    }
 
+
     public void onClickRequestLoan(View view) {
 
 
@@ -187,6 +261,21 @@ public class RequestLoan extends AppCompatActivity {
 
     }
 
+    public double calculationSixMonths(double finalValue) {
+        double actualFinalValue = finalValue;
+        double result = (finalValue * 0.15);
+        double endResult = (result + actualFinalValue) / 6;
+
+        return endResult;
+    }
+
+    public double calculationTwelveMonths(double finalValue) {
+        double actualFinalValue = finalValue;
+        double result = (finalValue * 0.25);
+        double endResult = (result + actualFinalValue) / 12;
+
+        return endResult;
+    }
 
     public class InstallmentRequest extends AsyncTask<String, Void, Void> {
 
@@ -231,7 +320,7 @@ public class RequestLoan extends AppCompatActivity {
                 postDataParams.put("PostCode", enterPostCode.getText());
                 postDataParams.put("Amount", enterloanAmount.getText());
                 postDataParams.put("PayWithIn", radionButton.getText());
-               // postDataParams.put("MonthlyPayment", enterloanAmount.getText());
+                // postDataParams.put("MonthlyPayment", enterloanAmount.getText());
 
                 SharedPreferences sharedPref = getSharedPreferences("userInfo", Context.MODE_PRIVATE);
 
@@ -260,7 +349,7 @@ public class RequestLoan extends AppCompatActivity {
 
                 if (responseCode == HttpURLConnection.HTTP_OK) {
 
-                    Intent goToAuthentication = new Intent(RequestLoan.this, MainActivity.class);
+                    Intent goToAuthentication = new Intent(InstallmentRequestActivity.this, MainActivity.class);
                     startActivity(goToAuthentication);
                     finish();
 

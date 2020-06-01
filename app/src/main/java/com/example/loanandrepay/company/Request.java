@@ -105,7 +105,7 @@ public class Request implements Serializable {
 
     public String toString() {
 
-        return "To: " + Company + "\n" + "From: " + FirstName + " " + LastName;
+        return "Company name: " + Company + "\n" + "From: " + FirstName + " " + LastName;
     }
 }
 // return "To: " + Company + "\n" +"From: " + FirstName + " " +LastName + "\n" + Email + "\n" + Phone + "\n" + StreetName + "\n" + HouseNumber + "\n" + CityName + "\n" + PostCode + "\n" + Amount + "\n" + PayWithIn + "\n" + MonthlyPayment;
