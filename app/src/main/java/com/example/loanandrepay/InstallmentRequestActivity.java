@@ -28,6 +28,7 @@ import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.text.DecimalFormat;
 
 public class InstallmentRequestActivity extends AppCompatActivity {
     private DrawerLayout drawerLayout;
@@ -87,8 +88,6 @@ public class InstallmentRequestActivity extends AppCompatActivity {
         loanAmount.addTextChangedListener(RequestLoanBtnTextWatcher);
         RequestLoanBtn = findViewById(R.id.RequestLoanBtn);
 
-
-
         ///////////////////////////////////////
 
 //Here we calculate the amount that the user has given and calculate it according to the radio button selected
@@ -105,7 +104,8 @@ public class InstallmentRequestActivity extends AppCompatActivity {
                     double finalValue = Integer.parseInt(value);
 
                     double getResult = calculationSixMonths(finalValue);
-                    String getResultinString = String.format("%1.2f", getResult);
+                   // String getResultinString = String.format("%1.2f", getResult);
+                    String getResultinString = String.valueOf(getResult);
 
                      totalAmountToPay = findViewById(R.id.LoanToRepay);
 
@@ -122,7 +122,9 @@ public class InstallmentRequestActivity extends AppCompatActivity {
                     double finalValue = Integer.parseInt(value);
 
                     double getResult = calculationTwelveMonths(finalValue);
-                    String getResultinString = String.format("%1.2f", getResult);
+                    //String getResultinString = String.format("%1.2f", getResult);
+                    String getResultinString = String.valueOf(getResult);
+
 
                     totalAmountToPay = findViewById(R.id.LoanToRepay);
 
@@ -263,7 +265,21 @@ public class InstallmentRequestActivity extends AppCompatActivity {
 
     }
 
+    public double calculationSixMonths(double finalValue) {
+        double actualFinalValue = finalValue;
+        double result = (finalValue * 0.15);
+        double endResult = (result + actualFinalValue) / 6;
+        endResult= Double.parseDouble(new DecimalFormat("##.##").format(endResult));
+        return endResult;
+    }
 
+    public double calculationTwelveMonths(double finalValue) {
+        double actualFinalValue = finalValue;
+        double result = (finalValue * 0.25);
+        double endResult = (result + actualFinalValue) / 12;
+        endResult= Double.parseDouble(new DecimalFormat("##.##").format(endResult));
+        return endResult;
+    }
 
     public class InstallmentRequest extends AsyncTask<String, Void, Void> {
 
