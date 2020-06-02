@@ -87,6 +87,8 @@ public class InstallmentRequestActivity extends AppCompatActivity {
         loanAmount.addTextChangedListener(RequestLoanBtnTextWatcher);
         RequestLoanBtn = findViewById(R.id.RequestLoanBtn);
 
+
+
         ///////////////////////////////////////
 
 //Here we calculate the amount that the user has given and calculate it according to the radio button selected
@@ -261,21 +263,7 @@ public class InstallmentRequestActivity extends AppCompatActivity {
 
     }
 
-    public double calculationSixMonths(double finalValue) {
-        double actualFinalValue = finalValue;
-        double result = (finalValue * 0.15);
-        double endResult = (result + actualFinalValue) / 6;
 
-        return endResult;
-    }
-
-    public double calculationTwelveMonths(double finalValue) {
-        double actualFinalValue = finalValue;
-        double result = (finalValue * 0.25);
-        double endResult = (result + actualFinalValue) / 12;
-
-        return endResult;
-    }
 
     public class InstallmentRequest extends AsyncTask<String, Void, Void> {
 
