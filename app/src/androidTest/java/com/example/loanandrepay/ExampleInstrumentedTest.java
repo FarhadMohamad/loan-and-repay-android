@@ -2,10 +2,11 @@ package com.example.loanandrepay;
 
 import android.content.Context;
 
-import androidx.annotation.ContentView;
 import androidx.test.platform.app.InstrumentationRegistry;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
 import androidx.test.rule.ActivityTestRule;
+
+import com.example.loanandrepay.client.RegisterActivity;
 
 import org.junit.Rule;
 import org.junit.Test;

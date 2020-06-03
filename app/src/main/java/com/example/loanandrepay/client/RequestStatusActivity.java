@@ -1,8 +1,9 @@
-package com.example.loanandrepay;
+package com.example.loanandrepay.client;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
@@ -13,9 +14,13 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.TextView;
 
+import com.example.loanandrepay.HttpConnection.ReadHttpTask;
+import com.example.loanandrepay.R;
 import com.google.android.material.navigation.NavigationView;
 
 import org.json.JSONArray;
@@ -46,13 +51,14 @@ public class RequestStatusActivity extends AppCompatActivity implements Navigati
         }
 
         GetPendingRequest getPendingRequest = new GetPendingRequest();
-        getPendingRequest.execute("http://192.168.1.171:4567/api/StatusPending?email="+ showLogUser);
+        getPendingRequest.execute("http://192.168.1.171:4567/api/StatusPending?email=" + showLogUser);
 
         GetAcceptedRequest getAcceptedRequest = new GetAcceptedRequest();
-        getAcceptedRequest.execute("http://192.168.1.171:4567/api/StatusAccepted?email="+ showLogUser);
+        getAcceptedRequest.execute("http://192.168.1.171:4567/api/StatusAccepted?email=" + showLogUser);
 
         GetRejectedRequest getRejectedRequest = new GetRejectedRequest();
-        getRejectedRequest.execute("http://192.168.1.171:4567/api/StatusRejected?email="+ showLogUser);
+
+        getRejectedRequest.execute("http://192.168.1.171:4567/api/StatusRejected?email=" + showLogUser);
 
     }
 
@@ -61,6 +67,9 @@ public class RequestStatusActivity extends AppCompatActivity implements Navigati
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_request_status);
 
+        //This is for overlaying the navigation header on the screen
+        Toolbar toolbar = (Toolbar) findViewById(R.id.nav_action);
+        setSupportActionBar(toolbar);
 
         drawerLayout = (DrawerLayout) findViewById(R.id.drawerLayout);
         toggle = new ActionBarDrawerToggle(this, drawerLayout, R.string.open, R.string.close);
@@ -70,8 +79,8 @@ public class RequestStatusActivity extends AppCompatActivity implements Navigati
         toggle.syncState();
 
         if (getSupportActionBar() != null) {
-
-
+            //This will enable the burger menu
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
             getSupportActionBar().setDisplayUseLogoEnabled(true);
         }
 
@@ -79,6 +88,7 @@ public class RequestStatusActivity extends AppCompatActivity implements Navigati
         NavigationView navigationView = (NavigationView) findViewById(R.id.navigation_view);
         navigationView.setNavigationItemSelectedListener(this);
     }
+
     //This is used whenever you click on the burger menu the menu bar will open
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
@@ -93,13 +103,13 @@ public class RequestStatusActivity extends AppCompatActivity implements Navigati
     @Override
     public void onBackPressed() {
 
-        if (drawerLayout.isDrawerOpen((GravityCompat.START))){
+        if (drawerLayout.isDrawerOpen((GravityCompat.START))) {
             drawerLayout.closeDrawer(GravityCompat.START);
-        }
-        else{
+        } else {
             super.onBackPressed();
         }
     }
+
     //Whenever you click on a particular item in the burger menu, it will
     //execute a function
     @Override
@@ -122,8 +132,6 @@ public class RequestStatusActivity extends AppCompatActivity implements Navigati
     }
 
 
-
-
     private class GetPendingRequest extends ReadHttpTask {
         @Override
         protected void onPostExecute(CharSequence jsonString) {
@@ -142,17 +150,20 @@ public class RequestStatusActivity extends AppCompatActivity implements Navigati
                     String status = obj.getString("Status");
 
 
-                    StatusPending statusPending = new StatusPending (company, status);
+                    StatusPending statusPending = new StatusPending(company, status);
 
                     request.add(statusPending);
                 }
                 ListView listView = findViewById(R.id.showPendingRequestList);
                 ArrayAdapter<StatusPending> adapter = new ArrayAdapter<>(getBaseContext(), android.R.layout.simple_list_item_1, request);
+                if (adapter.getCount() != 0) {
+                    TextView textView = findViewById(R.id.txtPendingNotFound);
+                    textView.setVisibility(View.INVISIBLE);
+                }
                 listView.setAdapter(adapter);
 
 
-            } catch (JSONException ex)
-            {
+            } catch (JSONException ex) {
                 //messageTextView.setText(ex.getMessage());
                 Log.e("InstallmentRequest", ex.getMessage());
             }
@@ -185,11 +196,14 @@ public class RequestStatusActivity extends AppCompatActivity implements Navigati
                 }
                 ListView listView = findViewById(R.id.showAcceptedRequests);
                 ArrayAdapter<StatusAccepted> adapter = new ArrayAdapter<>(getBaseContext(), android.R.layout.simple_list_item_1, request);
+                if (adapter.getCount() != 0) {
+                    TextView textView = findViewById(R.id.txtAcceptedNotFound);
+                    textView.setVisibility(View.INVISIBLE);
+                }
                 listView.setAdapter(adapter);
 
 
-            } catch (JSONException ex)
-            {
+            } catch (JSONException ex) {
                 //messageTextView.setText(ex.getMessage());
                 Log.e("InstallmentRequest", ex.getMessage());
             }
@@ -216,17 +230,22 @@ public class RequestStatusActivity extends AppCompatActivity implements Navigati
                     String status = obj.getString("Status");
 
 
-                   StatusRejected statusRejected = new StatusRejected(company, status);
+                    StatusRejected statusRejected = new StatusRejected(company, status);
 
                     request.add(statusRejected);
                 }
+
                 ListView listView = findViewById(R.id.showRejectedRequests);
+
                 ArrayAdapter<StatusRejected> adapter = new ArrayAdapter<>(getBaseContext(), android.R.layout.simple_list_item_1, request);
+                if (adapter.getCount() != 0) {
+                    TextView textView = findViewById(R.id.txtRejectedNotFound);
+                    textView.setVisibility(View.INVISIBLE);
+                }
                 listView.setAdapter(adapter);
 
 
-            } catch (JSONException ex)
-            {
+            } catch (JSONException ex) {
                 //messageTextView.setText(ex.getMessage());
                 Log.e("InstallmentRequest", ex.getMessage());
             }

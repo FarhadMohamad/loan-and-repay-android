@@ -4,6 +4,8 @@ import android.view.View;
 
 import androidx.test.rule.ActivityTestRule;
 
+import com.example.loanandrepay.client.MainActivity;
+
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Rule;

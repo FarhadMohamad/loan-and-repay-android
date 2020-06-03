@@ -1,313 +1,334 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.drawerlayout.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/drawerLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_marginLeft="10dp"
-    android:layout_marginTop="10dp"
-    android:layout_marginRight="10dp"
     android:orientation="vertical">
 
-
-    <ScrollView
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:background="@color/colorAccent">
 
-        <LinearLayout
+        <include
+            layout="@layout/navigation_action"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:layout_height="wrap_content" />
 
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="60dp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
 
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/companyinfo"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="10dp"
+                        android:text="Company  information:"
+                        android:textAlignment="center"
+                        android:textColor="#000000"
+                        android:textSize="24sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/choose_a_company"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="10dp"
+                        android:padding="5dip"
+                        android:paddingLeft="6dp"
+
+                        android:text="Choose a Company:"
+                        android:textColor="#000000"
+                        android:textSize="16sp"
+                        android:textStyle="bold|italic" />
+
+                    <Spinner
+                        android:id="@+id/spinnerCompany"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="6dp"
+                        android:background="@drawable/edittextlayout"
+                        android:entries="@array/company_arrays"
+                        android:padding="5dip"
+                        android:prompt="@string/company_prompt"
+                        android:textCursorDrawable="@color/textColor" />
+
+                </LinearLayout>
+
                 <TextView
-                    android:id="@+id/companyinfo"
+                    android:id="@+id/Personalinfo"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="10dp"
-                    android:text="Company  information:"
+                    android:padding="5dip"
+                    android:text="Personal information:"
+                    android:textAlignment="center"
+                    android:textColor="#000000"
+                    android:textCursorDrawable="@color/textColor"
+                    android:textSize="24sp"
+                    android:textStyle="bold" />
+
+
+                <EditText
+                    android:id="@+id/txtFirstName"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="6dp"
+                    android:background="@drawable/edittextlayout"
+                    android:ems="10"
+                    android:hint="@string/hintFirstName"
+                    android:inputType="textPersonName"
+                    android:padding="5dip"
+                    android:textCursorDrawable="@color/textColor" />
+
+                <EditText
+                    android:id="@+id/txtLastName"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="6dp"
+                    android:background="@drawable/edittextlayout"
+                    android:ems="10"
+                    android:hint="@string/hintLastName"
+                    android:inputType="textPersonName"
+                    android:padding="5dip"
+                    android:textCursorDrawable="@color/textColor" />/>
+
+                <EditText
+                    android:id="@+id/txtEmail"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="6dp"
+                    android:background="@drawable/edittextlayout"
+                    android:ems="10"
+                    android:hint="@string/hintRegisterEmail"
+                    android:inputType="textEmailAddress"
+                    android:padding="5dip"
+                    android:textCursorDrawable="@color/textColor" />/>
+
+                <EditText
+                    android:id="@+id/txtAge"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="6dp"
+                    android:background="@drawable/edittextlayout"
+                    android:ems="10"
+                    android:hint="Age"
+                    android:inputType="number"
+                    android:padding="5dip"
+                    android:textCursorDrawable="@color/textColor" />/>
+
+                <EditText
+                    android:id="@+id/txtPhone"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="6dp"
+                    android:background="@drawable/edittextlayout"
+                    android:ems="10"
+                    android:hint="@string/hintPhone"
+                    android:inputType="text"
+                    android:padding="5dip"
+                    android:textCursorDrawable="@color/textColor" />/>
+
+                <EditText
+                    android:id="@+id/StreetName"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="6dp"
+                    android:background="@drawable/edittextlayout"
+                    android:ems="10"
+                    android:hint="Street Name"
+                    android:inputType="text"
+                    android:padding="5dip"
+                    android:textCursorDrawable="@color/textColor" />/>
+
+                <EditText
+                    android:id="@+id/HouseNumber"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="6dp"
+                    android:background="@drawable/edittextlayout"
+                    android:ems="10"
+                    android:hint="House Number"
+                    android:inputType="text"
+                    android:padding="5dip"
+                    android:textCursorDrawable="@color/textColor" />/>
+
+                <EditText
+                    android:id="@+id/CityName"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="6dp"
+                    android:background="@drawable/edittextlayout"
+                    android:ems="10"
+                    android:hint="City Name"
+                    android:inputType="text"
+                    android:padding="5dip"
+                    android:textCursorDrawable="@color/textColor" />/>
+
+                <EditText
+                    android:id="@+id/PostCode"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/edittextlayout"
+                    android:ems="10"
+                    android:hint="Post Code"
+                    android:inputType="number"
+                    android:padding="5dip"
+                    android:textCursorDrawable="@color/textColor" />
+
+                <TextView
+                    android:id="@+id/Payment"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp"
+                    android:text="Payment information:"
                     android:textAlignment="center"
                     android:textColor="#000000"
                     android:textSize="24sp"
                     android:textStyle="bold" />
 
-                <TextView
-                    android:id="@+id/choose_a_company"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="10dp"
-                    android:padding="5dip"
-                    android:paddingLeft="6dp"
 
-                    android:text="Choose a Company:"
-                    android:textColor="#000000"
-                    android:textSize="16sp"
-                    android:textStyle="bold|italic" />
-
-                <Spinner
-                    android:id="@+id/spinnerCompany"
+                <EditText
+                    android:id="@+id/txtAmount"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="6dp"
                     android:background="@drawable/edittextlayout"
-                    android:entries="@array/company_arrays"
+                    android:ems="10"
+                    android:hint="Loan Amount"
+                    android:inputType="numberDecimal"
                     android:padding="5dip"
-                    android:prompt="@string/company_prompt"
                     android:textCursorDrawable="@color/textColor" />
 
-            </LinearLayout>
-
-            <TextView
-                android:id="@+id/Personalinfo"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="10dp"
-                android:padding="5dip"
-                android:text="Personal information:"
-                android:textAlignment="center"
-                android:textColor="#000000"
-                android:textCursorDrawable="@color/textColor"
-                android:textSize="24sp"
-                android:textStyle="bold" />
-
-
-            <EditText
-                android:id="@+id/txtFirstName"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="6dp"
-                android:background="@drawable/edittextlayout"
-                android:ems="10"
-                android:hint="@string/hintFirstName"
-                android:inputType="textPersonName"
-                android:padding="5dip"
-                android:textCursorDrawable="@color/textColor" />
-
-            <EditText
-                android:id="@+id/txtLastName"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="6dp"
-                android:background="@drawable/edittextlayout"
-                android:ems="10"
-                android:hint="@string/hintLastName"
-                android:inputType="textPersonName"
-                android:padding="5dip"
-                android:textCursorDrawable="@color/textColor" />/>
-
-            <EditText
-                android:id="@+id/txtEmail"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="6dp"
-                android:background="@drawable/edittextlayout"
-                android:ems="10"
-                android:hint="@string/hintRegisterEmail"
-                android:inputType="textEmailAddress"
-                android:padding="5dip"
-                android:textCursorDrawable="@color/textColor" />/>
-
-            <EditText
-                android:id="@+id/txtAge"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="6dp"
-                android:background="@drawable/edittextlayout"
-                android:ems="10"
-                android:hint="Age"
-                android:inputType="number"
-                android:padding="5dip"
-                android:textCursorDrawable="@color/textColor" />/>
-
-            <EditText
-                android:id="@+id/txtPhone"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="6dp"
-                android:background="@drawable/edittextlayout"
-                android:ems="10"
-                android:hint="@string/hintPhone"
-                android:inputType="text"
-                android:padding="5dip"
-                android:textCursorDrawable="@color/textColor" />/>
-
-            <EditText
-                android:id="@+id/StreetName"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="6dp"
-                android:background="@drawable/edittextlayout"
-                android:ems="10"
-                android:hint="Street Name"
-                android:inputType="text"
-                android:padding="5dip"
-                android:textCursorDrawable="@color/textColor" />/>
-
-            <EditText
-                android:id="@+id/HouseNumber"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="6dp"
-                android:background="@drawable/edittextlayout"
-                android:ems="10"
-                android:hint="House Number"
-                android:inputType="text"
-                android:padding="5dip"
-                android:textCursorDrawable="@color/textColor" />/>
-
-            <EditText
-                android:id="@+id/CityName"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="6dp"
-                android:background="@drawable/edittextlayout"
-                android:ems="10"
-                android:hint="City Name"
-                android:inputType="text"
-                android:padding="5dip"
-                android:textCursorDrawable="@color/textColor" />/>
-
-            <EditText
-                android:id="@+id/PostCode"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@drawable/edittextlayout"
-                android:ems="10"
-                android:hint="Post Code"
-                android:inputType="number"
-                android:padding="5dip"
-                android:textCursorDrawable="@color/textColor" />
-
-            <TextView
-                android:id="@+id/Payment"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="10dp"
-                android:text="Payment information:"
-                android:textAlignment="center"
-                android:textColor="#000000"
-                android:textSize="24sp"
-                android:textStyle="bold" />
-
-
-            <EditText
-                android:id="@+id/txtAmount"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="6dp"
-                android:background="@drawable/edittextlayout"
-                android:ems="10"
-                android:hint="Loan Amount"
-                android:inputType="numberDecimal"
-                android:padding="5dip"
-                android:textCursorDrawable="@color/textColor" />
-
-            <TextView
-                android:id="@+id/PaymentOptiontxt"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="10dp"
-                android:text="Payment Option:"
-                android:textAlignment="center"
-                android:textColor="#000000"
-                android:textSize="22sp"
-                android:textStyle="bold" />
-
-            <RadioGroup
-                android:id="@+id/radio_group"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_above="@+id/view_below"
-                android:onClick="onClickRadioGroup"
-                android:orientation="horizontal">
-
-                <RadioButton
-                    android:id="@+id/radiobtnSixMonths"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:buttonTint="@color/orange"
-                    android:checked="false"
-                    android:enabled="false"
-                    android:text="6 months" />
-
-                <RadioButton
-                    android:id="@+id/radiobtntvelveMonths"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:buttonTint="@color/orange"
-                    android:enabled="false"
-                    android:text="12 months" />
-            </RadioGroup>
-
-            <TextView
-                android:id="@+id/LoanToRepay"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="10dp"
-                android:hint="Monthly payment:"
-                android:textAlignment="center"
-                android:textColor="#000000"
-                android:textSize="22sp"
-                android:textStyle="bold" />
-
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:orientation="horizontal">
-
-                <CheckBox
-                    android:id="@+id/chkbxTerms"
+                <TextView
+                    android:id="@+id/PaymentOptiontxt"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp"
+                    android:text="Payment Option:"
+                    android:textAlignment="center"
+                    android:textColor="#000000"
+                    android:textSize="22sp"
+                    android:textStyle="bold" />
+
+                <RadioGroup
+                    android:id="@+id/radio_group"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_above="@+id/view_below"
+                    android:onClick="onClickRadioGroup"
+                    android:orientation="horizontal">
+
+                    <RadioButton
+                        android:id="@+id/radiobtnSixMonths"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:buttonTint="@color/orange"
+                        android:checked="false"
+                        android:enabled="false"
+                        android:text="6 months" />
+
+                    <RadioButton
+                        android:id="@+id/radiobtntvelveMonths"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:buttonTint="@color/orange"
+                        android:enabled="false"
+                        android:text="12 months" />
+                </RadioGroup>
 
                 <TextView
-                    android:id="@+id/textGDPR"
-                    android:layout_width="wrap_content"
+                    android:id="@+id/monthlyPayment"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:clickable="true"
-                    android:onClick="onClickTerms"
-                    android:text="@string/txtTerms"
-                    android:textColor="#0000EE" />
-            </LinearLayout>
+                    android:layout_marginBottom="10dp"
+                    android:hint="Monthly payment:"
+                    android:textAlignment="center"
+                    android:textColor="#000000"
+                    android:textSize="22sp"
+                    android:textStyle="bold" />
 
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:gravity="center">
-
-                <Button
-                    android:id="@+id/RequestLoanBtn"
-                    android:layout_width="156dp"
+                <LinearLayout
+                    android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginBottom="8dp"
-                    android:background="@drawable/buttonlayout"
-                    android:enabled="false"
-                    android:onClick="onClickRequestLoan"
-                    android:padding="10dp"
-                    android:text="@string/txtRequestLoan"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.19"
-                    app:layout_constraintStart_toEndOf="@+id/textView2"
-                    app:layout_constraintTop_toBottomOf="@+id/forgot_button"
-                    app:layout_constraintVertical_bias="0.222" />
+                    android:orientation="horizontal">
+
+                    <CheckBox
+                        android:id="@+id/chkbxTerms"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
+
+                    <TextView
+                        android:id="@+id/textGDPR"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:clickable="true"
+                        android:onClick="onClickTerms"
+                        android:text="@string/txtTerms"
+                        android:textColor="#0000EE" />
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center">
+
+                    <Button
+                        android:id="@+id/RequestLoanBtn"
+                        android:layout_width="156dp"
+                        android:layout_height="match_parent"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginBottom="8dp"
+                        android:background="@drawable/buttonlayout"
+                        android:enabled="false"
+                        android:onClick="onClickRequestLoan"
+                        android:padding="10dp"
+                        android:text="@string/txtRequestLoan"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.19"
+                        app:layout_constraintStart_toEndOf="@+id/textView2"
+                        app:layout_constraintTop_toBottomOf="@+id/forgot_button"
+                        app:layout_constraintVertical_bias="0.222" />
+
+
+                </LinearLayout>
 
 
             </LinearLayout>
 
+        </ScrollView>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
-        </LinearLayout>
+    <com.google.android.material.navigation.NavigationView
+        android:id="@+id/navigation_view"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_gravity="start"
+        app:headerLayout="@layout/navigation_header"
+        app:menu="@menu/navigation_menu">
 
-    </ScrollView>
-
+    </com.google.android.material.navigation.NavigationView>
 
 </androidx.drawerlayout.widget.DrawerLayout>

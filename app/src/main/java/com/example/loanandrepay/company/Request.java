@@ -1,7 +1,5 @@
 package com.example.loanandrepay.company;
 
-import com.example.loanandrepay.StatusPending;
-
 import java.io.Serializable;
 
 public class Request implements Serializable {

@@ -16,53 +16,25 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
+
 import androidx.appcompat.widget.Toolbar;
 
-import com.example.loanandrepay.company.RequestListActivity;
+import com.example.loanandrepay.HttpConnection.HttpConnection;
+import com.example.loanandrepay.client.MainActivity;
 import com.google.android.material.navigation.NavigationView;
 
 import org.json.JSONObject;
 
-import java.io.BufferedReader;
 import java.io.BufferedWriter;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.net.URLEncoder;
-import java.util.Iterator;
 import java.util.Objects;
-import java.util.regex.Pattern;
 
-public class LoginActivity extends AppCompatActivity {
+public class LoginActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     private DrawerLayout drawerLayout;
     private ActionBarDrawerToggle toggle;
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_login);
-
-
-        Toolbar toolbar = (Toolbar) findViewById(R.id.nav_action);
-        setSupportActionBar(toolbar);
-
-        drawerLayout = (DrawerLayout) findViewById(R.id.drawerLayout);
-        toggle = new ActionBarDrawerToggle(this, drawerLayout, R.string.open, R.string.close);
-        drawerLayout.addDrawerListener(toggle);
-        toggle.syncState();
-
-
-
-            if (getSupportActionBar() != null) {
-                //This will enable the burger menu
-                getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-                getSupportActionBar().setDisplayUseLogoEnabled(true);
-            }
-    }
 
     //Here the logout button is hidden, when the user is logged out
     @Override
@@ -79,6 +51,28 @@ public class LoginActivity extends AppCompatActivity {
             menuItem.setVisible(false);
         }
 
+    }
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_login);
+
+        //This is for overlaying the navigation header on the screen
+        Toolbar toolbar = (Toolbar) findViewById(R.id.nav_action);
+        setSupportActionBar(toolbar);
+
+        drawerLayout = (DrawerLayout) findViewById(R.id.drawerLayout);
+        toggle = new ActionBarDrawerToggle(this, drawerLayout, R.string.open, R.string.close);
+
+        drawerLayout.addDrawerListener(toggle);
+        toggle.syncState();
+
+        if (getSupportActionBar() != null) {
+            //This will enable the burger menu
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+            getSupportActionBar().setDisplayUseLogoEnabled(true);
+        }
     }
 
     //This is used whenever you click on the burger menu the menu bar will open
@@ -102,6 +96,27 @@ public class LoginActivity extends AppCompatActivity {
         }
     }
 
+    //Whenever you click on a particular item in the burger menu, it will
+    //execute a function
+    @Override
+    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+        int id = item.getItemId();
+        if (id == R.id.action_logout) {
+            SharedPreferences preferences = getSharedPreferences("userInfo", Context.MODE_PRIVATE);
+            SharedPreferences.Editor editor = preferences.edit();
+            editor.clear();
+            editor.apply();
+            finish();
+            Intent i = new Intent(LoginActivity.this, MainActivity.class);
+            // set the new task and clear flags
+//            i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+            startActivity(i);
+
+
+        }
+        return false;
+    }
+
 
     public void onClickRegisterbtn(View view) {
         Intent goToRegisterActivity = new Intent(LoginActivity.this, UserTypeRegistration.class);
@@ -112,7 +127,7 @@ public class LoginActivity extends AppCompatActivity {
         new UserLogin().execute();
     }
 
-    public  class UserLogin extends AsyncTask<String, Void, Void> {
+    public class UserLogin extends AsyncTask<String, Void, Void> {
 
         HttpConnection httpConnection = new HttpConnection();
         EditText userId = (EditText) findViewById(R.id.txtLoginUsername);
@@ -131,7 +146,7 @@ public class LoginActivity extends AppCompatActivity {
 
                 //url = new URL("http://25.95.117.73:7549/api/Account/Login");
                 //url = new URL("http://25.61.100.41:6429/api/Account/Login");
-               url = new URL("http://192.168.1.171:4567/api/Account/Login");
+                url = new URL("http://192.168.1.171:4567/api/Account/Login");
 
 
                 urlConnection = (HttpURLConnection) url.openConnection();
@@ -163,37 +178,29 @@ public class LoginActivity extends AppCompatActivity {
 
                     //Saving token
                     SharedPreferences sharedPref = getSharedPreferences("userInfo", Context.MODE_PRIVATE);
+
                     SharedPreferences.Editor editor = sharedPref.edit();
                     editor.putString("token", token);
                     editor.apply();
 
-                    //Saving logged in user for showing it later on in Profile Settings
-                    String saveUser = userId.getText().toString();
-                    editor.putString("savedUser", saveUser);
-                    editor.apply();
 
                     //Saving username
-                    SharedPreferences sharePrUsername = getSharedPreferences("userName", Context.MODE_PRIVATE);
-                    SharedPreferences.Editor editorUserName = sharePrUsername.edit();
+                    SharedPreferences.Editor editorUserName = sharedPref.edit();
                     editorUserName.putString("userName", userName);
                     editorUserName.apply();
 
-                    if (getUserRole.contains("Company"))
-                    {
+                    if (getUserRole.contains("Company")) {
                         //Go to Main after user is logged in
                         Intent goToMain = new Intent(LoginActivity.this, MainActivity.class);
                         startActivity(goToMain);
                         finish();
                     }
-                    if(getUserRole.contains("Client"))
-                    {
+                    if (getUserRole.contains("Client")) {
                         //Go to ..... after user is logged in
                         Intent goToMain = new Intent(LoginActivity.this, MainActivity.class);
                         startActivity(goToMain);
                         finish();
                     }
-
-
 
 
                 } else {

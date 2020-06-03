@@ -1,8 +1,9 @@
-package com.example.loanandrepay;
+package com.example.loanandrepay.client;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
@@ -13,16 +14,14 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.TextView;
 
-import androidx.appcompat.widget.Toolbar;
-
-import com.example.loanandrepay.company.RequestListActivity;
+import com.example.loanandrepay.R;
 import com.google.android.material.navigation.NavigationView;
 
 import java.util.Objects;
 
-public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
-
+public class ProfileActivity extends AppCompatActivity  implements NavigationView.OnNavigationItemSelectedListener{
     private DrawerLayout drawerLayout;
     private ActionBarDrawerToggle toggle;
 
@@ -42,11 +41,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         }
 
     }
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_profile);
 
         //This is for overlaying the navigation header on the screen
         Toolbar toolbar = (Toolbar) findViewById(R.id.nav_action);
@@ -55,13 +53,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         drawerLayout = (DrawerLayout) findViewById(R.id.drawerLayout);
         toggle = new ActionBarDrawerToggle(this, drawerLayout, R.string.open, R.string.close);
 
-
         drawerLayout.addDrawerListener(toggle);
         toggle.syncState();
 
         if (getSupportActionBar() != null) {
+            //This will enable the burger menu
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
             getSupportActionBar().setDisplayUseLogoEnabled(true);
         }
 
@@ -69,6 +66,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         NavigationView navigationView = (NavigationView) findViewById(R.id.navigation_view);
         navigationView.setNavigationItemSelectedListener(this);
 
+        SharedPreferences sharedPref = getSharedPreferences("userInfo", Context.MODE_PRIVATE);
+
+        String getUserName = sharedPref.getString("userName", "");
+
+        TextView loggedInUser = findViewById(R.id.txtLoggedinAs);
+        loggedInUser.setText(getUserName);
 
     }
 
@@ -95,23 +98,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     }
 
 
-    public void onClickRequestLoan(View view) {
-        SharedPreferences sharedPref = getSharedPreferences("userInfo", Context.MODE_PRIVATE);
-        String token = sharedPref.getString("token", "");
-        String showLogUser = sharedPref.getString("savedUser", "");
-
-        if (Objects.equals(token, "")) {
-
-            Intent goToLogin = new Intent(getApplicationContext(), LoginActivity.class);
-            startActivity(goToLogin);
-        } else {
-            Intent goToRequestLoan = new Intent(getApplicationContext(), InstallmentRequestActivity.class);
-            startActivity(goToRequestLoan);
-
-        }
-    }
-
-
     //Whenever you click on a particular item in the burger menu, it will
     //execute a function
     @Override
@@ -123,7 +109,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             editor.clear();
             editor.apply();
             finish();
-            Intent i = new Intent(MainActivity.this, MainActivity.class);
+            Intent i = new Intent(ProfileActivity.this, MainActivity.class);
             // set the new task and clear flags
 //            i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
             startActivity(i);
@@ -133,48 +119,17 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         return false;
     }
 
-    public void onClickInstallmentStatus(View view) {
+
+    public void onClickLoginBtn(View view) {
 
         SharedPreferences sharedPref = getSharedPreferences("userInfo", Context.MODE_PRIVATE);
-        String token = sharedPref.getString("token", "");
-        String showLogUser = sharedPref.getString("savedUser", "");
+        SharedPreferences.Editor editor = sharedPref.edit();
 
-        if (Objects.equals(token, "")) {
-
-            Intent goToLogin = new Intent(getApplicationContext(), LoginActivity.class);
-            startActivity(goToLogin);
-        } else {
-            Intent goToRequestStatus = new Intent(getApplicationContext(), RequestStatusActivity.class);
-            startActivity(goToRequestStatus);
-
-        }
-    }
-
-    public void onClickSetting(View view) {
-        //Go to ..... after user is logged in
-        Intent goToMain = new Intent(MainActivity.this, RequestListActivity.class);
-        startActivity(goToMain);
+        editor.clear();
+        editor.apply();
         finish();
-    }
-
-    public void onClickProfile(View view) {
-
-        SharedPreferences sharedPref = getSharedPreferences("userInfo", Context.MODE_PRIVATE);
-        String token = sharedPref.getString("token", "");
-        String showLogUser = sharedPref.getString("savedUser", "");
-
-        if (Objects.equals(token, "")) {
-
-            Intent goToLogin = new Intent(getApplicationContext(), LoginActivity.class);
-            startActivity(goToLogin);
-        } else {
-            Intent goToProfile = new Intent(getApplicationContext(), ProfileActivity.class);
-            startActivity(goToProfile);
-
-        }
+        Intent goToMain = new Intent(getApplicationContext(), MainActivity.class);
+        startActivity(goToMain);
 
     }
 }
-
-
-

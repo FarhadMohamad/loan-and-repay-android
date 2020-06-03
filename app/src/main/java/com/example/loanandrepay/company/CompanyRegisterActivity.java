@@ -16,10 +16,9 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.example.loanandrepay.HttpConnection;
+import com.example.loanandrepay.HttpConnection.HttpConnection;
 import com.example.loanandrepay.LoginActivity;
 import com.example.loanandrepay.R;
-import com.example.loanandrepay.RegisterActivity;
 import com.google.android.material.navigation.NavigationView;
 
 import org.json.JSONObject;

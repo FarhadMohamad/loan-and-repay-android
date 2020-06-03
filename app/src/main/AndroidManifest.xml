@@ -14,7 +14,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".MainActivity">
+        <activity android:name=".client.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -22,30 +22,30 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".RegisterActivity"
-            android:parentActivityName=".MainActivity" />
+            android:name=".client.RegisterActivity"
+            android:parentActivityName=".client.MainActivity" />
         <activity
             android:name=".LoginActivity"
-            android:parentActivityName=".MainActivity" />
+            android:parentActivityName=".client.MainActivity" />
         <activity
             android:name=".UserTypeRegistration"
-            android:parentActivityName=".MainActivity" />
+            android:parentActivityName=".client.MainActivity" />
         <activity
-            android:name=".InstallmentRequestActivity"
-            android:parentActivityName=".MainActivity" />
-        <activity android:name=".RequestStatusActivity" />
+            android:name=".client.InstallmentRequestActivity"
+            android:parentActivityName=".client.MainActivity" />
+        <activity android:name=".client.RequestStatusActivity" />
         <activity
             android:name=".company.CompanyRegisterActivity"
-            android:parentActivityName=".MainActivity" />
+            android:parentActivityName=".client.MainActivity" />
         <activity
             android:name=".company.RequestListActivity"
-            android:parentActivityName=".MainActivity" />
+            android:parentActivityName=".client.MainActivity" />
         <activity
             android:name=".company.RequestListDetailsActivity"
             android:parentActivityName=".company.RequestListActivity" />
         <activity
-            android:name=".ProfileActivity"
-            android:parentActivityName=".MainActivity" />
+            android:name=".client.ProfileActivity"
+            android:parentActivityName=".client.MainActivity" />
     </application>
 
 </manifest>

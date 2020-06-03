@@ -5,23 +5,20 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.database.Cursor;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
-import android.widget.Adapter;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Toast;
 
-import com.example.loanandrepay.MainActivity;
+import com.example.loanandrepay.client.MainActivity;
 import com.example.loanandrepay.R;
-import com.example.loanandrepay.ReadHttpTask;
-import com.example.loanandrepay.StatusPending;
+import com.example.loanandrepay.HttpConnection.ReadHttpTask;
 
 import org.json.JSONArray;
 import org.json.JSONException;

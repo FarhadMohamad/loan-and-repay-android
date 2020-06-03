@@ -1,4 +1,4 @@
-package com.example.loanandrepay;
+package com.example.loanandrepay.client;
 
 public class Status {
 

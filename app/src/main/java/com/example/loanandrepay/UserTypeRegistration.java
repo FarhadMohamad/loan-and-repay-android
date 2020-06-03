@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
+import com.example.loanandrepay.client.RegisterActivity;
 import com.example.loanandrepay.company.CompanyRegisterActivity;
 
 public class UserTypeRegistration extends AppCompatActivity {

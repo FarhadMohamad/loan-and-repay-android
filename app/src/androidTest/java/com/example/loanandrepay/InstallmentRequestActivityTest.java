@@ -1,17 +1,12 @@
 package com.example.loanandrepay;
 
-import android.widget.EditText;
-
-import androidx.test.filters.SmallTest;
 import androidx.test.rule.ActivityTestRule;
 
-import org.junit.Assert;
+import com.example.loanandrepay.client.InstallmentRequestActivity;
+
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
-import org.junit.Assert;
-import org.junit.Test;
-import org.junit.Assert;
 
 import static androidx.test.espresso.Espresso.onView;
 import static androidx.test.espresso.action.ViewActions.typeText;
