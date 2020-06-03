@@ -76,7 +76,7 @@ public class RequestListActivity extends AppCompatActivity {
     protected void onStart() {
             super.onStart();
         SharedPreferences sharedPref = getSharedPreferences("userInfo", Context.MODE_PRIVATE);
-        String showLogUser = sharedPref.getString("savedUser", "");
+        String showLogUser = sharedPref.getString("userName", "");
         GetRequestList getRequestList = new GetRequestList();
 
         getRequestList.execute("http://192.168.1.171:4567/api/GetRequestList?email="+ showLogUser);

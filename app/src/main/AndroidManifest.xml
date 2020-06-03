@@ -14,7 +14,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".client.MainActivity">
+        <activity android:name=".client.MainActivity"></activity>
+        <activity android:name=".company.CompanyMainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

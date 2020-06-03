@@ -21,6 +21,7 @@ import androidx.appcompat.widget.Toolbar;
 
 import com.example.loanandrepay.HttpConnection.HttpConnection;
 import com.example.loanandrepay.client.MainActivity;
+import com.example.loanandrepay.company.CompanyMainActivity;
 import com.google.android.material.navigation.NavigationView;
 
 import org.json.JSONObject;
@@ -191,7 +192,7 @@ public class LoginActivity extends AppCompatActivity implements NavigationView.O
 
                     if (getUserRole.contains("Company")) {
                         //Go to Main after user is logged in
-                        Intent goToMain = new Intent(LoginActivity.this, MainActivity.class);
+                        Intent goToMain = new Intent(LoginActivity.this, CompanyMainActivity.class);
                         startActivity(goToMain);
                         finish();
                     }

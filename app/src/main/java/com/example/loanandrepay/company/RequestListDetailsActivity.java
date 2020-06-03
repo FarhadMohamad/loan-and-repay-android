@@ -170,14 +170,14 @@ public class RequestListDetailsActivity extends AppCompatActivity {
                 if (responseCode == HttpURLConnection.HTTP_OK || responseCode == HttpURLConnection.HTTP_ACCEPTED) {
 
 
-                    Intent intent = new Intent(RequestListDetailsActivity.this, MainActivity.class);
+                    Intent intent = new Intent(RequestListDetailsActivity.this, CompanyMainActivity.class);
                     startActivity(intent);
                     finish();
 
 
                 } else if (responseCode == HttpURLConnection.HTTP_UNAUTHORIZED) {
 
-                    Intent intentLogin = new Intent(RequestListDetailsActivity.this, LoginActivity.class);
+                    Intent intentLogin = new Intent(RequestListDetailsActivity.this, CompanyMainActivity.class);
                     startActivity(intentLogin);
                     finish();
 
