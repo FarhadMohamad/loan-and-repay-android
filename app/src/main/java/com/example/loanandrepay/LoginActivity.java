@@ -157,6 +157,10 @@ public class LoginActivity extends AppCompatActivity {
                     String token = obj.get("access_token").toString();
                     String getUserRole = obj.get("roles").toString().trim();
 
+                    //get username
+                    String userName = obj.get("userName").toString();
+
+
                     //Saving token
                     SharedPreferences sharedPref = getSharedPreferences("userInfo", Context.MODE_PRIVATE);
                     SharedPreferences.Editor editor = sharedPref.edit();
@@ -167,6 +171,12 @@ public class LoginActivity extends AppCompatActivity {
                     String saveUser = userId.getText().toString();
                     editor.putString("savedUser", saveUser);
                     editor.apply();
+
+                    //Saving username
+                    SharedPreferences sharePrUsername = getSharedPreferences("userName", Context.MODE_PRIVATE);
+                    SharedPreferences.Editor editorUserName = sharePrUsername.edit();
+                    editorUserName.putString("userName", userName);
+                    editorUserName.apply();
 
                     if (getUserRole.contains("Company"))
                     {

@@ -34,7 +34,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         String token = sharedPref.getString("token", "");
 
         if (Objects.equals(token, "")) {
-           //// MenuItem logoutItem = menu.findItem(R.id.action_logout);
+            //// MenuItem logoutItem = menu.findItem(R.id.action_logout);
             NavigationView navigationView = findViewById(R.id.navigation_view);
             Menu menu = navigationView.getMenu();
             MenuItem menuItem = menu.findItem(R.id.action_logout);
@@ -87,10 +87,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     @Override
     public void onBackPressed() {
 
-        if (drawerLayout.isDrawerOpen((GravityCompat.START))){
+        if (drawerLayout.isDrawerOpen((GravityCompat.START))) {
             drawerLayout.closeDrawer(GravityCompat.START);
-        }
-        else{
+        } else {
             super.onBackPressed();
         }
     }
@@ -157,6 +156,25 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         startActivity(goToMain);
         finish();
     }
+
+    public void onClickProfile(View view) {
+
+        SharedPreferences sharedPref = getSharedPreferences("userInfo", Context.MODE_PRIVATE);
+        String token = sharedPref.getString("token", "");
+        String showLogUser = sharedPref.getString("savedUser", "");
+
+        if (Objects.equals(token, "")) {
+
+            Intent goToLogin = new Intent(getApplicationContext(), LoginActivity.class);
+            startActivity(goToLogin);
+        } else {
+            Intent goToProfile = new Intent(getApplicationContext(), ProfileActivity.class);
+            startActivity(goToProfile);
+
+        }
+
+    }
 }
+
 
 

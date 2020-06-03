@@ -7,8 +7,8 @@ public class StatusPending  implements Serializable {
 
     //For getting lender's requests
     //private String Token;
-    private String Company;
-    private String Status;
+    public String Company;
+    public String Status;
 
 
 

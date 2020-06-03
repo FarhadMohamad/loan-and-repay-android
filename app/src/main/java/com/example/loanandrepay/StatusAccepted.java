@@ -4,12 +4,15 @@ import android.content.Intent;
 
 import java.io.Serializable;
 
-public class StatusAccepted implements Serializable {
+public class StatusAccepted  implements Serializable {
+
+
+
 
     //For getting lender's requests
     //private String Token;
-    private String Company;
-    private String Status;
+    public String Company;
+    public String Status;
 
 
 
@@ -17,7 +20,6 @@ public class StatusAccepted implements Serializable {
 
     {
         // this.Token = token;
-
         this.Company = company;
         this.Status = status;
 
@@ -39,11 +41,9 @@ public class StatusAccepted implements Serializable {
 
 
     public String toString() {
+
         return "Company Name: " + Company + "\n" + "Status: " + Status;
     }
-
-
-
 
 }
 
