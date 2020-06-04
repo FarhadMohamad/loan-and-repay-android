@@ -7,16 +7,7 @@
     android:layout_height="match_parent"
     tools:context=".company.CompanyMainActivity">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@color/colorAccent">
 
-        <include
-            android:id="@+id/include"
-            layout="@layout/navigation_action"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -114,9 +105,6 @@
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>
-
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <com.google.android.material.navigation.NavigationView
         android:id="@+id/navigation_view"
