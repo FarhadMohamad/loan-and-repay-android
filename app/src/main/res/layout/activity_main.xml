@@ -13,131 +13,93 @@
         android:background="@color/colorAccent">
 
         <include
+            android:id="@+id/include2"
             layout="@layout/navigation_action"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
-        <TextView
-            android:id="@+id/textView3"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="62dp"
-            android:text="Setting"
-            android:textSize="20dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.885"
-            app:layout_constraintStart_toEndOf="@+id/textView4"
-            app:layout_constraintTop_toBottomOf="@+id/imageView2"
-            tools:ignore="MissingConstraints" />
-
-        <TextView
-            android:id="@+id/textView4"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Profile"
-            android:textSize="20sp"
-            app:layout_constraintBottom_toTopOf="@+id/imageRequestList"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.22"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/imageProfile"
-            app:layout_constraintVertical_bias="0.0"
-            tools:ignore="MissingConstraints" />
-
-        <TextView
-            android:id="@+id/textView5"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="36dp"
-            android:text="New Installment"
-            android:textAlignment="center"
-            android:textSize="20dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/imageView4"
-            app:layout_constraintVertical_bias="0.0" />
-
-        <TextView
-            android:id="@+id/textView6"
-            android:layout_width="150dp"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="1dp"
-            android:text="Installment status"
-            android:textAlignment="center"
-            android:textSize="20dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/textView5"
-            app:layout_constraintHorizontal_bias="0.439"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/imageRequestList"
-            app:layout_constraintVertical_bias="0.0" />
-
-        <ImageView
-            android:id="@+id/imageView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="105dp"
-            android:layout_marginEnd="86dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <ImageView
-            android:id="@+id/imageView2"
-            android:layout_width="150dp"
-            android:layout_height="109dp"
-            android:layout_marginTop="104dp"
-            android:layout_marginEnd="36dp"
-            android:background="@drawable/buttonlayout"
-            android:onClick="onClickSetting"
-            android:padding="10dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/settting" />
 
         <ImageView
             android:id="@+id/imageProfile"
             android:layout_width="150dp"
             android:layout_height="109dp"
-            android:layout_marginStart="21dp"
-            android:layout_marginTop="104dp"
+            android:layout_marginTop="45dp"
             android:background="@drawable/buttonlayout"
             android:onClick="onClickProfile"
             android:padding="10dp"
-            app:layout_constraintEnd_toStartOf="@+id/imageView2"
-            app:layout_constraintHorizontal_bias="0.285"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/include2"
             app:srcCompat="@drawable/profile1" />
 
+        <TextView
+            android:id="@+id/textProfile"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Profile"
+            android:textSize="20sp"
+            app:layout_constraintBottom_toTopOf="@+id/imageRequestStatus"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/imageProfile"
+            app:layout_constraintVertical_bias="0.0"
+            tools:ignore="MissingConstraints" />
+
         <ImageView
-            android:id="@+id/imageView4"
+            android:id="@+id/imageRequestStatus"
             android:layout_width="150dp"
             android:layout_height="109dp"
-            android:layout_marginTop="104dp"
-            android:layout_marginEnd="36dp"
+            android:layout_marginTop="45dp"
+            android:background="@drawable/buttonlayout"
+            android:onClick="onClickInstallmentStatus"
+            android:padding="10dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/imageProfile"
+            app:srcCompat="@drawable/myloanss" />
+
+        <TextView
+            android:id="@+id/textRequestStatus"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:text="Request status"
+            android:textAlignment="center"
+            android:textSize="20dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.498"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/imageRequestStatus" />
+
+
+        <ImageView
+            android:id="@+id/imageNewRequest"
+            android:layout_width="150dp"
+            android:layout_height="109dp"
+            android:layout_marginTop="45dp"
+            android:layout_marginBottom="168dp"
             android:background="@drawable/buttonlayout"
             android:onClick="onClickRequestLoan"
             android:padding="10dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/imageView2"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/imageRequestStatus"
             app:layout_constraintVertical_bias="0.134"
             app:srcCompat="@drawable/repayyyy" />
 
-        <ImageView
-            android:id="@+id/imageRequestList"
-            android:layout_width="150dp"
-            android:layout_height="109dp"
-            android:layout_marginTop="104dp"
-            android:layout_marginEnd="36dp"
-            android:background="@drawable/buttonlayout"
-            android:onClick="onClickInstallmentStatus"
-            android:padding="10dp"
+        <TextView
+            android:id="@+id/textNewRequest"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="144dp"
+            android:text="New Request"
+            android:textAlignment="center"
+            android:textSize="20dp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/imageView4"
-            app:layout_constraintTop_toBottomOf="@+id/imageProfile"
-            app:layout_constraintVertical_bias="0.134"
-            app:srcCompat="@drawable/myloanss" />
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/imageNewRequest"
+            app:layout_constraintVertical_bias="0.0" />
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

@@ -24,12 +24,12 @@
             android:layout_height="109dp"
             android:layout_marginTop="48dp"
             android:background="@drawable/buttonlayout"
-            android:padding="10dp"
             android:onClick="onClickProfile"
+            android:padding="12dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/include"
-            app:srcCompat="@drawable/profile1" />
+            app:srcCompat="@mipmap/male" />
 
         <TextView
             android:id="@+id/textProfile"
@@ -38,7 +38,7 @@
             android:layout_marginTop="110dp"
             android:text="Profile"
             android:textSize="20sp"
-            app:layout_constraintBottom_toTopOf="@+id/imageRequestList"
+            app:layout_constraintBottom_toTopOf="@+id/imageRequestStatus"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="@+id/imageProfile"
@@ -46,7 +46,7 @@
             tools:ignore="MissingConstraints" />
 
         <ImageView
-            android:id="@+id/imageRequestList"
+            android:id="@+id/imageRequestStatus"
             android:layout_width="150dp"
             android:layout_height="109dp"
             android:layout_marginTop="48dp"
@@ -68,7 +68,7 @@
             android:textSize="20dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/imageRequestList" />
+            app:layout_constraintTop_toBottomOf="@+id/imageRequestStatus" />
 
 
         <ImageView
@@ -84,7 +84,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.498"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/imageRequestList"
+            app:layout_constraintTop_toBottomOf="@+id/imageRequestStatus"
             app:layout_constraintVertical_bias="0.0"
             app:srcCompat="@mipmap/logout_foreground" />
 

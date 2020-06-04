@@ -107,10 +107,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             editor.clear();
             editor.apply();
             finish();
-            Intent i = new Intent(MainActivity.this, MainActivity.class);
+            Intent goToLoginActivity = new Intent(MainActivity.this, LoginActivity.class);
             // set the new task and clear flags
 //            i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-            startActivity(i);
+            startActivity(goToLoginActivity);
 
 
         }

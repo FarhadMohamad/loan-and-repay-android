@@ -109,21 +109,19 @@ public class RegisterActivity extends AppCompatActivity implements NavigationVie
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         int id = item.getItemId();
-
-        if (id == R.id.action_logout) {
-            SharedPreferences preferences = getSharedPreferences("userInfo", Context.MODE_PRIVATE);
-            SharedPreferences.Editor editor = preferences.edit();
-            editor.clear();
-            editor.apply();
-            finish();
-            Intent i = new Intent(RegisterActivity.this, LoginActivity.class);
-            // set the new task and clear flags
-            i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-            startActivity(i);
-
-
-        }
-        return false;
+//
+//        if (id == R.id.action_logout) {
+//            SharedPreferences preferences = getSharedPreferences("userInfo", Context.MODE_PRIVATE);
+//            SharedPreferences.Editor editor = preferences.edit();
+//            editor.clear();
+//            editor.apply();
+//            finish();
+//            Intent goToLoginActivity = new Intent(RegisterActivity.this, LoginActivity.class);
+//            // set the new task and clear flags
+//            goToLoginActivity.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+//            startActivity(goToLoginActivity);
+//        }
+       return false;
     }
 
     public void onClickSignupBtn(View view) {

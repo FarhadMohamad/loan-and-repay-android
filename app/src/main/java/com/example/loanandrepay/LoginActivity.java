@@ -43,6 +43,7 @@ public class LoginActivity extends AppCompatActivity implements NavigationView.O
         super.onStart();
         SharedPreferences sharedPref = getSharedPreferences("userInfo", Context.MODE_PRIVATE);
         String token = sharedPref.getString("token", "");
+        String getUserRole = sharedPref.getString("roles", "");
 
         if (Objects.equals(token, "")) {
             //// MenuItem logoutItem = menu.findItem(R.id.action_logout);
@@ -50,7 +51,24 @@ public class LoginActivity extends AppCompatActivity implements NavigationView.O
             Menu menu = navigationView.getMenu();
             MenuItem menuItem = menu.findItem(R.id.action_logout);
             menuItem.setVisible(false);
+
         }
+
+        if (!Objects.equals(token, "")) {
+            if (getUserRole.contains("Company")) {
+                //Go to Main after user is logged in
+                Intent goToMain = new Intent(LoginActivity.this, CompanyMainActivity.class);
+                startActivity(goToMain);
+                finish();
+            }
+            if (getUserRole.contains("Client")) {
+                //Go to ..... after user is logged in
+                Intent goToMain = new Intent(LoginActivity.this, MainActivity.class);
+                startActivity(goToMain);
+                finish();
+            }
+        }
+
 
     }
 
@@ -58,7 +76,7 @@ public class LoginActivity extends AppCompatActivity implements NavigationView.O
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-
+        this.setTitle("Login");
         //This is for overlaying the navigation header on the screen
         Toolbar toolbar = (Toolbar) findViewById(R.id.nav_action);
         setSupportActionBar(toolbar);
@@ -173,22 +191,26 @@ public class LoginActivity extends AppCompatActivity implements NavigationView.O
                     String token = obj.get("access_token").toString();
                     String getUserRole = obj.get("roles").toString().trim();
 
+
+                    SharedPreferences sharedPref = getSharedPreferences("userInfo", Context.MODE_PRIVATE);
+                    SharedPreferences.Editor editor = sharedPref.edit();
+
                     //get username
                     String userName = obj.get("userName").toString();
 
+                    //Saving user role
+                    editor.putString("roles", getUserRole);
+                    editor.apply();
+
 
                     //Saving token
-                    SharedPreferences sharedPref = getSharedPreferences("userInfo", Context.MODE_PRIVATE);
-
-                    SharedPreferences.Editor editor = sharedPref.edit();
                     editor.putString("token", token);
                     editor.apply();
 
 
                     //Saving username
-                    SharedPreferences.Editor editorUserName = sharedPref.edit();
-                    editorUserName.putString("userName", userName);
-                    editorUserName.apply();
+                    editor.putString("userName", userName);
+                    editor.apply();
 
                     if (getUserRole.contains("Company")) {
                         //Go to Main after user is logged in

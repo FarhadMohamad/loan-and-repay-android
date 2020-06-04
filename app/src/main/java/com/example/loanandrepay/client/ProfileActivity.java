@@ -16,7 +16,9 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 
+import com.example.loanandrepay.LoginActivity;
 import com.example.loanandrepay.R;
+import com.example.loanandrepay.company.CompanyMainActivity;
 import com.google.android.material.navigation.NavigationView;
 
 import java.util.Objects;
@@ -39,6 +41,7 @@ public class ProfileActivity extends AppCompatActivity  implements NavigationVie
             MenuItem menuItem = menu.findItem(R.id.action_logout);
             menuItem.setVisible(false);
         }
+
 
     }
     @Override
@@ -95,6 +98,18 @@ public class ProfileActivity extends AppCompatActivity  implements NavigationVie
         } else {
             super.onBackPressed();
         }
+
+        SharedPreferences sharedPref = getSharedPreferences("userInfo", Context.MODE_PRIVATE);
+        String getUserRole = sharedPref.getString("roles", "");
+
+        if (getUserRole.contains("Company")) {
+            //Go to Main after user is logged in
+            Intent goToMain = new Intent(ProfileActivity.this, CompanyMainActivity.class);
+            startActivity(goToMain);
+            finish();
+        }
+
+
     }
 
 
@@ -109,10 +124,10 @@ public class ProfileActivity extends AppCompatActivity  implements NavigationVie
             editor.clear();
             editor.apply();
             finish();
-            Intent i = new Intent(ProfileActivity.this, MainActivity.class);
+            Intent goToLoginActivity = new Intent(ProfileActivity.this, LoginActivity.class);
             // set the new task and clear flags
 //            i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-            startActivity(i);
+            startActivity(goToLoginActivity);
 
 
         }

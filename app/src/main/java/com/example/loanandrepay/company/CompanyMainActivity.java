@@ -43,6 +43,7 @@ public class CompanyMainActivity extends AppCompatActivity implements Navigation
             menuItem.setVisible(false);
         }
 
+
     }
 
     @Override
@@ -105,10 +106,10 @@ public class CompanyMainActivity extends AppCompatActivity implements Navigation
             editor.clear();
             editor.apply();
             finish();
-            Intent i = new Intent(CompanyMainActivity.this, CompanyMainActivity.class);
+            Intent goToLoginActivity = new Intent(CompanyMainActivity.this, LoginActivity.class);
             // set the new task and clear flags
 //            i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-            startActivity(i);
+            startActivity(goToLoginActivity);
 
 
         }

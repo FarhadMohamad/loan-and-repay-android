@@ -68,7 +68,7 @@ public class RequestListActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed(){
-        startActivity( new Intent(this, MainActivity.class) );
+        startActivity( new Intent(this, CompanyMainActivity.class) );
         //finish();
     }
 

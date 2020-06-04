@@ -14,8 +14,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".client.MainActivity"></activity>
-        <activity android:name=".company.CompanyMainActivity">
+        <activity android:name=".LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -26,7 +25,7 @@
             android:name=".client.RegisterActivity"
             android:parentActivityName=".client.MainActivity" />
         <activity
-            android:name=".LoginActivity"
+            android:name=".company.CompanyMainActivity"
             android:parentActivityName=".client.MainActivity" />
         <activity
             android:name=".UserTypeRegistration"
@@ -47,6 +46,10 @@
         <activity
             android:name=".client.ProfileActivity"
             android:parentActivityName=".client.MainActivity" />
+        <activity
+            android:name=".client.MainActivity"
+            android:parentActivityName=".client.MainActivity" />
+
     </application>
 
 </manifest>

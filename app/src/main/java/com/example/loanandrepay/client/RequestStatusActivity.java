@@ -20,6 +20,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.example.loanandrepay.HttpConnection.ReadHttpTask;
+import com.example.loanandrepay.LoginActivity;
 import com.example.loanandrepay.R;
 import com.google.android.material.navigation.NavigationView;
 
@@ -40,7 +41,7 @@ public class RequestStatusActivity extends AppCompatActivity implements Navigati
     protected void onStart() {
         super.onStart();
         SharedPreferences sharedPref = getSharedPreferences("userInfo", Context.MODE_PRIVATE);
-        String showLogUser = sharedPref.getString("savedUser", "");
+        String showLogUser = sharedPref.getString("userName", "");
         String token = sharedPref.getString("token", "");
         if (Objects.equals(token, "")) {
             //// MenuItem logoutItem = menu.findItem(R.id.action_logout);
@@ -121,10 +122,10 @@ public class RequestStatusActivity extends AppCompatActivity implements Navigati
             editor.clear();
             editor.apply();
             finish();
-            Intent i = new Intent(RequestStatusActivity.this, MainActivity.class);
+            Intent goToLoginActivity = new Intent(RequestStatusActivity.this, LoginActivity.class);
             // set the new task and clear flags
 //            i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-            startActivity(i);
+            startActivity(goToLoginActivity);
 
 
         }
