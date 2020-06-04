@@ -27,7 +27,7 @@
             android:layout_centerHorizontal="true"
             android:layout_centerVertical="true"
             android:autoSizeTextType="uniform"
-            android:text="Loan & Repay"
+            android:text="Loan &amp; Repay"
             android:textSize="90dp"
             android:textStyle="bold"
             android:textAlignment="center"
