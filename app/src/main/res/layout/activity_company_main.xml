@@ -18,89 +18,102 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
-        <ImageView
-            android:id="@+id/imageProfile"
-            android:layout_width="150dp"
-            android:layout_height="109dp"
-            android:layout_marginTop="48dp"
-            android:background="@drawable/buttonlayout"
-            android:onClick="onClickProfile"
-            android:padding="12dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/include"
-            app:srcCompat="@mipmap/male" />
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/colorAccent">
 
-        <TextView
-            android:id="@+id/textProfile"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="110dp"
-            android:text="Profile"
-            android:textSize="20sp"
-            app:layout_constraintBottom_toTopOf="@+id/imageRequestStatus"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/imageProfile"
-            app:layout_constraintVertical_bias="0.0"
-            tools:ignore="MissingConstraints" />
+            <include
+                layout="@layout/navigation_action"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
 
-        <ImageView
-            android:id="@+id/imageRequestStatus"
-            android:layout_width="150dp"
-            android:layout_height="109dp"
-            android:layout_marginTop="48dp"
-            android:background="@drawable/buttonlayout"
-            android:onClick="onClickRequestList"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/imageProfile"
-            app:srcCompat="@mipmap/list_foreground" />
-<!--        app:srcCompat="@drawable/myloanss" />-->
+            <ImageView
+                android:id="@+id/imageProfile"
+                android:layout_width="150dp"
+                android:layout_height="109dp"
+                android:layout_marginTop="100dp"
+                android:background="@drawable/buttonlayout"
+                android:onClick="onClickProfile"
+                android:padding="12dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@mipmap/male" />
 
-        <TextView
-            android:id="@+id/textRequestList"
-            android:layout_width="150dp"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="1dp"
-            android:text="Request list"
-            android:textAlignment="center"
-            android:textSize="20dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/imageRequestStatus" />
+            <TextView
+                android:id="@+id/textProfile"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="110dp"
+                android:text="Profile"
+                android:textSize="20sp"
+                app:layout_constraintBottom_toTopOf="@+id/imageRequestStatus"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/imageProfile"
+                app:layout_constraintVertical_bias="0.0"
+                tools:ignore="MissingConstraints" />
+
+            <ImageView
+                android:id="@+id/imageRequestStatus"
+                android:layout_width="150dp"
+                android:layout_height="109dp"
+                android:layout_marginTop="48dp"
+                android:background="@drawable/buttonlayout"
+                android:onClick="onClickRequestList"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/imageProfile"
+                app:srcCompat="@mipmap/list_foreground" />
+            <!--        app:srcCompat="@drawable/myloanss" />-->
+
+            <TextView
+                android:id="@+id/textRequestList"
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="1dp"
+                android:text="Request list"
+                android:textAlignment="center"
+                android:textSize="20dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/imageRequestStatus" />
 
 
-        <ImageView
-            android:id="@+id/imageLogin"
-            android:layout_width="150dp"
-            android:layout_height="109dp"
-            android:layout_marginTop="48dp"
-            android:layout_marginBottom="120dp"
-            android:background="@drawable/buttonlayout"
-            android:onClick="onClickLoginBtn"
-            android:padding="10dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.498"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/imageRequestStatus"
-            app:layout_constraintVertical_bias="0.0"
-            app:srcCompat="@mipmap/logout_foreground" />
+            <ImageView
+                android:id="@+id/imageLogin"
+                android:layout_width="150dp"
+                android:layout_height="109dp"
+                android:layout_marginTop="48dp"
+                android:layout_marginBottom="120dp"
+                android:background="@drawable/buttonlayout"
+                android:onClick="onClickLoginBtn"
+                android:padding="10dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.498"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/imageRequestStatus"
+                app:layout_constraintVertical_bias="0.0"
+                app:srcCompat="@mipmap/logout_foreground" />
 
-        <TextView
-            android:id="@+id/textLogin"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Login"
-            android:textAlignment="center"
-            android:textSize="20dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.512"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/imageLogin"
-            app:layout_constraintVertical_bias="0.0" />
+            <TextView
+                android:id="@+id/textLogin"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Login"
+                android:textAlignment="center"
+                android:textSize="20dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.512"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/imageLogin"
+                app:layout_constraintVertical_bias="0.0" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
