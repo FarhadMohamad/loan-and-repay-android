@@ -37,6 +37,7 @@ public class RequestListActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_request_list);
+        this.setTitle("Request List");
 
        EditText inputSearch = (EditText) findViewById(R.id.search_view);
 

@@ -51,6 +51,8 @@ public class CompanyMainActivity extends AppCompatActivity implements Navigation
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_company_main);
 
+        this.setTitle("Company");
+
         //This is for overlaying the navigation header on the screen
         Toolbar toolbar = (Toolbar) findViewById(R.id.nav_action);
         setSupportActionBar(toolbar);
@@ -116,13 +118,14 @@ public class CompanyMainActivity extends AppCompatActivity implements Navigation
         return false;
     }
 
-
-    public void onClickLoginBtn(View view) {
-        //Go to login activity
-        Intent gotoLoginActivity = new Intent(CompanyMainActivity.this, LoginActivity.class);
-        startActivity(gotoLoginActivity);
-        finish();
+    public void onClickLogOutBtn(View view) {
     }
+//    public void onClickLoginBtn(View view) {
+//        //Go to login activity
+//        Intent gotoLoginActivity = new Intent(CompanyMainActivity.this, LoginActivity.class);
+//        startActivity(gotoLoginActivity);
+//        finish();
+//    }
 
     public void onClickRequestList(View view) {
 
@@ -161,4 +164,6 @@ public class CompanyMainActivity extends AppCompatActivity implements Navigation
         }
 
     }
+
+
 }

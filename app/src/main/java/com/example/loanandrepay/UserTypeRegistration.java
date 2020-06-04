@@ -15,6 +15,7 @@ public class UserTypeRegistration extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_type_registration);
+        this.setTitle("Registration");
     }
 
     public void OnClickCompanyRegister(View view) {

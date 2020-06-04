@@ -37,6 +37,7 @@ public class CompanyRegisterActivity extends AppCompatActivity implements Naviga
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_company_register);
+        this.setTitle("Register Company");
 
 
         drawerLayout = (DrawerLayout) findViewById(R.id.drawerLayout);
