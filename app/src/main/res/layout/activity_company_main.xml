@@ -51,12 +51,12 @@
             android:layout_height="109dp"
             android:layout_marginTop="48dp"
             android:background="@drawable/buttonlayout"
-            android:padding="10dp"
             android:onClick="onClickRequestList"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/imageProfile"
-            app:srcCompat="@drawable/myloanss" />
+            app:srcCompat="@mipmap/installment_List1_foreground" />
+<!--        app:srcCompat="@drawable/myloanss" />-->
 
         <TextView
             android:id="@+id/textRequestList"
@@ -86,7 +86,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/imageRequestList"
             app:layout_constraintVertical_bias="0.0"
-            app:srcCompat="@drawable/repayyyy" />
+            app:srcCompat="@mipmap/logout_foreground" />
 
         <TextView
             android:id="@+id/textLogin"
