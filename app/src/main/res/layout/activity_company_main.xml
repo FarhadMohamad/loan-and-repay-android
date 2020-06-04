@@ -55,7 +55,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/imageProfile"
-            app:srcCompat="@mipmap/installment_List1_foreground" />
+            app:srcCompat="@mipmap/list_foreground" />
 <!--        app:srcCompat="@drawable/myloanss" />-->
 
         <TextView
