@@ -26,6 +26,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.loanandrepay.HttpConnection.HttpConnection;
+import com.example.loanandrepay.LoginActivity;
 import com.example.loanandrepay.R;
 import com.google.android.material.navigation.NavigationView;
 
@@ -208,22 +209,41 @@ public class InstallmentRequestActivity extends AppCompatActivity implements Nav
     //execute a function
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-        int id = item.getItemId();
-        if (id == R.id.action_logout) {
-            SharedPreferences preferences = getSharedPreferences("userInfo", Context.MODE_PRIVATE);
-            SharedPreferences.Editor editor = preferences.edit();
-            editor.clear();
-            editor.apply();
-            finish();
-            Intent i = new Intent(InstallmentRequestActivity.this, MainActivity.class);
-            // set the new task and clear flags
+
+        switch (item.getItemId( )) {
+
+            case R.id.nav_profile:
+                item.setChecked(false);
+                Intent a = new Intent(InstallmentRequestActivity.this, ProfileActivity.class);
+                startActivity(a);
+                break;
+            case R.id.nav_requestStatus:
+                item.setChecked(true);
+                Intent b = new Intent(InstallmentRequestActivity.this, RequestStatusActivity.class);
+                startActivity(b);
+                break;
+            case R.id.nav_newRequest:
+                item.setChecked(false);
+                Intent c = new Intent(InstallmentRequestActivity.this, InstallmentRequestActivity.class);
+                startActivity(c);
+                break;
+
+            case R.id.action_logout:
+                SharedPreferences preferences = getSharedPreferences("userInfo", Context.MODE_PRIVATE);
+                SharedPreferences.Editor editor = preferences.edit();
+                editor.clear();
+                editor.apply();
+                finish();
+                Intent goToLoginActivity = new Intent(InstallmentRequestActivity.this, LoginActivity.class);
+                // set the new task and clear flags
 //            i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-            startActivity(i);
-
-
+                startActivity(goToLoginActivity);
+                break;
         }
+
         return false;
     }
+
 
 
     //enable radion button and request loan button after all fields are filled

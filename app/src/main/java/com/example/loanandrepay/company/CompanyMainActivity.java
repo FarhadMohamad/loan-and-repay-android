@@ -18,8 +18,10 @@ import androidx.drawerlayout.widget.DrawerLayout;
 
 import com.example.loanandrepay.LoginActivity;
 import com.example.loanandrepay.R;
+import com.example.loanandrepay.client.InstallmentRequestActivity;
 import com.example.loanandrepay.client.MainActivity;
 import com.example.loanandrepay.client.ProfileActivity;
+import com.example.loanandrepay.client.RequestStatusActivity;
 import com.google.android.material.navigation.NavigationView;
 
 import java.util.Objects;
@@ -50,8 +52,6 @@ public class CompanyMainActivity extends AppCompatActivity implements Navigation
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_company_main);
-
-        this.setTitle("Company");
 
         //This is for overlaying the navigation header on the screen
         Toolbar toolbar = (Toolbar) findViewById(R.id.nav_action);
@@ -101,31 +101,43 @@ public class CompanyMainActivity extends AppCompatActivity implements Navigation
     //execute a function
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-        int id = item.getItemId();
-        if (id == R.id.action_logout) {
-            SharedPreferences preferences = getSharedPreferences("userInfo", Context.MODE_PRIVATE);
-            SharedPreferences.Editor editor = preferences.edit();
-            editor.clear();
-            editor.apply();
-            finish();
-            Intent goToLoginActivity = new Intent(CompanyMainActivity.this, LoginActivity.class);
-            // set the new task and clear flags
+
+        switch (item.getItemId()) {
+
+            case R.id.navigation_profile:
+                item.setChecked(false);
+                Intent a = new Intent(CompanyMainActivity.this, ProfileActivity.class);
+                startActivity(a);
+                break;
+            case R.id.navigation_requestList:
+                item.setChecked(true);
+                Intent b = new Intent(CompanyMainActivity.this, RequestListActivity.class);
+                startActivity(b);
+                break;
+
+            case R.id.action_logout:
+                SharedPreferences preferences = getSharedPreferences("userInfo", Context.MODE_PRIVATE);
+                SharedPreferences.Editor editor = preferences.edit();
+                editor.clear();
+                editor.apply();
+                finish();
+                Intent goToLoginActivity = new Intent(CompanyMainActivity.this, LoginActivity.class);
+                // set the new task and clear flags
 //            i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-            startActivity(goToLoginActivity);
-
-
+                startActivity(goToLoginActivity);
+                break;
         }
+
         return false;
     }
 
-    public void onClickLogOutBtn(View view) {
+
+    public void onClickLoginBtn(View view) {
+        //Go to login activity
+        Intent gotoLoginActivity = new Intent(CompanyMainActivity.this, LoginActivity.class);
+        startActivity(gotoLoginActivity);
+        finish();
     }
-//    public void onClickLoginBtn(View view) {
-//        //Go to login activity
-//        Intent gotoLoginActivity = new Intent(CompanyMainActivity.this, LoginActivity.class);
-//        startActivity(gotoLoginActivity);
-//        finish();
-//    }
 
     public void onClickRequestList(View view) {
 
@@ -165,5 +177,14 @@ public class CompanyMainActivity extends AppCompatActivity implements Navigation
 
     }
 
+    public void onClickLogOutBtn(View view) {
+        SharedPreferences sharedPref = getSharedPreferences("userInfo", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPref.edit();
 
+        editor.clear();
+        editor.apply();
+        finish();
+        Intent goToLoginActivity = new Intent(getApplicationContext(), LoginActivity.class);
+        startActivity(goToLoginActivity);
+    }
 }

@@ -1,24 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
-        android:id="@+id/nav_profile"
+        android:id="@+id/navigation_profile"
         android:icon="@mipmap/ic_profile"
         android:title="Profile" />
 
     <item
-        android:id="@+id/nav_requestStatus"
+        android:id="@+id/navigation_requestList"
         android:icon="@mipmap/ic_myloan_24dp"
-        android:title="Request status" />
-
-    <item
-        android:id="@+id/nav_newRequest"
-        android:icon="@mipmap/ic_loanmoney"
-        android:title="New Request" />
+        android:title="Request list" />
 
 
     <item
         android:id="@+id/action_logout"
-        android:icon="@mipmap/logoutnew_foreground"
         android:title="Logout" />
 
 

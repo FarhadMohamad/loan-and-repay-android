@@ -1,6 +1,11 @@
 package com.example.loanandrepay.company;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.core.view.GravityCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
 
 import android.content.Context;
 import android.content.Intent;
@@ -9,6 +14,8 @@ import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -16,9 +23,12 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.example.loanandrepay.LoginActivity;
 import com.example.loanandrepay.client.MainActivity;
 import com.example.loanandrepay.R;
 import com.example.loanandrepay.HttpConnection.ReadHttpTask;
+import com.example.loanandrepay.client.ProfileActivity;
+import com.google.android.material.navigation.NavigationView;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -26,18 +36,65 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
-public class RequestListActivity extends AppCompatActivity {
+public class RequestListActivity extends AppCompatActivity  implements NavigationView.OnNavigationItemSelectedListener {
+    private DrawerLayout drawerLayout;
+    private ActionBarDrawerToggle toggle;
 
     // Listview Adapter
    private ArrayAdapter<Request> adapter;
     private ListView listView;
     private EditText inputSearch;
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        SharedPreferences sharedPref = getSharedPreferences("userInfo", Context.MODE_PRIVATE);
+        String showLogUser = sharedPref.getString("userName", "");
+        String token = sharedPref.getString("token", "");
+
+        if (Objects.equals(token, "")) {
+            //// MenuItem logoutItem = menu.findItem(R.id.action_logout);
+            NavigationView navigationView = findViewById(R.id.navigation_view);
+            Menu menu = navigationView.getMenu();
+            MenuItem menuItem = menu.findItem(R.id.action_logout);
+            menuItem.setVisible(false);
+        }
+
+        GetRequestList getRequestList = new GetRequestList();
+
+        getRequestList.execute("http://192.168.1.171:4567/api/GetRequestList?email="+ showLogUser);
+    }
+
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_request_list);
         this.setTitle("Request List");
+
+
+        //This is for overlaying the navigation header on the screen
+        Toolbar toolbar = (Toolbar) findViewById(R.id.nav_action);
+        setSupportActionBar(toolbar);
+
+        drawerLayout = (DrawerLayout) findViewById(R.id.drawerLayout);
+        toggle = new ActionBarDrawerToggle(this, drawerLayout, R.string.open, R.string.close);
+
+        drawerLayout.addDrawerListener(toggle);
+        toggle.syncState();
+
+        if (getSupportActionBar() != null) {
+            //This will enable the burger menu
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+            getSupportActionBar().setDisplayUseLogoEnabled(true);
+        }
+
+        //This will do the job for selecting a specific item in the burger menu
+        NavigationView navigationView = (NavigationView) findViewById(R.id.navigation_view);
+        navigationView.setNavigationItemSelectedListener(this);
 
        EditText inputSearch = (EditText) findViewById(R.id.search_view);
 
@@ -65,23 +122,65 @@ public class RequestListActivity extends AppCompatActivity {
     }
 
 
-
-
+    //This is used whenever you click on the burger menu the menu bar will open
     @Override
-    public void onBackPressed(){
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+
+        if (toggle.onOptionsItemSelected(item)) {
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    //When a back button is pressed, the drawer will be closed instead of going back to another activity
+    @Override
+    public void onBackPressed() {
+
+        if (drawerLayout.isDrawerOpen((GravityCompat.START))) {
+            drawerLayout.closeDrawer(GravityCompat.START);
+        } else {
+            super.onBackPressed();
+        }
+
         startActivity( new Intent(this, CompanyMainActivity.class) );
-        //finish();
     }
 
+
+    //Whenever you click on a particular item in the burger menu, it will
+    //execute a function
     @Override
-    protected void onStart() {
-            super.onStart();
-        SharedPreferences sharedPref = getSharedPreferences("userInfo", Context.MODE_PRIVATE);
-        String showLogUser = sharedPref.getString("userName", "");
-        GetRequestList getRequestList = new GetRequestList();
+    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
 
-        getRequestList.execute("http://192.168.1.171:4567/api/GetRequestList?email="+ showLogUser);
+        switch (item.getItemId()) {
+
+            case R.id.navigation_profile:
+                item.setChecked(false);
+                Intent a = new Intent(RequestListActivity.this, ProfileActivity.class);
+                startActivity(a);
+                break;
+            case R.id.navigation_requestList:
+                item.setChecked(true);
+                Intent b = new Intent(RequestListActivity.this, RequestListActivity.class);
+                startActivity(b);
+                break;
+
+            case R.id.action_logout:
+                SharedPreferences preferences = getSharedPreferences("userInfo", Context.MODE_PRIVATE);
+                SharedPreferences.Editor editor = preferences.edit();
+                editor.clear();
+                editor.apply();
+                finish();
+                Intent goToLoginActivity = new Intent(RequestListActivity.this, LoginActivity.class);
+                // set the new task and clear flags
+//            i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                startActivity(goToLoginActivity);
+                break;
+        }
+
+        return false;
     }
+
+
 
     public void btnSearch(View view) {
 

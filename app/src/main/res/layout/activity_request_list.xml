@@ -7,39 +7,22 @@
     android:layout_height="match_parent">
 
 
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/colorAccent">
 
-        <LinearLayout
+        <include
+            layout="@layout/navigation_action"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
+            android:layout_height="wrap_content" />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="13dp"
-                android:text="Request List"
-                android:textColor="#000000"
-                android:textSize="20sp"
-                android:textStyle="bold|italic" />
-
-            <ListView
-                android:id="@+id/showRequestList"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginTop="75dp"
-                android:isScrollContainer="true">
-            </ListView>
-
-        </LinearLayout>
-    </LinearLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
         android:orientation="horizontal">
 
 
@@ -58,37 +41,38 @@
             android:layout_height="45dp"
             android:layout_marginVertical="38dp"
             android:layout_marginLeft="30dp"
-            android:text="Search"
             android:onClick="btnSearch"
+            android:text="Search"
             android:textStyle="bold" />
     </LinearLayout>
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="20sp" />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="20sp" />
     <!--    Start-->
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:layout_marginTop="40dp">
         <!--    section 1-->
+        <ListView
+            android:id="@+id/showRequestList"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="75dp"
+            android:isScrollContainer="true">
 
+        </ListView>
 
     </LinearLayout>
     <!--    End-->
-
     <com.google.android.material.navigation.NavigationView
         android:id="@+id/navigation_view"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_gravity="start"
-        app:menu="@menu/navigation_menu">
+        app:headerLayout="@layout/navigation_header"
+
+        app:menu="@menu/navigation_menu_company">
 
     </com.google.android.material.navigation.NavigationView>
 

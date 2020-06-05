@@ -118,25 +118,43 @@ public class ProfileActivity extends AppCompatActivity  implements NavigationVie
     //execute a function
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-        int id = item.getItemId();
-        if (id == R.id.action_logout) {
-            SharedPreferences preferences = getSharedPreferences("userInfo", Context.MODE_PRIVATE);
-            SharedPreferences.Editor editor = preferences.edit();
-            editor.clear();
-            editor.apply();
-            finish();
-            Intent goToLoginActivity = new Intent(ProfileActivity.this, LoginActivity.class);
-            // set the new task and clear flags
+
+        switch (item.getItemId( )) {
+
+            case R.id.nav_profile:
+                item.setChecked(false);
+                Intent a = new Intent(ProfileActivity.this, ProfileActivity.class);
+                startActivity(a);
+                break;
+            case R.id.nav_requestStatus:
+                item.setChecked(true);
+                Intent b = new Intent(ProfileActivity.this, RequestStatusActivity.class);
+                startActivity(b);
+                break;
+            case R.id.nav_newRequest:
+                item.setChecked(false);
+                Intent c = new Intent(ProfileActivity.this, InstallmentRequestActivity.class);
+                startActivity(c);
+                break;
+
+            case R.id.action_logout:
+                SharedPreferences preferences = getSharedPreferences("userInfo", Context.MODE_PRIVATE);
+                SharedPreferences.Editor editor = preferences.edit();
+                editor.clear();
+                editor.apply();
+                finish();
+                Intent goToLoginActivity = new Intent(ProfileActivity.this, LoginActivity.class);
+                // set the new task and clear flags
 //            i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-            startActivity(goToLoginActivity);
-
-
+                startActivity(goToLoginActivity);
+                break;
         }
+
         return false;
     }
 
 
-    public void onClickLoginBtn(View view) {
+    public void onClickLogoutBtn(View view) {
 
         SharedPreferences sharedPref = getSharedPreferences("userInfo", Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPref.edit();
@@ -144,8 +162,8 @@ public class ProfileActivity extends AppCompatActivity  implements NavigationVie
         editor.clear();
         editor.apply();
         finish();
-        Intent goToMain = new Intent(getApplicationContext(), MainActivity.class);
-        startActivity(goToMain);
+        Intent goToLoginActivity = new Intent(getApplicationContext(), LoginActivity.class);
+        startActivity(goToLoginActivity);
 
     }
 }
