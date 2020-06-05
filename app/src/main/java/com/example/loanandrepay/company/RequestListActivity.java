@@ -250,7 +250,7 @@ public class RequestListActivity extends AppCompatActivity  implements Navigatio
                 });
 
             } catch (JSONException ex) {
-                Log.e("Tickets", ex.getMessage());
+                Log.e("Request", ex.getMessage());
             }
 
 
