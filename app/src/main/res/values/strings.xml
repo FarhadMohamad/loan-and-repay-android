@@ -10,7 +10,7 @@
     <string name="hintPassword">Password</string>
     <string name="btnForgotUser">Forgot Username or Password?</string>
     <string name="txtNotRegisteredYet">Not Registered yet?</string>
-    <string name="btnRegisterNow">Register Now</string>
+    <string name="btnRegister">Register</string>
     --------------------------------------------------------------------------------------------------------------------------------------------
 
     //Signup
@@ -46,7 +46,7 @@
     --------------------------------------------------------------------------------------------------------------------------------------------
 
     //Request Loan
-    <string name="txtRequestLoan">Request Loan</string>
+    <string name="txtRequest">Request</string>
     --------------------------------------------------------------------------------------------------------------------------------------------
 
     //Loan Request Details
@@ -63,7 +63,7 @@
 
     <string-array name="company_arrays">
         <item>Select</item>
-        <item>Driving Licence</item>
+        <item>Alliance Trafikskole</item>
         <item>SteamFoss</item>
 
     </string-array>

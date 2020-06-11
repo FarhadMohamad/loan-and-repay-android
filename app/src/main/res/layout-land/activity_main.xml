@@ -18,12 +18,12 @@ android:background="@color/colorAccent"
         android:textSize="32dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.758"
-        app:layout_constraintStart_toEndOf="@+id/textProfile"
+        app:layout_constraintStart_toEndOf="@+id/txtProfile"
         app:layout_constraintTop_toBottomOf="@+id/imageView2"
         tools:ignore="MissingConstraints" />
 
     <TextView
-        android:id="@+id/textProfile"
+        android:id="@+id/txtProfile"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Profile"
@@ -37,7 +37,7 @@ android:background="@color/colorAccent"
         tools:ignore="MissingConstraints" />
 
     <TextView
-        android:id="@+id/textNewRequest"
+        android:id="@+id/txtNewRequest"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="132dp"
@@ -49,14 +49,14 @@ android:background="@color/colorAccent"
         app:layout_constraintVertical_bias="0.27" />
 
     <TextView
-        android:id="@+id/textRequestStatus"
+        android:id="@+id/txtRequestStatus"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="1dp"
         android:text="My Loan"
         android:textSize="32dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/textNewRequest"
+        app:layout_constraintEnd_toStartOf="@+id/txtNewRequest"
         app:layout_constraintHorizontal_bias="0.339"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageRequestStatus"

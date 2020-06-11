@@ -52,6 +52,7 @@ public class CompanyMainActivity extends AppCompatActivity implements Navigation
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_company_main);
+        this.setTitle("Main");
 
         //This is for overlaying the navigation header on the screen
         Toolbar toolbar = (Toolbar) findViewById(R.id.nav_action);
@@ -106,7 +107,7 @@ public class CompanyMainActivity extends AppCompatActivity implements Navigation
 
             case R.id.navigation_profile:
                 item.setChecked(false);
-                Intent a = new Intent(CompanyMainActivity.this, ProfileActivity.class);
+                Intent a = new Intent(CompanyMainActivity.this, CompanyProfileActivity.class);
                 startActivity(a);
                 break;
             case R.id.navigation_requestList:

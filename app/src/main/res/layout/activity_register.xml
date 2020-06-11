@@ -69,7 +69,7 @@
 
 
                     <EditText
-                        android:id="@+id/txtSignupPassword"
+                        android:id="@+id/txtPassword"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:ems="10"
@@ -90,42 +90,21 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content" />
 
-                    <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:orientation="horizontal">
-
-                        <CheckBox
-                            android:id="@+id/chkbxTerms"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content" />
-
-                        <TextView
-                            android:id="@+id/textGDPR"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:clickable="true"
-                            android:onClick="onClickTerms"
-                            android:text="@string/txtTerms"
-                            android:textColor="#0000EE" />
-                    </LinearLayout>
-
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:layout_marginTop="20dp"
                         android:gravity="center">
 
 
                         <Button
-                            android:id="@+id/btnRegisterNow"
+                            android:id="@+id/btnRegister"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:background="@drawable/buttonlayout"
                             android:onClick="onClickSignupBtn"
                             android:padding="10dp"
-                            android:text="@string/btnRegisterNow" />
+                            android:text="@string/btnRegister" />
 
                     </LinearLayout>
 

@@ -32,11 +32,8 @@ InstallmentRequestActivity installmentRequestActivity;
 
     @Test
     public void calculationSixMonthsTestPass() {
-
         double getResult = installmentRequestActivity.calculationSixMonths(1000);
-
         assertEquals(191.67, getResult, 0);
-
     }
 
     @Test

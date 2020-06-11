@@ -137,7 +137,7 @@ new Register().execute();
         EditText enterLastName = (EditText) findViewById(R.id.txtLastName);
         EditText enterPhone = (EditText) findViewById(R.id.txtPhone);
         EditText enterEmail = (EditText) findViewById(R.id.txtEmail);
-        EditText enterPassword = (EditText) findViewById(R.id.txtSignupPassword);
+        EditText enterPassword = (EditText) findViewById(R.id.txtPassword);
         EditText confirmPassword = (EditText) findViewById(R.id.txtConfirmPassword);
 
         @Override

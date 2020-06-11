@@ -82,6 +82,7 @@ public class InstallmentRequestActivity extends AppCompatActivity implements Nav
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_installment_request);
+        this.setTitle("Installment Request");
 
         //region Navigation bar related
         //This is for overlaying the navigation header on the screen
@@ -107,8 +108,8 @@ public class InstallmentRequestActivity extends AppCompatActivity implements Nav
 
 
         loanAmount = findViewById(R.id.txtAmount);
-        radiosixMonths = findViewById(R.id.radiobtnSixMonths);
-        radiontvelveMonths = findViewById(R.id.radiobtntvelveMonths);
+        radiosixMonths = findViewById(R.id.radioBtnSixMonths);
+        radiontvelveMonths = findViewById(R.id.radioBtntvelveMonths);
         loanAmount.addTextChangedListener(radioButtonTextWatcher);
         ///////////////////////////////////////
         AmountToPay = findViewById(R.id.txtAmount);
@@ -123,17 +124,17 @@ public class InstallmentRequestActivity extends AppCompatActivity implements Nav
         txtAge.addTextChangedListener(RequestLoanBtnTextWatcher);
         txtPhone = findViewById(R.id.txtPhone);
         txtPhone.addTextChangedListener(RequestLoanBtnTextWatcher);
-        StreetName = findViewById(R.id.StreetName);
+        StreetName = findViewById(R.id.txtStreetName);
         StreetName.addTextChangedListener(RequestLoanBtnTextWatcher);
-        HouseNumber = findViewById(R.id.HouseNumber);
+        HouseNumber = findViewById(R.id.txtHouseNumber);
         HouseNumber.addTextChangedListener(RequestLoanBtnTextWatcher);
-        CityName = findViewById(R.id.CityName);
+        CityName = findViewById(R.id.txtCityName);
         CityName.addTextChangedListener(RequestLoanBtnTextWatcher);
-        PostCode = findViewById(R.id.PostCode);
+        PostCode = findViewById(R.id.txtPostCode);
         PostCode.addTextChangedListener(RequestLoanBtnTextWatcher);
         loanAmount = findViewById(R.id.txtAmount);
         loanAmount.addTextChangedListener(RequestLoanBtnTextWatcher);
-        RequestLoanBtn = findViewById(R.id.RequestLoanBtn);
+        RequestLoanBtn = findViewById(R.id.btnRequesttInstallment);
 
         ///////////////////////////////////////
 
@@ -142,7 +143,7 @@ public class InstallmentRequestActivity extends AppCompatActivity implements Nav
         rg.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
-                if (checkedId == R.id.radiobtnSixMonths) {
+                if (checkedId == R.id.radioBtnSixMonths) {
                     //RadioButton radioButton = (RadioButton) findViewById(R.id.radiobtnSixMonths);
 
                     AmountToPay = findViewById(R.id.txtAmount);
@@ -154,13 +155,13 @@ public class InstallmentRequestActivity extends AppCompatActivity implements Nav
                     // String getResultinString = String.format("%1.2f", getResult);
                     String getResultinString = String.valueOf(getResult);
 
-                    totalAmountToPay = findViewById(R.id.monthlyPayment);
+                    totalAmountToPay = findViewById(R.id.txtmonthlyPayment);
 
                     totalAmountToPay.setText(getResultinString);
 
                 }
 
-                if (checkedId == R.id.radiobtntvelveMonths) {
+                if (checkedId == R.id.radioBtntvelveMonths) {
                     //RadioButton radioButton = (RadioButton) findViewById(R.id.radiobtnSixMonths);
 
                     AmountToPay = findViewById(R.id.txtAmount);
@@ -173,7 +174,7 @@ public class InstallmentRequestActivity extends AppCompatActivity implements Nav
                     String getResultinString = String.valueOf(getResult);
 
 
-                    totalAmountToPay = findViewById(R.id.monthlyPayment);
+                    totalAmountToPay = findViewById(R.id.txtmonthlyPayment);
 
 
                     totalAmountToPay.setText(getResultinString);
@@ -264,7 +265,7 @@ public class InstallmentRequestActivity extends AppCompatActivity implements Nav
             // find the radiobutton by returned id
             RadioButton radionButton = (RadioButton) findViewById(selectedId);
             radioGroup.clearCheck();
-            TextView textView = findViewById(R.id.monthlyPayment);
+            TextView textView = findViewById(R.id.txtmonthlyPayment);
             textView.setText("");
 
         }
@@ -393,83 +394,63 @@ public class InstallmentRequestActivity extends AppCompatActivity implements Nav
     public class InstallmentRequest extends AsyncTask<String, Void, Void> {
 
         HttpConnection httpConnection = new HttpConnection();
-
-        Spinner enterCompanyName = (Spinner) findViewById(R.id.spinnerCompany);
-        String CompanyName = enterCompanyName.getSelectedItem().toString();
-
-        EditText enterFirstName = (EditText) findViewById(R.id.txtFirstName);
-        EditText enterLastName = (EditText) findViewById(R.id.txtLastName);
-        EditText enterEmail = (EditText) findViewById(R.id.txtEmail);
-        EditText enterAge = (EditText) findViewById(R.id.txtAge);
-        EditText enterPhone = (EditText) findViewById(R.id.txtPhone);
-        EditText enterStreetName = (EditText) findViewById(R.id.StreetName);
-        EditText enterHouseNumber = (EditText) findViewById(R.id.HouseNumber);
-        EditText enterCityName = (EditText) findViewById(R.id.CityName);
-        EditText enterPostCode = (EditText) findViewById(R.id.PostCode);
-        EditText enterloanAmount = (EditText) findViewById(R.id.txtAmount);
+        Spinner spinnerCompanyName = (Spinner) findViewById(R.id.spinnerCompany);
+        String companyName = spinnerCompanyName.getSelectedItem().toString();
+        EditText firstName = (EditText) findViewById(R.id.txtFirstName);
+        EditText lastName = (EditText) findViewById(R.id.txtLastName);
+        EditText email = (EditText) findViewById(R.id.txtEmail);
+        EditText age = (EditText) findViewById(R.id.txtAge);
+        EditText phone = (EditText) findViewById(R.id.txtPhone);
+        EditText streetName = (EditText) findViewById(R.id.txtStreetName);
+        EditText houseNumber = (EditText) findViewById(R.id.txtHouseNumber);
+        EditText cityName = (EditText) findViewById(R.id.txtCityName);
+        EditText postCode = (EditText) findViewById(R.id.txtPostCode);
+        EditText loanAmount = (EditText) findViewById(R.id.txtAmount);
         RadioGroup radioGroup = (RadioGroup) findViewById(R.id.radio_group);
         // get selected radio button from radioGroup
         int selectedId = radioGroup.getCheckedRadioButtonId();
         // find the radiobutton by returned id
         RadioButton radionButton = (RadioButton) findViewById(selectedId);
-        TextView monthlyPayment = findViewById(R.id.monthlyPayment);
-
-
+        TextView monthlyPayment = findViewById(R.id.txtmonthlyPayment);
         @Override
         protected Void doInBackground(String... params) {
             URL url;
             HttpURLConnection urlConnection = null;
-
             try {
                 JSONObject postDataParams = new JSONObject();
-                postDataParams.put("Company", CompanyName);
-                postDataParams.put("FirstName", enterFirstName.getText());
-                postDataParams.put("LastName", enterLastName.getText());
-                postDataParams.put("Email", enterEmail.getText());
-                postDataParams.put("Age", enterAge.getText());
-                postDataParams.put("Phone", enterPhone.getText());
-                postDataParams.put("StreetName", enterStreetName.getText());
-                postDataParams.put("HouseNumber", enterHouseNumber.getText());
-                postDataParams.put("CityName", enterCityName.getText());
-                postDataParams.put("PostCode", enterPostCode.getText());
-                postDataParams.put("Amount", enterloanAmount.getText());
+                postDataParams.put("Company", companyName);
+                postDataParams.put("FirstName", firstName.getText());
+                postDataParams.put("LastName", lastName.getText());
+                postDataParams.put("Email", email.getText());
+                postDataParams.put("Age", age.getText());
+                postDataParams.put("Phone", phone.getText());
+                postDataParams.put("StreetName", streetName.getText());
+                postDataParams.put("HouseNumber", houseNumber.getText());
+                postDataParams.put("CityName", cityName.getText());
+                postDataParams.put("PostCode", postCode.getText());
+                postDataParams.put("Amount", loanAmount.getText());
                 postDataParams.put("PayWithIn", radionButton.getText());
                 postDataParams.put("MonthlyPayment", monthlyPayment.getText());
-
                 SharedPreferences sharedPref = getSharedPreferences("userInfo", Context.MODE_PRIVATE);
-
                 String token = sharedPref.getString("token", "");
-
                 url = new URL("http://192.168.1.171:4567/api/InstallmentRequest");
-
-
                 urlConnection = (HttpURLConnection) url.openConnection();
                 urlConnection.setRequestProperty("Authorization", "Bearer " + token);
-
                 urlConnection.setRequestMethod("POST");
                 urlConnection.setDoInput(true);
-
                 OutputStream os = urlConnection.getOutputStream();
-
                 BufferedWriter writer = new BufferedWriter(
                         new OutputStreamWriter(os, "UTF-8"));
                 writer.write(httpConnection.getPostDataString(postDataParams));
-
                 writer.flush();
                 writer.close();
                 os.close();
-
                 int responseCode = urlConnection.getResponseCode();
-
                 if (responseCode == HttpURLConnection.HTTP_OK) {
-
                     Intent goToAuthentication = new Intent(InstallmentRequestActivity.this, MainActivity.class);
                     startActivity(goToAuthentication);
                     finish();
-
-
                 }
-
                else if (responseCode == HttpURLConnection.HTTP_NOT_FOUND) {
                     runOnUiThread(new Runnable() {
                         @Override

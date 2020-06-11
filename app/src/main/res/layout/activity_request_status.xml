@@ -25,7 +25,7 @@
             android:orientation="vertical">
 
             <TextView
-                android:id="@+id/aa"
+                android:id="@+id/txtPendingRequest"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="13dp"
@@ -35,7 +35,7 @@
                 android:textStyle="bold|italic" />
 
             <ListView
-                android:id="@+id/showPendingRequestList"
+                android:id="@+id/listViewPending"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:isScrollContainer="true">
@@ -74,7 +74,7 @@
                 android:textStyle="bold|italic" />
 
             <ListView
-                android:id="@+id/showAcceptedRequests"
+                android:id="@+id/listViewAccepted"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:isScrollContainer="true">
@@ -113,7 +113,7 @@
 
 
             <ListView
-                android:id="@+id/showRejectedRequests"
+                android:id="@+id/listViewRejected"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:isScrollContainer="true"></ListView>

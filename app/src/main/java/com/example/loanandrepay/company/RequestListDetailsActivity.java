@@ -75,6 +75,7 @@ public class RequestListDetailsActivity extends AppCompatActivity  implements Na
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_request_list_details);
+        this.setTitle("Detail");
 
 
         //This is for overlaying the navigation header on the screen
@@ -217,8 +218,6 @@ public class RequestListDetailsActivity extends AppCompatActivity  implements Na
     public void btnAcceptRequest(View view) {
 
         new ChangeRequestStatus(1).execute();
-//        Intent intent = new Intent(this, RequestListDetailsActivity.class);
-//        finish();
 
     }
 

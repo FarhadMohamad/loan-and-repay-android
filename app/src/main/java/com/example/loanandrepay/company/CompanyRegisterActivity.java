@@ -3,6 +3,7 @@ package com.example.loanandrepay.company;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
@@ -11,6 +12,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
@@ -19,6 +21,10 @@ import android.widget.Toast;
 import com.example.loanandrepay.HttpConnection.HttpConnection;
 import com.example.loanandrepay.LoginActivity;
 import com.example.loanandrepay.R;
+import com.example.loanandrepay.client.InstallmentRequestActivity;
+import com.example.loanandrepay.client.MainActivity;
+import com.example.loanandrepay.client.ProfileActivity;
+import com.example.loanandrepay.client.RequestStatusActivity;
 import com.google.android.material.navigation.NavigationView;
 
 import org.json.JSONObject;
@@ -28,24 +34,48 @@ import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.Objects;
 
 public class CompanyRegisterActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     private DrawerLayout drawerLayout;
     private ActionBarDrawerToggle toggle;
 
+    //Here the logout button is hidden, when the user is logged out
+    @Override
+    protected void onStart() {
+        super.onStart();
+        SharedPreferences sharedPref = getSharedPreferences("userInfo", Context.MODE_PRIVATE);
+        String token = sharedPref.getString("token", "");
+
+        if (Objects.equals(token, "")) {
+            //// MenuItem logoutItem = menu.findItem(R.id.action_logout);
+            NavigationView navigationView = findViewById(R.id.navigation_view);
+            Menu menu = navigationView.getMenu();
+            MenuItem menuItem = menu.findItem(R.id.action_logout);
+            menuItem.setVisible(false);
+        }
+
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_company_register);
-        this.setTitle("Register Company");
+        this.setTitle("Register");
 
-
+        //This is for overlaying the navigation header on the screen
+        Toolbar toolbar = (Toolbar) findViewById(R.id.nav_action);
+        setSupportActionBar(toolbar);
         drawerLayout = (DrawerLayout) findViewById(R.id.drawerLayout);
         toggle = new ActionBarDrawerToggle(this, drawerLayout, R.string.open, R.string.close);
         drawerLayout.addDrawerListener(toggle);
         toggle.syncState();
 
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        if (getSupportActionBar() != null) {
+            //This will enable the burger menu
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+            getSupportActionBar().setDisplayUseLogoEnabled(true);
+        }
 
         //This will do the job for selecting a specific item in the burger menu
         NavigationView navigationView = (NavigationView) findViewById(R.id.navigation_view);
@@ -73,6 +103,46 @@ public class CompanyRegisterActivity extends AppCompatActivity implements Naviga
         }
     }
 
+
+    //Whenever you click on a particular item in the burger menu, it will
+    //execute a function
+    @Override
+    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+
+        switch (item.getItemId( )) {
+
+            case R.id.nav_profile:
+                item.setChecked(false);
+                Intent a = new Intent(CompanyRegisterActivity.this, ProfileActivity.class);
+                startActivity(a);
+                break;
+            case R.id.nav_requestStatus:
+                item.setChecked(true);
+                Intent b = new Intent(CompanyRegisterActivity.this, RequestStatusActivity.class);
+                startActivity(b);
+                break;
+            case R.id.nav_newRequest:
+                item.setChecked(false);
+                Intent c = new Intent(CompanyRegisterActivity.this, InstallmentRequestActivity.class);
+                startActivity(c);
+                break;
+
+            case R.id.action_logout:
+                SharedPreferences preferences = getSharedPreferences("userInfo", Context.MODE_PRIVATE);
+                SharedPreferences.Editor editor = preferences.edit();
+                editor.clear();
+                editor.apply();
+                finish();
+                Intent goToLoginActivity = new Intent(CompanyRegisterActivity.this, LoginActivity.class);
+                // set the new task and clear flags
+//            i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                startActivity(goToLoginActivity);
+                break;
+        }
+
+        return false;
+    }
+
     public void onClickSignupBtn(View view) {
 
         new Register().execute();
@@ -86,17 +156,11 @@ public class CompanyRegisterActivity extends AppCompatActivity implements Naviga
         EditText enterEmail = (EditText) findViewById(R.id.txtEmail);
         EditText enterPassword = (EditText) findViewById(R.id.txtPassword);
         EditText enterConfirmPassword = (EditText) findViewById(R.id.txtConfirmPassword);
-        EditText enterWebsite = (EditText) findViewById(R.id.txtWebsite);
         EditText enterPhone = (EditText) findViewById(R.id.txtPhone);
-
-        EditText enterContactPerson = (EditText) findViewById(R.id.txtContactPerson);
-
-        EditText enterStreetName = (EditText) findViewById(R.id.StreetName);
-
-        EditText enterHouseNumber = (EditText) findViewById(R.id.HouseNumber);
-
-        EditText enterCityName = (EditText) findViewById(R.id.CityName);
-        EditText enterPostCode = (EditText) findViewById(R.id.PostCode);
+        EditText enterStreetName = (EditText) findViewById(R.id.txtStreetName);
+        EditText enterHouseNumber = (EditText) findViewById(R.id.txtHouseNumber);
+        EditText enterCityName = (EditText) findViewById(R.id.txtCityName);
+        EditText enterPostCode = (EditText) findViewById(R.id.txtPostCode);
 
 
         @Override
@@ -111,32 +175,20 @@ public class CompanyRegisterActivity extends AppCompatActivity implements Naviga
                 postDataParams.put("Email", enterEmail.getText());
                 postDataParams.put("Password", enterPassword.getText());
                 postDataParams.put("ConfirmPassword", enterConfirmPassword.getText());
-                postDataParams.put("Website", enterWebsite.getText());
-
                 postDataParams.put("phone", enterPhone.getText());
-
-                postDataParams.put("ContactPerson", enterContactPerson.getText());
-
                 postDataParams.put("StreetName", enterStreetName.getText());
-
                 postDataParams.put("HouseNumber", enterHouseNumber.getText());
                 postDataParams.put("CityName", enterCityName.getText());
                 postDataParams.put("PostCode", enterPostCode.getText());
-
                 //url = new URL("http://25.95.117.73:7549/api/Account/Login");
                 url = new URL("http://192.168.1.171:4567/api/Account/RegisterCompany");
-
-
                 urlConnection = (HttpURLConnection) url.openConnection();
                 urlConnection.setRequestMethod("POST");
                 urlConnection.setDoInput(true);
-
                 OutputStream os = urlConnection.getOutputStream();
-
                 BufferedWriter writer = new BufferedWriter(
                         new OutputStreamWriter(os, "UTF-8"));
                 writer.write(httpConnection.getPostDataString(postDataParams));
-
                 writer.flush();
                 writer.close();
                 os.close();
@@ -148,7 +200,6 @@ public class CompanyRegisterActivity extends AppCompatActivity implements Naviga
                     Intent goToAuthentication = new Intent(CompanyRegisterActivity.this, LoginActivity.class);
                     startActivity(goToAuthentication);
                     finish();
-
 
                 } else if (responseCode == HttpURLConnection.HTTP_BAD_REQUEST) {
                     runOnUiThread(new Runnable() {
@@ -177,27 +228,6 @@ public class CompanyRegisterActivity extends AppCompatActivity implements Naviga
 
     }
 
-    //Whenever you click on a particular item in the burger menu, it will
-    //execute a function
-    @Override
-    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-        int id = item.getItemId();
-
-        if (id == R.id.action_logout) {
-            SharedPreferences preferences = getSharedPreferences("userInfo", Context.MODE_PRIVATE);
-            SharedPreferences.Editor editor = preferences.edit();
-            editor.clear();
-            editor.apply();
-            finish();
-            Intent i = new Intent(CompanyRegisterActivity.this, LoginActivity.class);
-            // set the new task and clear flags
-            i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-            startActivity(i);
-
-
-        }
-        return false;
-    }
 }
 
 

@@ -8,7 +8,6 @@
     tools:context=".company.CompanyMainActivity">
 
 
-
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -33,7 +32,7 @@
             app:srcCompat="@mipmap/male" />
 
         <TextView
-            android:id="@+id/textProfile"
+            android:id="@+id/txtProfile"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="110dp"
@@ -60,7 +59,7 @@
         <!--        app:srcCompat="@drawable/myloanss" />-->
 
         <TextView
-            android:id="@+id/textRequestList"
+            android:id="@+id/txtRequestList"
             android:layout_width="150dp"
             android:layout_height="wrap_content"
             android:layout_marginEnd="1dp"
@@ -90,7 +89,7 @@
             app:srcCompat="@mipmap/logout_foreground" />
 
         <TextView
-            android:id="@+id/textLogin"
+            android:id="@+id/txtLogin"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Log out"

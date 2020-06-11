@@ -67,7 +67,7 @@ public class RequestStatusActivity extends AppCompatActivity implements Navigati
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_request_status);
-        this.setTitle("Status");
+        this.setTitle("Request Status");
 
         //This is for overlaying the navigation header on the screen
         Toolbar toolbar = (Toolbar) findViewById(R.id.nav_action);
@@ -174,7 +174,7 @@ public class RequestStatusActivity extends AppCompatActivity implements Navigati
 
                     request.add(statusPending);
                 }
-                ListView listView = findViewById(R.id.showPendingRequestList);
+                ListView listView = findViewById(R.id.listViewPending);
                 ArrayAdapter<StatusPending> adapter = new ArrayAdapter<>(getBaseContext(), android.R.layout.simple_list_item_1, request);
                 if (adapter.getCount() != 0) {
                     TextView textView = findViewById(R.id.txtPendingNotFound);
@@ -195,40 +195,29 @@ public class RequestStatusActivity extends AppCompatActivity implements Navigati
     private class GetAcceptedRequest extends ReadHttpTask {
         @Override
         protected void onPostExecute(CharSequence jsonString) {
-
             //Gets the data from database and show all info into list by using loop
             final List<StatusAccepted> request = new ArrayList<>();
-
             try {
-
                 JSONArray array = new JSONArray(jsonString.toString());
                 for (int i = 0; i < array.length(); i++) {
                     JSONObject obj = array.getJSONObject(i);
-
                     //token = obj.getString("UserId");
                     String company = obj.getString("Company");
                     String status = obj.getString("Status");
-
-
                     StatusAccepted statusAccepted = new StatusAccepted(company, status);
-
                     request.add(statusAccepted);
                 }
-                ListView listView = findViewById(R.id.showAcceptedRequests);
+                ListView listView = findViewById(R.id.listViewAccepted);
                 ArrayAdapter<StatusAccepted> adapter = new ArrayAdapter<>(getBaseContext(), android.R.layout.simple_list_item_1, request);
                 if (adapter.getCount() != 0) {
                     TextView textView = findViewById(R.id.txtAcceptedNotFound);
                     textView.setVisibility(View.INVISIBLE);
                 }
                 listView.setAdapter(adapter);
-
-
             } catch (JSONException ex) {
                 //messageTextView.setText(ex.getMessage());
                 Log.e("InstallmentRequest", ex.getMessage());
             }
-
-
         }
     }
 
@@ -255,7 +244,7 @@ public class RequestStatusActivity extends AppCompatActivity implements Navigati
                     request.add(statusRejected);
                 }
 
-                ListView listView = findViewById(R.id.showRejectedRequests);
+                ListView listView = findViewById(R.id.listViewRejected);
 
                 ArrayAdapter<StatusRejected> adapter = new ArrayAdapter<>(getBaseContext(), android.R.layout.simple_list_item_1, request);
                 if (adapter.getCount() != 0) {

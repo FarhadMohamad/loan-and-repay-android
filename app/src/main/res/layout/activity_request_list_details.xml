@@ -1,10 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.drawerlayout.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/drawerLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#18B3B1B0">
+    android:background="#18B3B1B0"
+    tools:context=".company.RequestListDetailsActivity">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -17,8 +19,6 @@
         android:layout_height="wrap_content" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
-
-
 
     <LinearLayout
 
@@ -146,6 +146,8 @@
             android:layout_width="80dp"
             android:layout_height="40dp"
             android:layout_marginLeft="5dp"
+            android:layout_marginBottom="10dp"
+            android:background="@drawable/buttonlayout"
             android:onClick="btnAcceptRequest"
             android:text="@string/btnAccept" />
 
@@ -154,6 +156,7 @@
             android:layout_width="80dp"
             android:layout_height="40dp"
             android:layout_marginLeft="5dp"
+            android:background="@drawable/buttonlayout"
             android:onClick="btnRejectRequest"
             android:text="@string/btnReject" />
     </LinearLayout>

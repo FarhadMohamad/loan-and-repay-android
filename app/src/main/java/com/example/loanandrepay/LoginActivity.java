@@ -76,7 +76,7 @@ public class LoginActivity extends AppCompatActivity implements NavigationView.O
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-        this.setTitle("Login");
+        this.setTitle("LoanAndRepay");
         //This is for overlaying the navigation header on the screen
         Toolbar toolbar = (Toolbar) findViewById(R.id.nav_action);
         setSupportActionBar(toolbar);

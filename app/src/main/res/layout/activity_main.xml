@@ -33,7 +33,7 @@
             app:srcCompat="@mipmap/male" />
 
         <TextView
-            android:id="@+id/textProfile"
+            android:id="@+id/txtProfile"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="110dp"
@@ -60,7 +60,7 @@
         <!--        app:srcCompat="@drawable/myloanss" />-->
 
         <TextView
-            android:id="@+id/textRequestStatus"
+            android:id="@+id/txtRequestStatus"
             android:layout_width="150dp"
             android:layout_height="wrap_content"
             android:layout_marginEnd="1dp"
@@ -90,7 +90,7 @@
             app:srcCompat="@drawable/repayyyy" />
 
         <TextView
-            android:id="@+id/textNewRequest"
+            android:id="@+id/txtNewRequest"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="New Request"

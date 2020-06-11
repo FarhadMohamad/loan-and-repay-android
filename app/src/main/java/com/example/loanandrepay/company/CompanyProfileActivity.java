@@ -1,8 +1,9 @@
-package com.example.loanandrepay.client;
+package com.example.loanandrepay.company;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
@@ -13,17 +14,16 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-
-import androidx.appcompat.widget.Toolbar;
+import android.widget.TextView;
 
 import com.example.loanandrepay.LoginActivity;
 import com.example.loanandrepay.R;
-import com.example.loanandrepay.company.RequestListActivity;
+import com.example.loanandrepay.client.ProfileActivity;
 import com.google.android.material.navigation.NavigationView;
 
 import java.util.Objects;
 
-public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+public class CompanyProfileActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
 
     private DrawerLayout drawerLayout;
     private ActionBarDrawerToggle toggle;
@@ -43,13 +43,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             menuItem.setVisible(false);
         }
 
-    }
 
+    }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-        this.setTitle("Main");
+        setContentView(R.layout.activity_company_profile);
+        this.setTitle("COMPANYProfile");
 
         //This is for overlaying the navigation header on the screen
         Toolbar toolbar = (Toolbar) findViewById(R.id.nav_action);
@@ -71,6 +71,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         NavigationView navigationView = (NavigationView) findViewById(R.id.navigation_view);
         navigationView.setNavigationItemSelectedListener(this);
 
+        SharedPreferences sharedPref = getSharedPreferences("userInfo", Context.MODE_PRIVATE);
+
+        String getUserName = sharedPref.getString("userName", "");
+
+        TextView loggedInUser = findViewById(R.id.txtLoggedinAs);
+        loggedInUser.setText(getUserName);
 
     }
 
@@ -94,7 +100,20 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         } else {
             super.onBackPressed();
         }
+
+        SharedPreferences sharedPref = getSharedPreferences("userInfo", Context.MODE_PRIVATE);
+        String getUserRole = sharedPref.getString("roles", "");
+
+        if (getUserRole.contains("Company")) {
+            //Go to Main after user is logged in
+            Intent goToMain = new Intent(CompanyProfileActivity.this, CompanyMainActivity.class);
+            startActivity(goToMain);
+            finish();
+        }
+
+
     }
+
 
 
     //Whenever you click on a particular item in the burger menu, it will
@@ -102,22 +121,17 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
 
-        switch (item.getItemId( )) {
+        switch (item.getItemId()) {
 
-            case R.id.nav_profile:
+            case R.id.navigation_profile:
                 item.setChecked(false);
-                Intent a = new Intent(MainActivity.this, ProfileActivity.class);
+                Intent a = new Intent(CompanyProfileActivity.this, ProfileActivity.class);
                 startActivity(a);
                 break;
-            case R.id.nav_requestStatus:
+            case R.id.navigation_requestList:
                 item.setChecked(true);
-                Intent b = new Intent(MainActivity.this, RequestStatusActivity.class);
+                Intent b = new Intent(CompanyProfileActivity.this, RequestListActivity.class);
                 startActivity(b);
-                break;
-            case R.id.nav_newRequest:
-                item.setChecked(false);
-                Intent c = new Intent(MainActivity.this, InstallmentRequestActivity.class);
-                startActivity(c);
                 break;
 
             case R.id.action_logout:
@@ -126,7 +140,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 editor.clear();
                 editor.apply();
                 finish();
-                Intent goToLoginActivity = new Intent(MainActivity.this, LoginActivity.class);
+                Intent goToLoginActivity = new Intent(CompanyProfileActivity.this, LoginActivity.class);
                 // set the new task and clear flags
 //            i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 startActivity(goToLoginActivity);
@@ -138,66 +152,16 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
 
 
-    public void onClickRequestLoan(View view) {
-        SharedPreferences sharedPref = getSharedPreferences("userInfo", Context.MODE_PRIVATE);
-        String token = sharedPref.getString("token", "");
-        String showLogUser = sharedPref.getString("savedUser", "");
-
-        if (Objects.equals(token, "")) {
-
-            Intent goToLogin = new Intent(getApplicationContext(), LoginActivity.class);
-            startActivity(goToLogin);
-        } else {
-            Intent goToRequestLoan = new Intent(getApplicationContext(), InstallmentRequestActivity.class);
-            startActivity(goToRequestLoan);
-
-        }
-    }
-
-
-
-    public void onClickInstallmentStatus(View view) {
+    public void onClickLogoutBtn(View view) {
 
         SharedPreferences sharedPref = getSharedPreferences("userInfo", Context.MODE_PRIVATE);
-        String token = sharedPref.getString("token", "");
-        String showLogUser = sharedPref.getString("savedUser", "");
+        SharedPreferences.Editor editor = sharedPref.edit();
 
-        if (Objects.equals(token, "")) {
-
-            Intent goToLogin = new Intent(getApplicationContext(), LoginActivity.class);
-            startActivity(goToLogin);
-        } else {
-            Intent goToRequestStatus = new Intent(getApplicationContext(), RequestStatusActivity.class);
-            startActivity(goToRequestStatus);
-
-        }
-    }
-
-    public void onClickSetting(View view) {
-        //Go to ..... after user is logged in
-        Intent goToMain = new Intent(MainActivity.this, RequestListActivity.class);
-        startActivity(goToMain);
+        editor.clear();
+        editor.apply();
         finish();
-    }
-
-    public void onClickProfile(View view) {
-
-        SharedPreferences sharedPref = getSharedPreferences("userInfo", Context.MODE_PRIVATE);
-        String token = sharedPref.getString("token", "");
-        String showLogUser = sharedPref.getString("savedUser", "");
-
-        if (Objects.equals(token, "")) {
-
-            Intent goToLogin = new Intent(getApplicationContext(), LoginActivity.class);
-            startActivity(goToLogin);
-        } else {
-            Intent goToProfile = new Intent(getApplicationContext(), ProfileActivity.class);
-            startActivity(goToProfile);
-
-        }
+        Intent goToLoginActivity = new Intent(getApplicationContext(), LoginActivity.class);
+        startActivity(goToLoginActivity);
 
     }
 }
-
-
-

@@ -20,14 +20,14 @@
 
 
         <TextView
-            android:id="@+id/textView"
+            android:id="@+id/txtTitleLogin"
             android:layout_marginTop="25dp"
             android:layout_width="300dp"
             android:layout_height="46dp"
             android:layout_centerHorizontal="true"
             android:layout_centerVertical="true"
             android:autoSizeTextType="uniform"
-            android:text="Loan &amp; Repay"
+            android:text="Login"
             android:textSize="90dp"
             android:textStyle="bold"
             android:textAlignment="center"
@@ -40,7 +40,7 @@
             app:layout_constraintVertical_bias="0.07" />
 
         <Button
-            android:id="@+id/login_button"
+            android:id="@+id/btnLogin"
             android:layout_width="150dp"
             android:layout_height="71dp"
             android:layout_centerHorizontal="true"
@@ -48,7 +48,7 @@
             android:onClick="onClickLoginBtn"
             android:padding="10dp"
             android:text="@string/btnLogin"
-            app:layout_constraintBottom_toTopOf="@+id/forgot_button"
+            app:layout_constraintBottom_toTopOf="@+id/btnForgot"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.497"
             app:layout_constraintLeft_toLeftOf="parent"
@@ -90,9 +90,8 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/txtLoginUsername" />
 
-
         <Button
-            android:id="@+id/forgot_button"
+            android:id="@+id/btnForgot"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
@@ -111,7 +110,7 @@
             app:layout_constraintVertical_bias="0.701" />
 
         <TextView
-            android:id="@+id/textView2"
+            android:id="@+id/txtNotRegisteredYet"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="52dp"
@@ -119,23 +118,23 @@
             android:text="@string/txtNotRegisteredYet"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/forgot_button"
+            app:layout_constraintTop_toBottomOf="@+id/btnForgot"
             app:layout_constraintVertical_bias="0.271" />
 
         <Button
-            android:id="@+id/btnRegisterNow"
+            android:id="@+id/btnRegister"
             android:layout_width="156dp"
             android:layout_height="42dp"
             android:layout_marginBottom="8dp"
             android:background="@drawable/buttonlayout"
             android:onClick="onClickRegisterbtn"
             android:padding="10dp"
-            android:text="@string/btnRegisterNow"
+            android:text="@string/btnRegister"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.19"
-            app:layout_constraintStart_toEndOf="@+id/textView2"
-            app:layout_constraintTop_toBottomOf="@+id/forgot_button"
+            app:layout_constraintStart_toEndOf="@+id/txtNotRegisteredYet"
+            app:layout_constraintTop_toBottomOf="@+id/btnForgot"
             app:layout_constraintVertical_bias="0.222"
             tools:ignore="OnClick" />
     </androidx.constraintlayout.widget.ConstraintLayout>
