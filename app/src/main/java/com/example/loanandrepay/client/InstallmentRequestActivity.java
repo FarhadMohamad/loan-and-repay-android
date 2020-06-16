@@ -14,9 +14,11 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioButton;
@@ -26,10 +28,13 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.loanandrepay.HttpConnection.HttpConnection;
+import com.example.loanandrepay.HttpConnection.ReadHttpTask;
 import com.example.loanandrepay.LoginActivity;
 import com.example.loanandrepay.R;
 import com.google.android.material.navigation.NavigationView;
 
+import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.BufferedWriter;
@@ -38,12 +43,14 @@ import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.text.DecimalFormat;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 public class InstallmentRequestActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
     private DrawerLayout drawerLayout;
     private ActionBarDrawerToggle toggle;
-    private Spinner spinner1;
+    private Spinner spinner;
     private EditText loanAmount;
     public RadioButton radiosixMonths;
     public RadioButton radiontvelveMonths;
@@ -76,6 +83,8 @@ public class InstallmentRequestActivity extends AppCompatActivity implements Nav
             menuItem.setVisible(false);
         }
 
+        GetCompany getCompany = new GetCompany();
+        getCompany.execute("http://192.168.1.171:4567/api/CompanyName");
     }
 
     @Override
@@ -391,11 +400,43 @@ public class InstallmentRequestActivity extends AppCompatActivity implements Nav
         return endResult;
     }
 
+
+    private class GetCompany extends ReadHttpTask {
+        @Override
+        protected void onPostExecute(CharSequence jsonString) {
+
+            //Gets the data from database and show all info into list by using loop
+            final List<CompanyNames> request = new ArrayList<>();
+
+            try {
+
+                JSONArray array = new JSONArray(jsonString.toString());
+                for (int i = 0; i < array.length(); i++) {
+                    JSONObject obj = array.getJSONObject(i);
+
+                    //token = obj.getString("UserId");
+                    String company = obj.getString("Name");
+
+                    CompanyNames companyName = new CompanyNames(company);
+
+                    request.add(companyName);
+                }
+                spinner = findViewById(R.id.spinnerCompany);
+                ArrayAdapter<CompanyNames> adapter = new ArrayAdapter<>(getBaseContext(), android.R.layout.simple_spinner_item, request);
+                spinner.setAdapter(adapter);
+//
+            } catch (JSONException ex) {
+                //messageTextView.setText(ex.getMessage());
+                Log.e("InstallmentRequest", ex.getMessage());
+            }
+        }
+    }
+
     public class InstallmentRequest extends AsyncTask<String, Void, Void> {
 
         HttpConnection httpConnection = new HttpConnection();
-        Spinner spinnerCompanyName = (Spinner) findViewById(R.id.spinnerCompany);
-        String companyName = spinnerCompanyName.getSelectedItem().toString();
+        Spinner spinner = (Spinner) findViewById(R.id.spinnerCompany);
+        String companyName = spinner.getSelectedItem().toString();
         EditText firstName = (EditText) findViewById(R.id.txtFirstName);
         EditText lastName = (EditText) findViewById(R.id.txtLastName);
         EditText email = (EditText) findViewById(R.id.txtEmail);

@@ -64,7 +64,6 @@
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="6dp"
                         android:background="@drawable/edittextlayout"
-                        android:entries="@array/company_arrays"
                         android:padding="5dip"
                         android:prompt="@string/company_prompt"
                         android:textCursorDrawable="@color/textColor" />

@@ -61,11 +61,10 @@
     <string name="Register">Register</string>
     <string name="CompanyName">Company Name</string>
 
-    <string-array name="company_arrays">
-        <item>Select</item>
-        <item>Alliance Trafikskole</item>
-        <item>SteamFoss</item>
+<!--    <string-array name="company_arrays">-->
+<!--        <item>Select</item>-->
 
-    </string-array>
+
+<!--    </string-array>-->
 
 </resources>
