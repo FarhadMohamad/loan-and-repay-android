@@ -176,6 +176,7 @@
                         android:layout_height="wrap_content"
                         android:background="@drawable/buttonlayout"
                         android:onClick="onClickSignupBtn"
+                        android:enabled="false"
                         android:padding="10dp"
                         android:text="@string/btnRegister" />
 

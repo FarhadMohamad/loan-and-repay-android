@@ -68,6 +68,7 @@ public class InstallmentRequestActivity extends AppCompatActivity implements Nav
     public TextView totalAmountToPay;
 
 
+
     //Here the logout button is hidden, when the user is logged out
     @Override
     protected void onStart() {
@@ -152,9 +153,12 @@ public class InstallmentRequestActivity extends AppCompatActivity implements Nav
         rg.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
+
+
+
                 if (checkedId == R.id.radioBtnSixMonths) {
                     //RadioButton radioButton = (RadioButton) findViewById(R.id.radiobtnSixMonths);
-
+                    checkRequiredFields();
                     AmountToPay = findViewById(R.id.txtAmount);
 
                     String value = AmountToPay.getText().toString();
@@ -172,6 +176,7 @@ public class InstallmentRequestActivity extends AppCompatActivity implements Nav
 
                 if (checkedId == R.id.radioBtntvelveMonths) {
                     //RadioButton radioButton = (RadioButton) findViewById(R.id.radiobtnSixMonths);
+                    checkRequiredFields();
 
                     AmountToPay = findViewById(R.id.txtAmount);
 
@@ -300,7 +305,6 @@ public class InstallmentRequestActivity extends AppCompatActivity implements Nav
             radiosixMonths.setEnabled(!usernameInput.isEmpty());
             radiontvelveMonths.setEnabled(!usernameInput.isEmpty());
 
-
         }
 
         @Override
@@ -308,7 +312,7 @@ public class InstallmentRequestActivity extends AppCompatActivity implements Nav
 
         }
     };
-    private TextWatcher RequestLoanBtnTextWatcher = new TextWatcher() {
+    public TextWatcher RequestLoanBtnTextWatcher = new TextWatcher() {
         @Override
         public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
@@ -316,29 +320,8 @@ public class InstallmentRequestActivity extends AppCompatActivity implements Nav
 
         @Override
         public void onTextChanged(CharSequence s, int start, int before, int count) {
-            String txtFirstNameFiled = txtFirstName.getText().toString();
-            String txtLastNameFiled = txtLastName.getText().toString();
-            String txtEmailFiled = txtEmail.getText().toString();
-            String txtAgeFiled = txtAge.getText().toString();
-            String txtPhoneFiled = txtPhone.getText().toString();
-            String StreetNameFiled = StreetName.getText().toString();
-            String HouseNumberFiled = HouseNumber.getText().toString();
-            String CityNameFiled = CityName.getText().toString();
-            String PostCodeFiled = PostCode.getText().toString();
-            String usernameInput = loanAmount.getText().toString();
 
-
-            RequestLoanBtn.setEnabled(!txtFirstNameFiled.isEmpty());
-            RequestLoanBtn.setEnabled(!txtLastNameFiled.isEmpty());
-            RequestLoanBtn.setEnabled(!txtEmailFiled.isEmpty());
-            RequestLoanBtn.setEnabled(!txtAgeFiled.isEmpty());
-            RequestLoanBtn.setEnabled(!txtPhoneFiled.isEmpty());
-            RequestLoanBtn.setEnabled(!StreetNameFiled.isEmpty());
-            RequestLoanBtn.setEnabled(!HouseNumberFiled.isEmpty());
-            RequestLoanBtn.setEnabled(!CityNameFiled.isEmpty());
-            RequestLoanBtn.setEnabled(!PostCodeFiled.isEmpty());
-            RequestLoanBtn.setEnabled(!usernameInput.isEmpty());
-
+            checkRequiredFields();
 
         }
 
@@ -347,34 +330,24 @@ public class InstallmentRequestActivity extends AppCompatActivity implements Nav
 
         }
     };
-    //Here the logout button is hidden, when the user is logged out
-//    @Override
-//    protected void onStart() {
-//        super.onStart();
-//        SharedPreferences sharedPref = getSharedPreferences("userInfo", Context.MODE_PRIVATE);
-//        String token = sharedPref.getString("token", "");
-//
-//        if (Objects.equals(token, "")) {
-//            //// MenuItem logoutItem = menu.findItem(R.id.action_logout);
-//            NavigationView navigationView = findViewById(R.id.navigation_view);
-//            Menu menu = navigationView.getMenu();
-//            MenuItem menuItem = menu.findItem(R.id.action_logout);
-//            menuItem.setVisible(false);
-//        }
-//
-//    }
 
-    //When a back button is pressed, the drawer will be closed instead of going back to another activity
-//    @Override
-//    public void onBackPressed() {
-//
-//        if (drawerLayout.isDrawerOpen((GravityCompat.START))){
-//            drawerLayout.closeDrawer(GravityCompat.START);
-//        }
-//        else{
-//            super.onBackPressed();
-//        }
-//    }
+    private void checkRequiredFields() {
+        Button btnRequesttInstallment = findViewById(R.id.btnRequesttInstallment);
+
+        RadioGroup radioGroup = (RadioGroup) findViewById(R.id.radio_group);
+
+        // get selected radio button from radioGroup
+        int selectedId = radioGroup.getCheckedRadioButtonId();
+
+
+        if (!txtFirstName.getText().toString().isEmpty() && !txtLastName.getText().toString().isEmpty() && !txtEmail.getText().toString().isEmpty() && !txtAge.getText().toString().isEmpty() &&
+        !txtPhone.getText().toString().isEmpty() && !StreetName.getText().toString().isEmpty() && !HouseNumber.getText().toString().isEmpty() && !CityName.getText().toString().isEmpty() &&
+        !PostCode.getText().toString().isEmpty() && !loanAmount.getText().toString().isEmpty() && selectedId != -1 )   {
+            btnRequesttInstallment.setEnabled(true);
+        } else {
+            btnRequesttInstallment.setEnabled(false);
+        }
+    }
 
 
     public void onClickRequestLoan(View view) {
@@ -399,6 +372,8 @@ public class InstallmentRequestActivity extends AppCompatActivity implements Nav
         endResult= Double.parseDouble(new DecimalFormat("##.##").format(endResult));
         return endResult;
     }
+
+
 
 
     private class GetCompany extends ReadHttpTask {

@@ -58,6 +58,7 @@
                         android:textSize="16sp"
                         android:textStyle="bold|italic" />
 
+                 
                     <Spinner
                         android:id="@+id/spinnerCompany"
                         android:layout_width="match_parent"

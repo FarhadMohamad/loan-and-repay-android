@@ -12,9 +12,12 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -35,6 +38,10 @@ import java.util.Objects;
 public class RegisterActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     private DrawerLayout drawerLayout;
     private ActionBarDrawerToggle toggle;
+    EditText firstName;
+    EditText email;
+    EditText password;
+    EditText confirmPassword;
 
     //Here the logout button is hidden, when the user is logged out
     @Override
@@ -79,8 +86,17 @@ public class RegisterActivity extends AppCompatActivity implements NavigationVie
         //This will do the job for selecting a specific item in the burger menu
         NavigationView navigationView = (NavigationView) findViewById(R.id.navigation_view);
         navigationView.setNavigationItemSelectedListener(this);
-    }
 
+        firstName = findViewById(R.id.txtFirstName);
+        firstName.addTextChangedListener(RegisterBtnTextWatcher);
+        email = findViewById(R.id.txtEmail);
+        email.addTextChangedListener(RegisterBtnTextWatcher);
+        password = findViewById(R.id.txtPassword);
+        password.addTextChangedListener(RegisterBtnTextWatcher);
+        confirmPassword = findViewById(R.id.txtConfirmPassword);
+        confirmPassword.addTextChangedListener(RegisterBtnTextWatcher);
+
+    }
 
 
     //This is used whenever you click on the burger menu the menu bar will open
@@ -92,14 +108,14 @@ public class RegisterActivity extends AppCompatActivity implements NavigationVie
         }
         return super.onOptionsItemSelected(item);
     }
+
     //When a back button is pressed, the drawer will be closed instead of going back to another activity
     @Override
     public void onBackPressed() {
 
-        if (drawerLayout.isDrawerOpen((GravityCompat.START))){
+        if (drawerLayout.isDrawerOpen((GravityCompat.START))) {
             drawerLayout.closeDrawer(GravityCompat.START);
-        }
-        else{
+        } else {
             super.onBackPressed();
         }
     }
@@ -122,11 +138,41 @@ public class RegisterActivity extends AppCompatActivity implements NavigationVie
 //            goToLoginActivity.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
 //            startActivity(goToLoginActivity);
 //        }
-       return false;
+        return false;
+    }
+
+    public TextWatcher RegisterBtnTextWatcher = new TextWatcher() {
+        @Override
+        public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+        }
+
+        @Override
+        public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            checkRequiredFields();
+
+        }
+
+        @Override
+        public void afterTextChanged(Editable s) {
+
+        }
+    };
+
+    private void checkRequiredFields() {
+        Button btnRegister = findViewById(R.id.btnRegister);
+
+
+        if (!firstName.getText().toString().isEmpty() && !email.getText().toString().isEmpty() && !password.getText().toString().isEmpty() && !confirmPassword.getText().toString().isEmpty()) {
+            btnRegister.setEnabled(true);
+        } else {
+            btnRegister.setEnabled(false);
+        }
     }
 
     public void onClickSignupBtn(View view) {
-new Register().execute();
+        new Register().execute();
     }
 
     public class Register extends AsyncTask<String, Void, Void> {
@@ -182,9 +228,9 @@ new Register().execute();
                     finish();
 
 
-                } if (responseCode == HttpURLConnection.HTTP_NOT_FOUND)
-                {
-                    runOnUiThread(new Runnable(){
+                }
+                if (responseCode == HttpURLConnection.HTTP_NOT_FOUND) {
+                    runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
                             Toast.makeText(getApplicationContext(), "Sign-up failed. Please try again",
@@ -193,8 +239,7 @@ new Register().execute();
                     });
 
 
-                }
-                else if (responseCode == HttpURLConnection.HTTP_BAD_REQUEST) {
+                } else if (responseCode == HttpURLConnection.HTTP_BAD_REQUEST) {
                     runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
@@ -212,10 +257,10 @@ new Register().execute();
             return null;
         }
 
-        protected void onPostExecute(Void result){
+        protected void onPostExecute(Void result) {
             super.onPostExecute(result);
 
         }
 
-}
+    }
 }

@@ -12,9 +12,12 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -22,7 +25,6 @@ import com.example.loanandrepay.HttpConnection.HttpConnection;
 import com.example.loanandrepay.LoginActivity;
 import com.example.loanandrepay.R;
 import com.example.loanandrepay.client.InstallmentRequestActivity;
-import com.example.loanandrepay.client.MainActivity;
 import com.example.loanandrepay.client.ProfileActivity;
 import com.example.loanandrepay.client.RequestStatusActivity;
 import com.google.android.material.navigation.NavigationView;
@@ -39,6 +41,17 @@ import java.util.Objects;
 public class CompanyRegisterActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     private DrawerLayout drawerLayout;
     private ActionBarDrawerToggle toggle;
+    EditText companyName;
+    EditText cvr;
+    EditText email;
+    EditText password;
+    EditText confirmPassword;
+    EditText phoneNumber;
+    EditText streetName;
+    EditText houseNumber;
+    EditText city;
+    EditText postCode;
+
 
     //Here the logout button is hidden, when the user is logged out
     @Override
@@ -80,6 +93,27 @@ public class CompanyRegisterActivity extends AppCompatActivity implements Naviga
         //This will do the job for selecting a specific item in the burger menu
         NavigationView navigationView = (NavigationView) findViewById(R.id.navigation_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+        companyName = findViewById(R.id.txtCompanyName);
+        companyName.addTextChangedListener(RegisterCompanyBtnTextWatcher);
+        cvr = findViewById(R.id.txtCVR);
+        cvr.addTextChangedListener(RegisterCompanyBtnTextWatcher);
+        email = findViewById(R.id.txtEmail);
+        email.addTextChangedListener(RegisterCompanyBtnTextWatcher);
+        password = findViewById(R.id.txtPassword);
+        password.addTextChangedListener(RegisterCompanyBtnTextWatcher);
+        confirmPassword = findViewById(R.id.txtConfirmPassword);
+        confirmPassword.addTextChangedListener(RegisterCompanyBtnTextWatcher);
+        phoneNumber = findViewById(R.id.txtPhone);
+        phoneNumber.addTextChangedListener(RegisterCompanyBtnTextWatcher);
+        streetName = findViewById(R.id.txtStreetName);
+        streetName.addTextChangedListener(RegisterCompanyBtnTextWatcher);
+        houseNumber = findViewById(R.id.txtHouseNumber);
+        houseNumber.addTextChangedListener(RegisterCompanyBtnTextWatcher);
+        city = findViewById(R.id.txtCityName);
+        city.addTextChangedListener(RegisterCompanyBtnTextWatcher);
+        postCode = findViewById(R.id.txtPostCode);
+        postCode.addTextChangedListener(RegisterCompanyBtnTextWatcher);
     }
 
     //This is used whenever you click on the burger menu the menu bar will open
@@ -109,7 +143,7 @@ public class CompanyRegisterActivity extends AppCompatActivity implements Naviga
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
 
-        switch (item.getItemId( )) {
+        switch (item.getItemId()) {
 
             case R.id.nav_profile:
                 item.setChecked(false);
@@ -141,6 +175,38 @@ public class CompanyRegisterActivity extends AppCompatActivity implements Naviga
         }
 
         return false;
+    }
+
+    public TextWatcher RegisterCompanyBtnTextWatcher = new TextWatcher() {
+        @Override
+        public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+        }
+
+        @Override
+        public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            checkRequiredFields();
+
+        }
+
+        @Override
+        public void afterTextChanged(Editable s) {
+
+        }
+    };
+
+    private void checkRequiredFields() {
+        Button btnRegister = findViewById(R.id.btnRegister);
+
+
+        if (!companyName.getText().toString().isEmpty() && !cvr.getText().toString().isEmpty() && !email.getText().toString().isEmpty() && !password.getText().toString().isEmpty() && !confirmPassword.getText().toString().isEmpty() &&
+                !phoneNumber.getText().toString().isEmpty() && !streetName.getText().toString().isEmpty() && !houseNumber.getText().toString().isEmpty() && !city.getText().toString().isEmpty() &&
+                !postCode.getText().toString().isEmpty()) {
+            btnRegister.setEnabled(true);
+        } else {
+            btnRegister.setEnabled(false);
+        }
     }
 
     public void onClickSignupBtn(View view) {
