@@ -466,6 +466,13 @@ public class InstallmentRequestActivity extends AppCompatActivity implements Nav
                     Intent goToAuthentication = new Intent(InstallmentRequestActivity.this, MainActivity.class);
                     startActivity(goToAuthentication);
                     finish();
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            Toast.makeText(getApplicationContext(), "your request was made successfully",
+                                    Toast.LENGTH_LONG).show();
+                        }
+                    });
                 }
                else if (responseCode == HttpURLConnection.HTTP_NOT_FOUND) {
                     runOnUiThread(new Runnable() {

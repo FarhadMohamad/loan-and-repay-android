@@ -266,6 +266,13 @@ public class CompanyRegisterActivity extends AppCompatActivity implements Naviga
                     Intent goToAuthentication = new Intent(CompanyRegisterActivity.this, LoginActivity.class);
                     startActivity(goToAuthentication);
                     finish();
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            Toast.makeText(getApplicationContext(), "you are registered successfully",
+                                    Toast.LENGTH_LONG).show();
+                        }
+                    });
 
                 } else if (responseCode == HttpURLConnection.HTTP_BAD_REQUEST) {
                     runOnUiThread(new Runnable() {

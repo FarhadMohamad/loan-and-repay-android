@@ -125,7 +125,7 @@ public class CompanyProfileActivity extends AppCompatActivity implements Navigat
 
             case R.id.navigation_profile:
                 item.setChecked(false);
-                Intent a = new Intent(CompanyProfileActivity.this, ProfileActivity.class);
+                Intent a = new Intent(CompanyProfileActivity.this, CompanyProfileActivity.class);
                 startActivity(a);
                 break;
             case R.id.navigation_requestList:

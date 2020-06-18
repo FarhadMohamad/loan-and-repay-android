@@ -141,7 +141,7 @@
                     android:background="@drawable/edittextlayout"
                     android:ems="10"
                     android:hint="@string/hintPhone"
-                    android:inputType="text"
+                    android:inputType="phone"
                     android:padding="5dip"
                     android:textCursorDrawable="@color/textColor" />/>
 

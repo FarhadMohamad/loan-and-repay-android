@@ -166,7 +166,8 @@ public class RegisterActivity extends AppCompatActivity implements NavigationVie
 
         if (!firstName.getText().toString().isEmpty() && !email.getText().toString().isEmpty() && !password.getText().toString().isEmpty() && !confirmPassword.getText().toString().isEmpty()) {
             btnRegister.setEnabled(true);
-        } else {
+        }
+        else {
             btnRegister.setEnabled(false);
         }
     }
@@ -226,7 +227,13 @@ public class RegisterActivity extends AppCompatActivity implements NavigationVie
                     Intent goToAuthentication = new Intent(RegisterActivity.this, LoginActivity.class);
                     startActivity(goToAuthentication);
                     finish();
-
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            Toast.makeText(getApplicationContext(), "you are registered successfully",
+                                    Toast.LENGTH_LONG).show();
+                        }
+                    });
 
                 }
                 if (responseCode == HttpURLConnection.HTTP_NOT_FOUND) {

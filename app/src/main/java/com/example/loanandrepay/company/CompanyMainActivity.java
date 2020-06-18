@@ -170,7 +170,7 @@ public class CompanyMainActivity extends AppCompatActivity implements Navigation
             startActivity(gotoLoginActivity);
         } else {
             //Go to goToRequestActivity
-            Intent goToProfileActivity = new Intent(CompanyMainActivity.this, ProfileActivity.class);
+            Intent goToProfileActivity = new Intent(CompanyMainActivity.this, CompanyProfileActivity.class);
             startActivity(goToProfileActivity);
             finish();
 

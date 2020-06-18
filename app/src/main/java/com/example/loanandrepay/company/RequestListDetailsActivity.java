@@ -32,7 +32,7 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.Objects;
 
-public class RequestListDetailsActivity extends AppCompatActivity  implements NavigationView.OnNavigationItemSelectedListener {
+public class RequestListDetailsActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     private Request request;
     private TextView Company;
@@ -102,14 +102,12 @@ public class RequestListDetailsActivity extends AppCompatActivity  implements Na
         request = (Request) intent.getSerializableExtra("Request");
 
 
-        if (request.getStatus() == 1)
-        {
+        if (request.getStatus() == 1) {
             Button btn = findViewById(R.id.btnAccept);
             btn.setEnabled(false);
         }
 
-         if (request.getStatus() == 2)
-        {
+        if (request.getStatus() == 2) {
             Button btn = findViewById(R.id.btnReject);
             btn.setEnabled(false);
         }
@@ -278,17 +276,26 @@ public class RequestListDetailsActivity extends AppCompatActivity  implements Na
 
 
                     Intent intent = new Intent(RequestListDetailsActivity.this, CompanyMainActivity.class);
+
                     startActivity(intent);
+
                     finish();
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            Toast.makeText(getApplicationContext(), "status changed successfully",
+                                    Toast.LENGTH_LONG).show();
+                        }
 
+                    });
 
-                } else if (responseCode == HttpURLConnection.HTTP_UNAUTHORIZED) {
+                } else if (responseCode == HttpURLConnection.HTTP_NOT_FOUND) {
 
                     Intent intentLogin = new Intent(RequestListDetailsActivity.this, CompanyMainActivity.class);
                     startActivity(intentLogin);
                     finish();
 
-                    Toast.makeText(getApplicationContext(), "Authorization failed, please login.",
+                    Toast.makeText(getApplicationContext(), "request was failed, please login.",
                             Toast.LENGTH_LONG).show();
                 }
 

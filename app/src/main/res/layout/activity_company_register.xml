@@ -57,7 +57,7 @@
                     android:background="@drawable/edittextlayout"
                     android:ems="10"
                     android:hint="CVR"
-                    android:inputType="textPersonName"
+                    android:inputType="number"
                     android:padding="5dip"
                     android:textCursorDrawable="@color/textColor" />
 
@@ -82,7 +82,7 @@
                     android:background="@drawable/edittextlayout"
                     android:ems="10"
                     android:hint="Password"
-                    android:inputType="textEmailAddress"
+                    android:inputType="textPassword"
                     android:padding="5dip"
                     android:textCursorDrawable="@color/textColor" />
 
@@ -94,7 +94,7 @@
                     android:background="@drawable/edittextlayout"
                     android:ems="10"
                     android:hint="Confirm Password"
-                    android:inputType="textEmailAddress"
+                    android:inputType="textPassword"
                     android:padding="5dip"
                     android:textCursorDrawable="@color/textColor" />
 
@@ -107,7 +107,7 @@
                     android:background="@drawable/edittextlayout"
                     android:ems="10"
                     android:hint="@string/hintPhone"
-                    android:inputType="text"
+                    android:inputType="phone"
                     android:padding="5dip"
                     android:textCursorDrawable="@color/textColor" />
 
