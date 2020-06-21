@@ -33,7 +33,7 @@
             android:layout_marginVertical="40dp"
             android:layout_marginLeft="15dp"
             android:background="#fff"
-            android:hint="search_main_menu" />
+            android:hint="Search" />
 
         <Button
             android:id="@+id/btnSearch"
